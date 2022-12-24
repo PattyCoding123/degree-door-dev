@@ -7,9 +7,9 @@ interface ILoginForm {
   providers: ProviderProps[];
 }
 
-const LoginForm = ({ providers }:ILoginForm) => {
+const LoginForm:React.FC<ILoginForm> = ({ providers }) => {
   const discord = providers[0];
-  
+
   return (
     <motion.form
       initial={{ opacity: 0 }}
