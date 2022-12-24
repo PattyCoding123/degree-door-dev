@@ -9,4 +9,10 @@ declare module "next-auth" {
       id: string;
     } & DefaultSession["user"];
   }
+
+  // Mandatory properties for OAUTH providers
+  interface ProviderProps {
+    name: string;
+    id: string;
+  }
 }
