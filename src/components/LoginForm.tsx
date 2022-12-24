@@ -1,8 +1,12 @@
-import Link from 'next/link'
-import { SiDiscord } from 'react-icons/si'
-import { motion } from 'framer-motion'
+import { SiDiscord } from 'react-icons/si';
+import { signIn } from 'next-auth/react';
+import { motion } from 'framer-motion';
 
-const LoginForm = () => {
+interface ILoginForm {
+  providers: any[];
+}
+
+const LoginForm = ({ providers }:ILoginForm) => {
 
   return (
     <motion.form
@@ -15,12 +19,13 @@ const LoginForm = () => {
       <button className="p-4 py-2 text-md text-indigo-500 font-semibold rounded-full border
         border-indigo-500 hover:bg-indigo-500 hover:text-gray-50 hover:border-transparent 
         duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center gap-4"
+        onClick={() => signIn(providers[0].id)}
       >
         <SiDiscord />
         <p>Continue with Discord</p>
       </button>
     </motion.form>
-  )
+  );
 }
 
-export default LoginForm
+export default LoginForm;
