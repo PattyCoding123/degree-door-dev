@@ -3,11 +3,11 @@ import { signIn } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
 interface ILoginForm {
-  providers: any[];
+  providers: any;
 }
 
 const LoginForm = ({ providers }:ILoginForm) => {
-
+  const { discord } = providers;
   return (
     <motion.form
       initial={{ opacity: 0 }}
@@ -19,7 +19,7 @@ const LoginForm = ({ providers }:ILoginForm) => {
       <button className="p-4 py-2 text-md text-indigo-500 font-semibold rounded-full border
         border-indigo-500 hover:bg-indigo-500 hover:text-gray-50 hover:border-transparent 
         duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center gap-4"
-        onClick={() => signIn(providers[0].id)}
+        onClick={() => signIn(discord.id)}
       >
         <SiDiscord />
         <p>Continue with Discord</p>
