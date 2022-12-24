@@ -5,7 +5,7 @@ import { unstable_getServerSession } from 'next-auth';
 
 import LoginForm from "../../../components/LoginForm";
 
-const Login: NextPage = ({ providers } : InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Login: NextPage = ({ providerResults } : InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -13,7 +13,7 @@ const Login: NextPage = ({ providers } : InferGetServerSidePropsType<typeof getS
       exit={{ opacity: 0 }}
       className="bg-green-600 bg-gradient-to-r from-green-400 to-green-800 flex items-center justify-center h-screen flex-col"
     >
-      <LoginForm />
+      <LoginForm providers={providerResults}/>
     </motion.div>
   )
 }
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: { providers }
+    props: { providerResults: providers }
   };
 }
 
