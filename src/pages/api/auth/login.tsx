@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { type NextPage } from "next";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../../../components/LoginForm";
 
 const Login: NextPage = () => {
   return (
