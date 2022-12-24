@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { type NextPage } from "next";
+import { GetServerSideProps, NextPage, InferGetServerSidePropsType } from "next";
+import { getProviders } from "next-auth/react";
 import LoginForm from "../../../components/LoginForm";
 
-const Login: NextPage = () => {
+const Login: NextPage = ({ providers } : InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,3 +17,11 @@ const Login: NextPage = () => {
 }
 
 export default Login;
+
+export const getServerSideProps: GetServerSideProps = async () => { 
+  const providers = await getProviders();
+  return {
+    props: { providers }
+  };
+}
+
