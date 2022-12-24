@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { GetServerSideProps, NextPage, InferGetServerSidePropsType } from "next";
 import { getProviders } from "next-auth/react";
-import { unstable_getServerSession } from 'next-auth';
+import { getServerAuthSession } from "../server/common/get-server-auth-session";
 
 import LoginForm from "../components/LoginForm";
 
@@ -22,7 +22,7 @@ export default Login;
 
 export const getServerSideProps: GetServerSideProps = async (context) => { 
   const providers = await getProviders();
-  const session = await unstable_getServerSession();
+  const session = await getServerAuthSession(context);
 
   if(session) {
     return {
