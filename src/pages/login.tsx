@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { type NextPage } from "next";
+import LoginForm from "../components/LoginForm";
 
 const Login: NextPage = () => {
   return (
@@ -7,13 +8,9 @@ const Login: NextPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="bg-green-600 bg-gradient-to-r from-green-400 to-green-800 flex items-center justify-center h-screen"
+      className="bg-green-600 bg-gradient-to-r from-green-400 to-green-800 flex items-center justify-center h-screen flex-col"
     >
-      <button
-        className="px-4 py-2 bg-white rounded-full shadow-lg font-bold hover:opacity-80 hover:scale-90 duration-300"
-      >
-        Log in with Discord
-      </button>
+      <LoginForm />
     </motion.div>
   )
 }
