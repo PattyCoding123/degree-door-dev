@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage, InferGetServerSidePropsType } from "next"
 import { getProviders } from "next-auth/react";
 import { unstable_getServerSession } from 'next-auth';
 
-import LoginForm from "../../../components/LoginForm";
+import LoginForm from "../components/LoginForm";
 
 const Login: NextPage = ({ providerResults } : InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
