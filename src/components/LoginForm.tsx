@@ -17,7 +17,7 @@ const LoginForm = () => {
         duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center gap-4"
       >
         <SiDiscord />
-        <p>Coninue with Discord</p>
+        <p>Continue with Discord</p>
       </button>
     </motion.form>
   )
