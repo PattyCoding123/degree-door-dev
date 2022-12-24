@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 
-  // For each provider, create a ProviderProp object with the name and id.
+  // For each provider, create a ProviderProp object with the name and id
   const providers = Object.values(providersData!).map((provider) => ({
     name: provider.name, 
     id: provider.id as string} as ProviderProps))
