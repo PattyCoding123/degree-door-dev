@@ -6,15 +6,15 @@ import LoginForm from "../../components/LoginForm";
 import { ProviderProps } from 'next-auth';
 
 interface ILoginPage {
-  providerResults: ProviderProps[]
+  providerResultsSSR: ProviderProps[]
 }
 
-const Login: NextPage<ILoginPage> = ({ providerResults }) => {
+const Login: NextPage<ILoginPage> = ({ providerResultsSSR }) => {
   return (
     <main
       className="bg-green-600 bg-gradient-to-r from-green-400 to-green-800 flex items-center justify-center h-screen flex-col"
     >
-      <LoginForm providers={providerResults}/>
+      <LoginForm providers={providerResultsSSR}/>
     </main>
   )
 }
@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     id: provider.id as string} as ProviderProps))
 
   return {
-    props: { providerResults: providers }
+    props: { providerResultsSSR: providers }
   };
 }
 
