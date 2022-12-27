@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, type NextPage } from "next";
 
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 import LoginForm from "../../components/LoginForm";
