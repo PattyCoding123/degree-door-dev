@@ -1,6 +1,6 @@
-import { SiDiscord } from 'react-icons/si';
-import { signIn } from 'next-auth/react';
-import { motion } from 'framer-motion';
+import { SiDiscord } from "react-icons/si";
+import { signIn } from "next-auth/react";
+import { motion } from "framer-motion";
 
 const LoginForm:React.FC = () => {
 
