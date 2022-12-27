@@ -1,7 +1,7 @@
 const ForumForm: React.FC = () => {
   return (
-    <form>
-
+    <form className="w-1/2">
+      MY FORM
     </form>
   )
 }
