@@ -73,7 +73,7 @@ model Post {
   pros      String
   cons      String
   major     String
-  userId   String
+  userId    String
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id]) 
 }
