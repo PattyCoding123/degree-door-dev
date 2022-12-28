@@ -64,3 +64,14 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// Degree Door Schema
+model Post {
+  id        String   @id @default(cuid())
+  course    String
+  pros      String
+  cons      String
+  major     String
+  user_id   String
+  createdAt DateTime @default(now())
+}
