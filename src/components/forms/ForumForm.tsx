@@ -19,7 +19,8 @@ const ForumForm: React.FC = () => {
             id="course-id-input" 
             className="block w-56 max-w-fit flex-1 rounded-md border-gray-700 p-4 mt-2
             sm:text-sm hover:shadow-xl duration-200 outline-none" 
-            {...register("course", { required: true, pattern: /^[A-Z]{2}\s[0-9]{4}$/i})}
+            placeholder="Ex. CSC"
+            {...register("course", { required: true, pattern: /^[A-Z]{2-3}\s[0-9]{4}$/i})}
           />
         </div>
         <div className="mb-6">
