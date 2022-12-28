@@ -11,7 +11,7 @@ const ForumForm: React.FC = () => {
   const onSubmit = handleSubmit(data => console.log(data));
 
   return (
-    <form className="w-1/2" onSubmit={onSubmit}>
+    <form className="w-1/2 bg-gradient-to-r from-slate-300 to-slate-500" onSubmit={onSubmit}>
       <label>Course</label>
       <input {...register("course", { required: true, pattern: /^[A-Z]{2}\s[0-9]{4}$/i})}/>
 

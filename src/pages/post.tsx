@@ -6,10 +6,10 @@ const Post: NextPage = () => {
 
 
   return (
-    <div>
+    <main className="h-screen w-screen bg-gradient-to-t from-blue-800 to-indigo-900">
       This is my post page.
       <ForumForm />
-    </div>
+    </main>
   );
 }
 
