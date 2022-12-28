@@ -12,7 +12,7 @@ const ForumForm: React.FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="w-1/2 p-8 bg-slate-200 mx-auto rounded-md shadow-2xl">
+      <div className="w-1/2 p-8 bg-gradient-to-b from-indigo-300 to-purple-400 mx-auto rounded-md shadow-2xl">
         <div className="mb-6">
           <label htmlFor="course-id" className="block text-xl font-medium text-gray-700">Course</label>
           <input 
