@@ -29,7 +29,7 @@ const ForumForm: React.FC = () => {
             id="pros-input"
             className="block w-full h-32 max-h-fit flex-1 rounded-md border-gray-700 p-4 mt-2
             sm:text-sm hover:shadow-xl duration-200 outline-none"
-            placeholder="What did you enjoy about this particular course?"
+            placeholder="What did you enjoy about this particular course? (If nothing, you can put N/A)"
             {...register("pros", { required: true })}
           />
         </div>
@@ -39,7 +39,7 @@ const ForumForm: React.FC = () => {
             id="cons-input"
             className="block w-full h-32 max-h-fit flex-1 rounded-md border-gray-700 p-4 mt-2
             sm:text-sm hover:shadow-xl duration-200 outline-none"
-            placeholder="What did you dislike about this particular course?"
+            placeholder="What did you dislike about this particular course? (If nothing, you can put N/A)"
             {...register("cons", { required: true })}
           />
         </div>
