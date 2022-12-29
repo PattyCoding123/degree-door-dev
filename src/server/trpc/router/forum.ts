@@ -16,6 +16,6 @@ export const forumRouter = router({
   createPost: protectedProcedure
     .input(z.object({ course: z.string(), pros: z.string(), cons: z.string() }))
     .mutation(({ input }) => {
-      
+      console.log(input);
     })
 });
