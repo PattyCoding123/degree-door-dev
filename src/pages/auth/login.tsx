@@ -1,7 +1,7 @@
 import { GetServerSideProps, type NextPage } from "next";
 
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import LoginForm from "../../components/LoginForm";
+import LoginForm from "../../components/forms/LoginForm";
 
 const Login: NextPage = () => {
   return (
