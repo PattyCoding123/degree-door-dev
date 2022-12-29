@@ -1,17 +1,25 @@
 import { useForm } from "react-hook-form";
-import { BiError } from "react-icons/bi"
+import { BiError } from "react-icons/bi";
 
-interface ForumFormData {
+export interface ForumFormData {
   course: string;
   pros: string;
   cons: string;
 }
 
-const ForumForm: React.FC = () => {
+interface ForumFormProps {
+  onSubmit: (data: ForumFormData) => Promise<void>;
+}
+
+const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
   const { register, handleSubmit, formState: { errors } } = useForm<ForumFormData>();
-  const onSubmit = handleSubmit(data => console.log(data));
+
+  const onSubmit2 = handleSubmit(data => {
+    onSubmit(data);
+  });
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit2}>
       <div className="w-1/2 p-8 bg-gradient-to-b from-indigo-300 to-purple-400 mx-auto rounded-md shadow-2xl">
         <div className="mb-6">
           <label htmlFor="course-id" className="block text-xl font-medium text-gray-900">Course</label>
