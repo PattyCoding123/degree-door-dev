@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { BiError } from "react-icons/bi"
 
 interface ForumFormData {
   course: string;
@@ -22,6 +23,7 @@ const ForumForm: React.FC = () => {
             placeholder="Ex. CSC 0000"
             {...register("course", { required: "Course is required", pattern: {value: /^[A-Z]{2,3}\s[0-9]{4}$/i, message: "Please enter a valid course"}})}
           />
+          {errors.course && <ErrorMessage message={errors.course?.message} /> }
         </div>
         <div className="mb-6">
           <label htmlFor="pros" className="block text-xl font-medium text-gray-900">Pros</label>
@@ -32,6 +34,7 @@ const ForumForm: React.FC = () => {
             placeholder="What did you enjoy about this particular course? (If nothing, you can put N/A)"
             {...register("pros", { required: "This field is required" })}
           />
+          {errors.pros && <ErrorMessage message={errors.pros?.message} /> }
         </div>
         <div className="mb-6">
           <label htmlFor="cons" className="block text-xl font-medium text-gray-900">Cons</label>
@@ -42,6 +45,7 @@ const ForumForm: React.FC = () => {
             placeholder="What did you dislike about this particular course? (If nothing, you can put N/A)"
             {...register("cons", { required: "This field is required" })}
           />
+          {errors.cons && <ErrorMessage message={errors.cons?.message} /> }
         </div>
         <div className="flex justify-end">
           <button 
@@ -57,6 +61,21 @@ const ForumForm: React.FC = () => {
       </div>
     </form>
   );
+}
+
+interface ErrorMessageProps {
+  message?: string;
+}
+
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+  return (
+    <div className=" text-red-700 mt-2 flex items-center gap-2" role="alert">
+      <div className="text-xl">
+        <BiError />
+      </div>
+      <p className="font-medium">{message}</p>
+    </div>
+  )
 }
 
 export default ForumForm;
