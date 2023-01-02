@@ -83,7 +83,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
       </div>
       <p className="font-medium">{message}</p>
     </div>
-  )
+  );
 }
 
 export default ForumForm;
