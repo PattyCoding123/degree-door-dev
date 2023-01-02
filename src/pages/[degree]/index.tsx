@@ -15,7 +15,7 @@ const DegreeHome: NextPage = () => {
             <p className="text-sm md:text-lg">Apart of the College of Engineering at Wayne State University</p>
           </section>
         </div>
-        <section className="mt-8 border border-purple-500">
+        <section className="mt-8">
           <h1 className="text-white text-xl text-center font-bold">More Info...</h1>
           <div className="mt-8 flex flex-col md:flex-row items-center align-middle justify-center gap-16">
             <article className="w-80 h-80 p-4 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl">
