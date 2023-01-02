@@ -23,7 +23,8 @@ const DegreeHome: NextPage = () => {
                 <h2 className="text-center font-bold">Information about the University</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quasi suscipit voluptatem natus!
                   Eum, deleniti fugit. Illo veniam laborum distinctio placeat fugiat temporibus molestiae, quis 
-                  voluptates soluta debitis cupiditate neque!</p>
+                  voluptates soluta debitis cupiditate neque!
+                </p>
               </div>
             </article>
             <article className="w-80 h-80 p-4 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl">
@@ -31,7 +32,8 @@ const DegreeHome: NextPage = () => {
                 <h2 className="text-center font-bold">Information about the University</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quasi suscipit voluptatem natus!
                   Eum, deleniti fugit. Illo veniam laborum distinctio placeat fugiat temporibus molestiae, quis 
-                  voluptates soluta debitis cupiditate neque!</p>
+                  voluptates soluta debitis cupiditate neque!
+                </p>
               </div>
             </article>
             <article className="w-80 h-80 p-4 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl">
@@ -39,7 +41,8 @@ const DegreeHome: NextPage = () => {
                 <h2 className="text-center font-bold">Information about the University</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quasi suscipit voluptatem natus!
                   Eum, deleniti fugit. Illo veniam laborum distinctio placeat fugiat temporibus molestiae, quis 
-                  voluptates soluta debitis cupiditate neque!</p>
+                  voluptates soluta debitis cupiditate neque!
+                </p>
               </div>
             </article>
           </div>
