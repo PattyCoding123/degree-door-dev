@@ -72,7 +72,6 @@ model Review {
   course    String
   pros      String
   cons      String
-  major     String
   userId    String
   degreeId  String
   createdAt DateTime @default(now())
