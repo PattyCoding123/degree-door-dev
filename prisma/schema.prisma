@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+  // NOTE: When using Reviewgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
   // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
@@ -55,7 +55,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
+  Reviews         Review[]
 }
 
 model VerificationToken {
@@ -67,7 +67,7 @@ model VerificationToken {
 }
 
 // Degree Door Schema
-model Post {
+model Review {
   id        String   @id @default(cuid())
   course    String
   pros      String
@@ -84,5 +84,5 @@ model Degree {
   id        String   @id
   name      String
   createdAt DateTime @default(now())
-  posts     Post[]
+  Reviews     Review[]
 }
