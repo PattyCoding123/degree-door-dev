@@ -55,7 +55,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Reviews         Review[]
+  Reviews       Review[]
 }
 
 model VerificationToken {
@@ -84,5 +84,5 @@ model Degree {
   id        String   @id
   name      String
   createdAt DateTime @default(now())
-  Reviews     Review[]
+  Reviews   Review[]
 }
