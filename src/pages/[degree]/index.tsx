@@ -3,11 +3,11 @@ import DegreeNavbar from "../../components/DegreeNavbar";
 
 const DegreeHome: NextPage = () => {
   return (
-    <main>
-      <div className="w-screen h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-        <DegreeNavbar />
+    <div className="w-screen h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <DegreeNavbar />
+      <main>
         <div 
-          className="h-1/3 mt-8 mx-auto relative items-center justify-center flex 
+          className="h-80 mt-8 mx-auto relative items-center justify-center flex 
           border w-2/3 rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
         >
           <section className="absolute flex flex-col gap-2 text-center">
@@ -47,8 +47,8 @@ const DegreeHome: NextPage = () => {
             </article>
           </div>
         </section>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 
