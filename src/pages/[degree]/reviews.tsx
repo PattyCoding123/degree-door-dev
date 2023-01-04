@@ -11,9 +11,9 @@ const DegreeHome: NextPage = () => {
   }
 
   return (
-    <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+    <div className="max-w-screen min-h-screen bg-gradient-to-b from-rose-400 via-fuchsia-500 to-indigo-500">
       <DegreeNavbar />
-      <main>
+      <main className="flex flex-col">
         <div 
           className="h-80 mt-8 mx-auto relative items-center justify-center flex 
           border w-2/3 rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
@@ -23,11 +23,10 @@ const DegreeHome: NextPage = () => {
             <p className="text-xl md:text-3xl">Reviews</p>
           </section>
         </div>
-        <section className="mt-8">
-          <div className="mt-8 flex flex-col items-center align-middle justify-center gap-10">
-            <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
-            <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
-          </div>
+        <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
+          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
+          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
+          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
         </section>
       </main>
     </div>
