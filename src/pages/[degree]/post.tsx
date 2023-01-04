@@ -12,11 +12,11 @@ const Post: NextPage = () => {
   }
 
   return (
-    <div className="min-h-screen w-screen bg-gradient-to-t from-blue-800 to-indigo-900">
+    <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <DegreeNavbar />
       <main>
         <section>
-          <h1 className="text-slate-200 text-4xl text-center p-8">Write your Review</h1>
+          <h1 className="text-white text-4xl text-center p-8">Write your Review</h1>
           <ForumForm onSubmit={onSubmit}/>
         </section>
       </main>
