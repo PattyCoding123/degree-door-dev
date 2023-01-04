@@ -1,7 +1,11 @@
-import Image from "next/image"
-import { BsFillGearFill } from "react-icons/bs"
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { BsFillGearFill } from "react-icons/bs";
 
 const DegreeNavbar: React.FC = () => {
+  const { degree } = useRouter().query as { degree: string };
+
   return (
     <nav className="max-w-screen m-auto flex flex-col shadow-lg">
       <header className="bg-gray-900 py-1">
@@ -12,15 +16,21 @@ const DegreeNavbar: React.FC = () => {
           <Image src="/degree_door_logo_filled.png" alt="Degree Door Logo" width={24} height={24} />
           <p className="font-bold">egree Door</p>
         </div>
-        <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-8 md:gap-4">
+        <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
           <li>
-            <p className="font-bold">OVERVIEW</p>
+            <Link href={`/${degree}`}>
+              <p className="font-bold hover:opacity-50">OVERVIEW</p>
+            </Link>
           </li>
           <li>
-            <p className="font-bold">REVIEWS</p>
+            <Link href={`/${degree}/reviews`}>
+              <p className="font-bold hover:opacity-50">REVIEWS</p>
+            </Link>
           </li>
           <li>
-            <p className="font-bold">POST A REVIEW</p>
+            <Link href={`/${degree}/post`}>
+              <p className="font-bold hover:opacity-50">POST A REVIEW</p>
+            </Link>
           </li>
         </ul>
         <div className="flex md:col-span-1 justify-end">
