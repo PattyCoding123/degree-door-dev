@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 
-import { trpc } from "../utils/trpc";
-import ForumForm, { ForumFormData } from "../components/forms/ForumForm";
+import { trpc } from "../../utils/trpc";
+import ForumForm, { ForumFormData } from "../../components/forms/ForumForm";
 
 const Post: NextPage = () => {
   const createPost = trpc.forum.createPost.useMutation();
