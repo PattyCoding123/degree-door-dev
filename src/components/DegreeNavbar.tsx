@@ -3,7 +3,7 @@ import { BsFillGearFill } from "react-icons/bs"
 
 const DegreeNavbar: React.FC = () => {
   return (
-    <nav className="w-screen m-auto flex flex-col shadow-lg">
+    <nav className="max-w-screen m-auto flex flex-col shadow-lg">
       <header className="bg-gray-900 py-1">
         <h1 className="font-bold text-white text-center">Computer Science</h1>
       </header>

@@ -11,7 +11,7 @@ const DegreeHome: NextPage = () => {
   }
 
   return (
-    <div className="w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+    <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <DegreeNavbar />
       <main>
         <div 
