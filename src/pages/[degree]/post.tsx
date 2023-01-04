@@ -5,7 +5,7 @@ import ForumForm, { type ForumFormData } from "../../components/forms/ForumForm"
 import DegreeNavbar from "../../components/DegreeNavbar";
 
 const Post: NextPage = () => {
-  const createPost = trpc.forum.createPost.useMutation();
+  const createPost = trpc.forum.createPost.useMutation<ForumFormData>();
 
   const onSubmit = async (data: ForumFormData) => {
     createPost.mutate(data);
