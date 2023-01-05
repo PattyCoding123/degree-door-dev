@@ -4,7 +4,7 @@ import DegreeNavbar from "../../components/DegreeNavbar";
 const DegreeHome: NextPage = () => {
   return (
     <div className="max-w-screen h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-      <DegreeNavbar />
+      <DegreeNavbar active="overview" />
       <main>
         <div 
           className="h-80 mt-8 mx-auto relative items-center justify-center flex 

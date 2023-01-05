@@ -2,8 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsFillGearFill } from "react-icons/bs";
+import clsx from "clsx";
 
-const DegreeNavbar: React.FC = () => {
+interface DegreeNavbarProps {
+  active: string;
+}
+
+const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
   const { degree } = useRouter().query as { degree: string };
 
   return (
@@ -19,17 +24,17 @@ const DegreeNavbar: React.FC = () => {
         <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
           <li>
             <Link href={`/${degree}`}>
-              <p className="font-bold hover:opacity-50">OVERVIEW</p>
+              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "overview"})}>OVERVIEW</p>
             </Link>
           </li>
           <li>
             <Link href={`/${degree}/reviews`}>
-              <p className="font-bold hover:opacity-50">REVIEWS</p>
+              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "reviews"})}>REVIEWS</p>
             </Link>
           </li>
           <li>
             <Link href={`/${degree}/post`}>
-              <p className="font-bold hover:opacity-50">POST A REVIEW</p>
+              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "post"})}>POST A REVIEW</p>
             </Link>
           </li>
         </ul>
