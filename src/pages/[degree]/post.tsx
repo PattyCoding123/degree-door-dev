@@ -1,14 +1,16 @@
 import { type NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { trpc } from "../../utils/trpc";
 import ForumForm, { type ForumFormData } from "../../components/forms/ForumForm";
 import DegreeNavbar from "../../components/DegreeNavbar";
 
 const Post: NextPage = () => {
+  const { degree } = useRouter().query as { degree: string };
   const createPost = trpc.forum.createPost.useMutation<ForumFormData>();
-
   const onSubmit = async (data: ForumFormData) => {
-    createPost.mutate(data);
+    const review = await createPost.mutateAsync({degreeId: degree, formData: data});
+    console.log(review);
   }
 
   return (
