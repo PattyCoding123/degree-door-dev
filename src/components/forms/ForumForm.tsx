@@ -8,14 +8,15 @@ export interface ForumFormData {
 }
 
 interface ForumFormProps {
-  onSubmit: (data: ForumFormData) => Promise<void>;
+  onSubmit: (data: ForumFormData) => Promise<boolean>;
 }
 
 const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ForumFormData>();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<ForumFormData>();
 
-  const onSubmit2 = handleSubmit(data => {
-    onSubmit(data);
+  const onSubmit2 = handleSubmit(async (data) => {
+    const isSuccessful = await onSubmit(data);
+    if (isSuccessful) reset();
   });
 
   return (
