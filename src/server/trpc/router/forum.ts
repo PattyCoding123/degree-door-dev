@@ -14,8 +14,16 @@ export const forumRouter = router({
     return ctx.prisma.example.findMany();
   }),
   createPost: protectedProcedure
-    .input(z.object({ course: z.string(), pros: z.string(), cons: z.string() }))
-    .mutation(({ input }) => {
-      return input;
+    .input(z.object({degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() })}))
+    .mutation(async ({ input, ctx }) => {
+      const { degreeId, formData } = input;
+      const review = await ctx.prisma.review.create({
+        data: {
+          ...formData,
+          userId: ctx.session.user.id,
+          degreeId: degreeId,
+        }
+      });
+      return review;
     })
 });
