@@ -15,8 +15,7 @@ const Post: NextPage = () => {
   });
 
   const onSubmit = async (data: ForumFormData) => {
-    const review = await createPost.mutateAsync({degreeId: degree, formData: data});
-    console.log(review);
+    await createPost.mutateAsync({degreeId: degree, formData: data});
   }
 
   return (
