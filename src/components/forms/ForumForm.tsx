@@ -1,3 +1,4 @@
+import { signIn, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 
@@ -13,6 +14,7 @@ interface ForumFormProps {
 
 const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ForumFormData>();
+  const { data: sessionData } = useSession();
 
   const onSubmit2 = handleSubmit(async (data) => {
     const isSuccessful = await onSubmit(data);
@@ -57,6 +59,7 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
           {errors.cons && <ErrorMessage message={errors.cons?.message} /> }
         </div>
         <div className="flex justify-end">
+          {sessionData?.user ? 
           <button 
             type="submit" 
             className="inline-block px-6 py-2.5 bg-rose-400 text-white font-medium 
@@ -65,7 +68,18 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
             ease-in-out"
           >
             Submit
-          </button>
+          </button> :
+            <button 
+              type="button" 
+              className="inline-block px-6 py-2.5 bg-rose-400 text-white font-medium 
+              text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90
+              focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-200
+              ease-in-out"
+              onClick={() => signIn()}
+            >
+              Sign In to Create a Review
+            </button>
+          }
         </div>
       </div>
     </form>
