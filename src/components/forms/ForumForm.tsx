@@ -1,4 +1,5 @@
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 
@@ -15,11 +16,20 @@ interface ForumFormProps {
 const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ForumFormData>();
   const { data: sessionData } = useSession();
+  const router = useRouter();
 
   const onSubmit2 = handleSubmit(async (data) => {
     const isSuccessful = await onSubmit(data);
     if (isSuccessful) reset();
   });
+
+  const activeButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
+  "text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90 "+
+  "focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-200 " +
+  "ease-in-out";
+
+  const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
+  "text-sm leading-tight uppercase rounded shadow-md opacity-50";
 
   return (
     <form onSubmit={onSubmit2}>
@@ -62,19 +72,14 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
           {sessionData?.user ? 
           <button 
             type="submit" 
-            className="inline-block px-6 py-2.5 bg-rose-400 text-white font-medium 
-            text-xs leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90
-            focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-200
-            ease-in-out"
+            className={router.isReady ? activeButton : disabledButton}
+            disabled={router.isReady}
           >
             Submit
           </button> :
             <button 
               type="button" 
-              className="inline-block px-6 py-2.5 bg-rose-400 text-white font-medium 
-              text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90
-              focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-200
-              ease-in-out"
+              className={activeButton}
               onClick={() => signIn()}
             >
               Sign In to Create a Review
