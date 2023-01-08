@@ -9,10 +9,10 @@ interface ReviewProps {
 
 const Review: React.FC<ReviewProps> = ({ course, pros, cons }) => {
   return (
-    <article className="w-2/3 p-5 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl flex flex-col gap-2">
+    <article className="w-2/3 p-4 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <h1 className="text-center text-lg font-bold">{course}</h1>
-        <BsFillTrashFill className="text-xl"/>
+        <BsFillTrashFill className="text-lg"/>
       </div>
       <section className="flex">
         <div className="bg-white border-2 border-green-700 w-16 p-2 flex justify-center items-center rounded">
