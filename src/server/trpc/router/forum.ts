@@ -10,11 +10,13 @@ export const forumRouter = router({
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
+  getAllReviews: publicProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.review.findMany({ where: { degreeId: input.degreeId }})
   }),
   createPost: protectedProcedure
-    .input(z.object({degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() })}))
+    .input(z.object({ degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() }) }))
     .mutation(async ({ input, ctx }) => {
       const { degreeId, formData } = input;
       const review = await ctx.prisma.review.create({
