@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, BaseSyntheticEvent } from 'react';
+import { useEffect, MouseEvent } from 'react';
 
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
@@ -16,8 +16,8 @@ const DegreeHome: NextPage = () => {
     queryReviews.refetch();
   }, [router.isReady]);
 
-  const deleteReview = (e: BaseSyntheticEvent) => {
-    console.log(e.target.id);
+  const deleteReview = (reviewId: string) => {
+    console.log(reviewId);
   }
 
   return (
@@ -36,6 +36,7 @@ const DegreeHome: NextPage = () => {
         <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
           {queryReviews.data?.map((review) => (
             <Review 
+              key={review.id}
               course={review.course} 
               pros={review.pros} 
               cons={review.cons} 
