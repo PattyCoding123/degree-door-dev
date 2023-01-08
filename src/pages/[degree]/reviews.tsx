@@ -14,7 +14,7 @@ const DegreeHome: NextPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     queryReviews.refetch();
-  },[router.isReady, queryReviews.data]);
+  }, [router.isReady]);
 
   const deleteReview = (e: BaseSyntheticEvent) => {
     console.log(e.target.id);
@@ -35,7 +35,13 @@ const DegreeHome: NextPage = () => {
         </div>
         <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
           {queryReviews.data?.map((review) => (
-            <Review course={review.course} pros={review.pros} cons={review.cons} reviewId={review.id} handleClick={deleteReview} />
+            <Review 
+              course={review.course} 
+              pros={review.pros} 
+              cons={review.cons} 
+              reviewId={review.id} 
+              userId = {review.userId}
+              handleClick={deleteReview} />
           ))}
         </section>
       </main>
