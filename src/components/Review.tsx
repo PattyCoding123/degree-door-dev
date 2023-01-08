@@ -1,6 +1,5 @@
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import { BsFillTrashFill } from "react-icons/bs";
-import { BaseSyntheticEvent } from "react";
 import { useSession } from "next-auth/react";
 
 interface ReviewProps {

@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, MouseEvent } from 'react';
+import { useEffect } from 'react';
 
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
