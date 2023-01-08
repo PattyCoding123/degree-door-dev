@@ -14,7 +14,7 @@ const DegreeHome: NextPage = () => {
   useEffect(() => {
     if (!router.isReady) return;
     queryReviews.refetch();
-  },[router.isReady, queryReviews]);
+  },[router.isReady, queryReviews.data]);
 
   const deleteReview = (e: BaseSyntheticEvent) => {
     console.log(e.target.id);
