@@ -1,13 +1,23 @@
 import { type NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect, BaseSyntheticEvent } from 'react';
 
+import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 import Review from "../../components/Review";
 
 const DegreeHome: NextPage = () => {
-  const sample = {
-    course: "BE 0000",
-    pros: "Lorem ipsum dolor sit amet, consectetur adip",
-    cons: "Lorem ipsum dolor sit amet, consectetur adip"
+  const router = useRouter();
+  const { degree } = router.query as { degree: string };
+  const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: degree }, { enabled: false });
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    queryReviews.refetch();
+  },[router.isReady, queryReviews]);
+
+  const deleteReview = (e: BaseSyntheticEvent) => {
+    console.log(e.target.id);
   }
 
   return (
@@ -24,9 +34,9 @@ const DegreeHome: NextPage = () => {
           </section>
         </div>
         <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
-          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
-          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
-          <Review course={sample.course} pros={sample.pros} cons={sample.cons}/>
+          {queryReviews.data?.map((review) => (
+            <Review course={review.course} pros={review.pros} cons={review.cons} reviewId={review.id} handleClick={deleteReview} />
+          ))}
         </section>
       </main>
     </div>
