@@ -73,7 +73,7 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
           <button 
             type="submit" 
             className={router.isReady ? activeButton : disabledButton}
-            disabled={router.isReady}
+            disabled={!router.isReady}
           >
             Submit
           </button> :
