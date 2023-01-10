@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import { useRouter } from "next/router";
 import { BsFillGearFill } from "react-icons/bs";
-import clsx from "clsx";
 
 interface DegreeNavbarProps {
   active: string;
@@ -17,10 +17,12 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
         <h1 className="font-bold text-white text-center">Computer Science</h1>
       </header>
       <div className="p-4 flex flex-col md:grid md:grid-cols-3 justify-between items-center gap-8 bg-gradient-to-b from-rose-100 to-teal-100">
-        <div className="col-span-1 navbar-brand cursor-pointer flex">
-          <Image src="/degree_door_logo_filled.png" alt="Degree Door Logo" width={24} height={24} />
-          <p className="font-bold">egree Door</p>
-        </div>
+        <Link href="/">
+          <div className="col-span-1 navbar-brand cursor-pointer flex">
+            <Image src="/degree_door_logo_filled.png" alt="Degree Door Logo" width={24} height={24} />
+            <p className="font-bold">egree Door</p>
+          </div>
+        </Link>
         <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
           <li>
             <Link href={`/${degree}`}>
