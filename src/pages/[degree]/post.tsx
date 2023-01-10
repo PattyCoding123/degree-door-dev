@@ -9,13 +9,13 @@ import DegreeNavbar from "../../components/DegreeNavbar";
 
 const Post: NextPage = () => {
   const { degree } = useRouter().query as { degree: string };
-  const createPost = trpc.forum.createPost.useMutation<ForumFormData>({
+  const createReview = trpc.forum.createReview.useMutation<ForumFormData>({
     onSuccess: () => toast.success("Review successfully created!", { position: "bottom-center", className: "text-xl" }),
     onError: () => toast.error("There was an error creating the post!", { position: "bottom-center", className: "text-xl" })
   });
 
   const onSubmit = async (data: ForumFormData) => {
-    const review = await createPost.mutateAsync({degreeId: degree, formData: data});
+    const review = await createReview.mutateAsync({degreeId: degree, formData: data});
     if (review) return true;
     else return false;
   }
