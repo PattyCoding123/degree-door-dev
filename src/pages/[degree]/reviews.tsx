@@ -1,27 +1,36 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from 'react';
+import { Toaster, toast } from "react-hot-toast";
 
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 import Review from "../../components/Review";
 
 const DegreeHome: NextPage = () => {
-  const router = useRouter();
+  const router = useRouter(); 
   const { degree } = router.query as { degree: string };
   const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: degree }, { enabled: false });
+  const deleteReview = trpc.forum.deleteReview.useMutation({ 
+    onSuccess: () => {
+      queryReviews.refetch();
+      toast.success("Review successfully deleted!", { position: "bottom-center", className: "text-xl" });
+    },
+    onError: () => toast.error("There was an error deleting the post!", { position: "bottom-center", className: "text-xl" })
+  });
 
   useEffect(() => {
     if (!router.isReady) return;
     queryReviews.refetch();
   }, [router.isReady]);
 
-  const deleteReview = (reviewId: string) => {
-    console.log(reviewId);
+  const deleteReviewHandler = async (reviewId: string) => {
+    await deleteReview.mutateAsync({ reviewId: reviewId });
   }
 
   return (
     <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <Toaster />
       <DegreeNavbar active="reviews" />
       <main className="flex flex-col">
         <div 
@@ -42,7 +51,7 @@ const DegreeHome: NextPage = () => {
               cons={review.cons} 
               reviewId={review.id} 
               userId = {review.userId}
-              handleClick={deleteReview} />
+              handleClick={deleteReviewHandler} />
           ))}
         </section>
       </main>
