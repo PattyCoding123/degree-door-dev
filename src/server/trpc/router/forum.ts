@@ -15,7 +15,7 @@ export const forumRouter = router({
     .query(({ input, ctx }) => {
       return ctx.prisma.review.findMany({ where: { degreeId: input.degreeId }})
   }),
-  createPost: protectedProcedure
+  createReview: protectedProcedure
     .input(z.object({ degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() }) }))
     .mutation(async ({ input, ctx }) => {
       const { degreeId, formData } = input;
@@ -27,5 +27,15 @@ export const forumRouter = router({
         }
       });
       return review;
+    }),
+  deleteReview: protectedProcedure
+    .input(z.object({ reviewId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const deletedReview = await ctx.prisma.review.delete({
+        where: {
+          id: input.reviewId
+        }
+      })
+      return deletedReview;
     })
 });
