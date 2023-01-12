@@ -24,7 +24,7 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
   });
 
   const activeButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium cursor-pointer " +
-  "text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90 "+
+  "text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg hover:scale-90 "+
   "ease-in-out";
 
   const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
