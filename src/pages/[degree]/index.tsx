@@ -1,7 +1,20 @@
 import { type NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 
 const DegreeHome: NextPage = () => {
+  const router = useRouter();
+  const { degree } = router.query as { degree: string };
+  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree }, { enabled: false });
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    degreeQuery.refetch();
+  }, [router.isReady])
+
   return (
     <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <DegreeNavbar active="overview" />
@@ -11,7 +24,7 @@ const DegreeHome: NextPage = () => {
           border w-2/3 rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
         >
           <section className="absolute flex flex-col gap-2 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold">Computer Science</h1>
+            <h1 className="text-4xl md:text-6xl font-bold">{degreeQuery.data?.name}</h1>
             <p className="text-lg md:text-xl">Apart of the College of Engineering at Wayne State University</p>
           </section>
         </div>
