@@ -5,8 +5,8 @@ import { BsFillGearFill } from "react-icons/bs";
 
 interface DegreeNavbarProps {
   active: string;
-  degreeName?: string;
-  degreeId?: string;
+  degreeName: string;
+  degreeId: string;
 }
 
 const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active, degreeName, degreeId }) => {
