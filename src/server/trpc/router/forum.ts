@@ -10,6 +10,15 @@ export const forumRouter = router({
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
+  getDegreeInfo: publicProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.degree.findUnique({ 
+        where: {
+          id: input.degreeId
+        }
+      })
+    }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(({ input, ctx }) => {
