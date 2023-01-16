@@ -25,9 +25,8 @@ const Post: NextPage = () => {
   }, [router.isReady])
 
   const onSubmit = async (data: ForumFormData) => {
-    const review = await createReview.mutateAsync({degreeId: degree, formData: data});
-    if (review) return true;
-    else return false;
+    await createReview.mutateAsync({degreeId: degree, formData: data});
+    return createReview.isSuccess;
   }
 
   return (
