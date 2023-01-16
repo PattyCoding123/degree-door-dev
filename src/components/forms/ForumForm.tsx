@@ -1,5 +1,6 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 
@@ -29,6 +30,13 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
 
   const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
   "text-sm leading-tight uppercase rounded shadow-md opacity-50";
+
+  const [routerIsReady, setRouterIsReady] = useState(router.isReady);
+
+  useEffect(() => {
+    if(!router.isReady) return;
+    setRouterIsReady(true);
+  }, [router.isReady]);
 
   return (
     <form onSubmit={onSubmit2}>
@@ -71,8 +79,8 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
           {sessionData?.user ? 
           <button 
             type="submit" 
-            className={router.isReady ? activeButton : disabledButton}
-            disabled={!router.isReady}
+            className={routerIsReady ? activeButton : disabledButton}
+            disabled={routerIsReady}
           >
             Submit
           </button> :
