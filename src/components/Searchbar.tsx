@@ -12,6 +12,7 @@ const Searchbar: React.FC = () => {
   const degreePathQuery = trpc.forum.getAllDegreePaths.useQuery<DegreePath>();
 
   const filteredItems = useMemo(() => {
+    if (query === "") return;
     return degreePathQuery.data?.filter(item => {
       return item.name.toLowerCase().includes(query.toLowerCase());
     })
@@ -19,25 +20,33 @@ const Searchbar: React.FC = () => {
 
   
   return (
-    <div className="flex flex-col min-w-full">
-      <div className="flex items-center justify-center z-10 text-green-600">
+    <div className="flex flex-col">
+      <div 
+        className="flex items-center justify-between z-10 text-gray-600 w-80 bg-white
+        rounded-full relative"
+      >
         <input 
           type="search"
           name="search"
           placeholder="Search for a degree..."
           value={query}
-          className="h-8 px-5 pr-10 rounded-full text-sm focus:outline-none"
+          className="h-8 px-5 text-sm focus:outline-none rounded-full w-full"
           onChange={e => setQuery(e.target.value)}
         />
-        <BsSearch className="text-black relative right-8"/>
+        <BsSearch className="text-black absolute right-2" />
       </div>
       <div 
-        className="flex flex-col items-center mt-8 h-2/5
+        className="flex flex-col items-center mt-10 h-2/5
         overflow-x-hidden overflow-y-auto no-scrollbar fixed z-10"
       >
         {filteredItems?.slice(0, 10).map((degree, index) => (
           <Link href={`/${degree.id}`} key={index}>
-            <p>{degree.name}</p>
+            <div 
+              className="degree-item bg-white z-50 w-80 h-8 flex items-center p-4 
+            text-black border-b-2 border-gray-600"
+            >
+              <p>{degree.name}</p>
+            </div>
           </Link>
         ))}
       </div>
