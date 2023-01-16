@@ -14,20 +14,10 @@ const Post: NextPage = () => {
 
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree }, { enabled: false });
 
-  const createReview = trpc.forum.createReview.useMutation<ForumFormData>({
-    onSuccess: () => toast.success("Review successfully created!", { position: "bottom-center", className: "text-xl" }),
-    onError: () => toast.error("There was an error creating the post!", { position: "bottom-center", className: "text-xl" })
-  });
-
   useEffect(() => {
     if (!router.isReady) return;
     degreeQuery.refetch();
   }, [router.isReady])
-
-  const onSubmit = async (data: ForumFormData) => {
-    await createReview.mutateAsync({degreeId: degree, formData: data});
-    return createReview.isSuccess;
-  }
 
   return (
     <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
@@ -36,7 +26,7 @@ const Post: NextPage = () => {
       <main>
         <section>
           <h1 className="text-white text-4xl text-center p-8">Write your Review</h1>
-          <ForumForm onSubmit={onSubmit}/>
+          <ForumForm />
         </section>
       </main>
     </div>

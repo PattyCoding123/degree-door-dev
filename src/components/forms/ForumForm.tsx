@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
+import { toast } from "react-hot-toast";
+import { trpc } from "../../utils/trpc";
 
 export interface ForumFormData {
   course: string;
@@ -10,18 +12,30 @@ export interface ForumFormData {
   cons: string;
 }
 
-interface ForumFormProps {
-  onSubmit: (data: ForumFormData) => Promise<boolean>;
-}
-
-const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
+const ForumForm: React.FC = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ForumFormData>();
   const { data: sessionData } = useSession();
   const router = useRouter();
 
+  const [routerIsReady, setRouterIsReady] = useState(router.isReady);
+
+  useEffect(() => {
+    if(!router.isReady) return;
+    setRouterIsReady(true);
+  }, [router.isReady]);
+
+  const { degree } = router.query as { degree: string};
+
+  const createReview = trpc.forum.createReview.useMutation<ForumFormData>({
+    onSuccess: () => {
+      toast.success("Review successfully created!", { position: "bottom-center", className: "text-xl" });
+      reset();
+    },
+    onError: () => toast.error("There was an error creating the post!", { position: "bottom-center", className: "text-xl" })
+  });
+
   const onSubmit2 = handleSubmit(async (data) => {
-    const isSuccessful = await onSubmit(data);
-    if (isSuccessful) reset();
+    await createReview.mutateAsync({degreeId: degree, formData: data});
   });
 
   const activeButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium cursor-pointer " +
@@ -30,13 +44,6 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
 
   const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
   "text-sm leading-tight uppercase rounded shadow-md opacity-50";
-
-  const [routerIsReady, setRouterIsReady] = useState(router.isReady);
-
-  useEffect(() => {
-    if(!router.isReady) return;
-    setRouterIsReady(true);
-  }, [router.isReady]);
 
   return (
     <form onSubmit={onSubmit2}>
