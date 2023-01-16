@@ -17,12 +17,16 @@ export const forumRouter = router({
         where: {
           id: input.degreeId
         }
-      })
+      });
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(({ input, ctx }) => {
-      return ctx.prisma.review.findMany({ where: { degreeId: input.degreeId }})
+      return ctx.prisma.review.findMany({
+        where: { 
+          degreeId: input.degreeId 
+        }
+      });
   }),
   createReview: protectedProcedure
     .input(z.object({ degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() }) }))
@@ -44,7 +48,17 @@ export const forumRouter = router({
         where: {
           id: input.reviewId
         }
-      })
+      });
       return deletedReview;
+    }),
+  getAllDegreePaths: publicProcedure
+    .query(async ({ ctx }) => {
+      const degreePaths = await ctx.prisma.degree.findMany({
+        select: {
+          id: true,
+          name: true
+        }
+      });
+      return degreePaths;
     })
 });
