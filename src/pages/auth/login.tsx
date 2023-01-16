@@ -6,7 +6,7 @@ import LoginForm from "../../components/forms/LoginForm";
 const Login: NextPage = () => {
   return (
     <main
-      className="bg-green-600 bg-gradient-to-r from-green-400 to-green-800 flex items-center justify-center h-screen flex-col"
+      className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 flex items-center justify-center h-screen flex-col"
     >
       <LoginForm />
     </main>

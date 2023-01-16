@@ -1,3 +1,6 @@
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 
@@ -8,19 +11,36 @@ export interface ForumFormData {
 }
 
 interface ForumFormProps {
-  onSubmit: (data: ForumFormData) => Promise<void>;
+  onSubmit: (data: ForumFormData) => Promise<boolean>;
 }
 
 const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ForumFormData>();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<ForumFormData>();
+  const { data: sessionData } = useSession();
+  const router = useRouter();
 
-  const onSubmit2 = handleSubmit(data => {
-    onSubmit(data);
+  const onSubmit2 = handleSubmit(async (data) => {
+    const isSuccessful = await onSubmit(data);
+    if (isSuccessful) reset();
   });
+
+  const activeButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium cursor-pointer " +
+  "text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg hover:scale-90 "+
+  "duration-200 ease-in-out";
+
+  const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
+  "text-sm leading-tight uppercase rounded shadow-md opacity-50";
+
+  const [routerIsReady, setRouterIsReady] = useState(router.isReady);
+
+  useEffect(() => {
+    if(!router.isReady) return;
+    setRouterIsReady(true);
+  }, [router.isReady]);
 
   return (
     <form onSubmit={onSubmit2}>
-      <div className="w-1/2 p-8 bg-gradient-to-b from-indigo-300 to-purple-400 mx-auto rounded-md shadow-2xl">
+      <div className="w-1/2 p-8 bg-slate-200 mx-auto rounded-md shadow-2xl">
         <div className="mb-6">
           <label htmlFor="course-id" className="block text-xl font-medium text-gray-900">Course</label>
           <input 
@@ -56,15 +76,22 @@ const ForumForm: React.FC<ForumFormProps> = ({ onSubmit }) => {
           {errors.cons && <ErrorMessage message={errors.cons?.message} /> }
         </div>
         <div className="flex justify-end">
+          {sessionData?.user ? 
           <button 
             type="submit" 
-            className="inline-block px-6 py-2.5 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-medium 
-            text-xs leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg focus:bg-violet-700 hover:scale-90
-            focus:shadow-lg focus:outline-none focus:ring-0 active:bg-violet-800 active:shadow-lg transition duration-200
-            ease-in-out"
+            className={routerIsReady ? activeButton : disabledButton}
+            disabled={routerIsReady}
           >
             Submit
-          </button>
+          </button> :
+            <button 
+              type="button" 
+              className={activeButton}
+              onClick={() => signIn()}
+            >
+              Sign In to Create a Review
+            </button>
+          }
         </div>
       </div>
     </form>

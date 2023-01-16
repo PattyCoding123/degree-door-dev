@@ -10,12 +10,41 @@ export const forumRouter = router({
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
+  getDegreeInfo: publicProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.degree.findUnique({ 
+        where: {
+          id: input.degreeId
+        }
+      })
+    }),
+  getAllReviews: publicProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.review.findMany({ where: { degreeId: input.degreeId }})
   }),
-  createPost: protectedProcedure
-    .input(z.object({ course: z.string(), pros: z.string(), cons: z.string() }))
-    .mutation(({ input }) => {
-      return input;
+  createReview: protectedProcedure
+    .input(z.object({ degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() }) }))
+    .mutation(async ({ input, ctx }) => {
+      const { degreeId, formData } = input;
+      const review = await ctx.prisma.review.create({
+        data: {
+          ...formData,
+          userId: ctx.session.user.id,
+          degreeId: degreeId,
+        }
+      });
+      return review;
+    }),
+  deleteReview: protectedProcedure
+    .input(z.object({ reviewId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const deletedReview = await ctx.prisma.review.delete({
+        where: {
+          id: input.reviewId
+        }
+      })
+      return deletedReview;
     })
 });
