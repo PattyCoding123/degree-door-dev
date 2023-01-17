@@ -1,15 +1,11 @@
 import { BsSearch } from "react-icons/bs";
-import { trpc } from "../utils/trpc";
+import { RouterOutputs, trpc } from "../utils/trpc";
 import { useState, useMemo } from "react";
 import Link from "next/link";
-interface DegreePath {
-  id: string;
-  name: string;
-}
 
 const Searchbar: React.FC = () => {
   const [query, setQuery] = useState("");
-  const degreePathQuery = trpc.forum.getAllDegreePaths.useQuery<DegreePath>();
+  const degreePathQuery = trpc.forum.getAllDegreePaths.useQuery();
 
   const filteredItems = useMemo(() => {
     if (query === "") return;

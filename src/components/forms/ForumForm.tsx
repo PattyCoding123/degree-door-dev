@@ -26,7 +26,7 @@ const ForumForm: React.FC = () => {
 
   const { degree } = router.query as { degree: string};
 
-  const createReview = trpc.forum.createReview.useMutation<ForumFormData>({
+  const createReview = trpc.forum.createReview.useMutation({
     onSuccess: () => {
       toast.success("Review successfully created!", { position: "bottom-center", className: "text-xl" });
       reset();
