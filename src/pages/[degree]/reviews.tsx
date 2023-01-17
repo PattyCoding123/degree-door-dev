@@ -39,10 +39,10 @@ const DegreeHome: NextPage = () => {
       <DegreeNavbar active="reviews" degreeName={degreeQuery.data?.name!} degreeId={degreeQuery.data?.id!} />
       <main className="flex flex-col">
         <div 
-          className="h-80 mt-8 mx-auto relative items-center justify-center flex 
-          border w-2/3 rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
+          className="h-80 mt-8 mx-auto relative border w-2/3 
+          rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
         >
-          <section className="absolute flex flex-col gap-2 text-center">
+          <section className="absolute inset-0 flex flex-col gap-2 justify-center text-center">
             <h1 className="text-4xl md:text-6xl font-bold">{degreeQuery.data?.name!}</h1>
             <p className="text-xl md:text-3xl">Reviews</p>
           </section>
