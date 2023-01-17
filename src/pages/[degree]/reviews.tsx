@@ -50,12 +50,7 @@ const DegreeHome: NextPage = () => {
         <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
           {queryReviews.data?.map((review) => (
             <Review 
-              key={review.id}
-              course={review.course} 
-              pros={review.pros} 
-              cons={review.cons} 
-              reviewId={review.id} 
-              userId = {review.userId}
+              reviewPost={review}
               handleClick={deleteReviewHandler} />
           ))}
         </section>
