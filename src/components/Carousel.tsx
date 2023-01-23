@@ -6,9 +6,9 @@ import useMeasure from "react-use-measure";
 const Carousel: React.FC = () => {
   const [count, setCount] = useState(1);
   const [ref, { width }] = useMeasure();
-  const prev = usePrevious(count) as number;
+  const prev = usePrevious(count);
 
-  const direction: number = count > prev ? 1 : -1;
+  const direction: number = (typeof prev === "number" && count > prev ? 1 : -1);
   
   return (
     <div className="text-white">
@@ -59,11 +59,11 @@ const variants = {
   exit: (custom: { direction: number, width: number}) => ({ x: custom.direction * -custom.width })
 };
 
-function usePrevious(state: number) {
-  const [tuple, setTuple] = useState([0, state]);
+function usePrevious<T>(state: T): T | undefined {
+  const [tuple, setTuple] = useState([undefined, state]);
 
   if (tuple[1] !== state) {
-    setTuple([tuple[1], state] as number[]); // [prevCount, currentCount]
+    setTuple([tuple[1], state]); // [prevCount, currentCount]
   }
   
   return tuple[0];
