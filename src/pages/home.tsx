@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import HeroBanner from "../components/HeroBanner";
 import HomeNavbar from "../components/HomeNavbar";
 import Searchbar from "../components/Searchbar";
+import Carousel from "../components/Carousel";
 
 const Home: NextPage = () => {
   return (
@@ -12,8 +13,8 @@ const Home: NextPage = () => {
       </HomeNavbar>
       <main>
         <HeroBanner />
-        <section className="max-w-md rounded-lg shadow-xl p-6 mx-auto">
-          <p className="text-tokyo-night">Hello, this is my home page.</p>
+        <section>
+          <Carousel />
         </section>
       </main>
     </div>
