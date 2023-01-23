@@ -11,9 +11,7 @@ const HeroBanner: React.FC = () => {
         with upcoming students. Providing information on courses, degrees, and work loads
         in a forum like style allowing access to important information.
       </p>
-      <Button type="button" className="inline-block px-6 py-2.5 bg-rose-400 text-white font-medium cursor-pointer 
-        text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg hover:scale-90 
-        duration-200 ease-in-out"
+      <Button type="button"
       >
         Learn More
       </Button>
