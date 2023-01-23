@@ -29,10 +29,6 @@ const DegreeHome: NextPage = () => {
     degreeQuery.refetch();
   }, [router.isReady]);
 
-  const deleteReviewHandler = async (reviewId: string) => {
-    await deleteReview.mutateAsync({ reviewId: reviewId });
-  }
-
   return (
     <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <Toaster />
@@ -51,7 +47,9 @@ const DegreeHome: NextPage = () => {
           {queryReviews.data?.map((review) => (
             <Review 
               reviewPost={review}
-              handleClick={deleteReviewHandler} />
+              handleClick={async (reviewId: string) => {
+                await deleteReview.mutateAsync({ reviewId: reviewId });
+              }} />
           ))}
         </section>
       </main>
