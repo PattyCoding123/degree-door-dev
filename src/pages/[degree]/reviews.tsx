@@ -48,9 +48,8 @@ const DegreeHome: NextPage = () => {
             <Review 
               key={review.id}
               reviewPost={review}
-              handleClick={async (reviewId: string) => {
-                await deleteReview.mutateAsync({ reviewId: reviewId });
-              }} />
+              handleClick={async (reviewId: string) => {await deleteReview.mutateAsync({ reviewId: reviewId });}} 
+            />
           ))}
         </section>
       </main>
