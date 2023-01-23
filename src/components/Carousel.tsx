@@ -3,6 +3,8 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useState } from "react";
 import useMeasure from "react-use-measure";
 
+import usePrevious from "../utils/usePrevious";
+
 const Carousel: React.FC = () => {
   const [count, setCount] = useState(1);
   const [ref, { width }] = useMeasure();
@@ -58,13 +60,3 @@ const variants = {
   center: { x: 0 },
   exit: (custom: { direction: number, width: number}) => ({ x: custom.direction * -custom.width })
 };
-
-function usePrevious<T>(state: T): T | undefined {
-  const [tuple, setTuple] = useState([undefined, state]);
-
-  if (tuple[1] !== state) {
-    setTuple([tuple[1], state]); // [prevCount, currentCount]
-  }
-  
-  return tuple[0];
-}
