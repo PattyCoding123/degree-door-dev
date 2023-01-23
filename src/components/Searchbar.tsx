@@ -9,9 +9,9 @@ const Searchbar: React.FC = () => {
 
   const filteredItems = useMemo(() => {
     if (query === "") return;
-    return degreePathQuery.data?.filter(item => {
-      return item.name.toLowerCase().includes(query.toLowerCase());
-    })
+    return degreePathQuery.data?.filter(item => 
+      item.name.toLowerCase().includes(query.toLowerCase())
+    )
   }, [query]);
 
   
