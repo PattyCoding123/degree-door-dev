@@ -46,6 +46,7 @@ const DegreeHome: NextPage = () => {
         <section className="my-8 flex flex-col items-center align-middle justify-center gap-8">
           {queryReviews.data?.map((review) => (
             <Review 
+              key={review.id}
               reviewPost={review}
               handleClick={async (reviewId: string) => {
                 await deleteReview.mutateAsync({ reviewId: reviewId });
