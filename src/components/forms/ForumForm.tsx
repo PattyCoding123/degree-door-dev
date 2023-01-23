@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 import { toast } from "react-hot-toast";
+
 import { trpc } from "../../utils/trpc";
+import { Button } from "../Buttons";
 
 export interface ForumFormData {
   course: string;
@@ -37,13 +39,6 @@ const ForumForm: React.FC = () => {
   const onSubmit2 = handleSubmit(async (data) => {
     await createReview.mutateAsync({degreeId: degree, formData: data});
   });
-
-  const activeButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium cursor-pointer " +
-  "text-sm leading-tight uppercase rounded shadow-md hover:opacity-80 hover:shadow-lg hover:scale-90 "+
-  "duration-200 ease-in-out";
-
-  const disabledButton = "inline-block px-6 py-2.5 bg-rose-400 text-white font-medium " +
-  "text-sm leading-tight uppercase rounded shadow-md opacity-50";
 
   return (
     <form onSubmit={onSubmit2}>
@@ -84,20 +79,18 @@ const ForumForm: React.FC = () => {
         </div>
         <div className="flex justify-end">
           {sessionData?.user ? 
-          <button 
+          <Button 
             type="submit" 
-            className={routerIsReady ? activeButton : disabledButton}
             disabled={!routerIsReady}
           >
             Submit
-          </button> :
-            <button 
+          </Button> :
+            <Button 
               type="button" 
-              className={activeButton}
               onClick={() => signIn()}
             >
               Sign In to Create a Review
-            </button>
+            </Button>
           }
         </div>
       </div>
@@ -105,11 +98,8 @@ const ForumForm: React.FC = () => {
   );
 }
 
-interface ErrorMessageProps {
-  message?: string;
-}
-
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+const ErrorMessage = (props: { message: string | undefined }) => {
+  const { message } = props;
   return (
     <div className=" text-red-700 mt-2 flex items-center gap-2" role="alert">
       <div className="text-xl">
