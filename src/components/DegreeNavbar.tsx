@@ -33,21 +33,19 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
           </div>
         </Link>
         <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
-          <li>
-            <Link href={`/${degreeQuery.data?.id!}`}>
-              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "overview"})}>OVERVIEW</p>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${degreeQuery.data?.id!}/reviews`}>
-              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "reviews"})}>REVIEWS</p>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${degreeQuery.data?.id!}/post`}>
-              <p className={clsx("font-bold hover:opacity-50", {"text-indigo-500": active === "post"})}>POST A REVIEW</p>
-            </Link>
-          </li>
+          {
+            [
+              [`/${degreeQuery.data?.id!}`, "OVERVIEW", "overview"],
+              [`/${degreeQuery.data?.id!}/reviews`, "REVIEWS", "reviews"],
+              [`/${degreeQuery.data?.id!}/post`, "POST A REVIEW", "post"]
+            ].map(([href, label, id]) => (
+              <li key={label} id={id}>
+                <Link href={href!}>
+                  <p className={clsx("font-bold hover:opacity-50", {"text-indigo-600": active === id})}>{label!}</p>
+                </Link>
+              </li>
+            ))
+          }
         </ul>
         <div className="flex md:col-span-1 justify-end">
           <BsFillGearFill className="text-lg" />
