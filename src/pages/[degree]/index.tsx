@@ -1,19 +1,14 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 
 const DegreeHome: NextPage = () => {
-  const router = useRouter();
-  const { degree } = router.query as { degree: string };
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree }, { enabled: false });
+  const { degree } = useRouter().query as { degree: string | undefined };
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    degreeQuery.refetch();
-  }, [router.isReady])
+  // Dependent query, will not run unless degree is definied: !!variable => boolean
+  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
 
   return (
     <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">

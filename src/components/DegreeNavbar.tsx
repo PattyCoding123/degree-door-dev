@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { BsFillGearFill } from "react-icons/bs";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { trpc } from "../utils/trpc";
 
@@ -11,14 +10,10 @@ interface DegreeNavbarProps {
 }
 
 const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
-  const router = useRouter();
-  const { degree } = router.query as { degree: string };
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree }, { enabled: false });
+  const { degree } = useRouter().query as { degree: string | undefined };
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    degreeQuery.refetch();
-  }, [router.isReady])
+  // Dependent query, will not run unless degree is definied: !!variable => boolean
+  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
 
   return (
     <nav className="max-w-screen m-auto flex flex-col shadow-lg">

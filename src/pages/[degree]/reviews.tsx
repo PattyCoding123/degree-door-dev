@@ -8,8 +8,7 @@ import DegreeNavbar from "../../components/DegreeNavbar";
 import Review from "../../components/Review";
 
 const DegreeHome: NextPage = () => {
-  const router = useRouter(); 
-  const { degree } = router.query as { degree: string | undefined };
+  const { degree } = useRouter().query as { degree: string | undefined };
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
