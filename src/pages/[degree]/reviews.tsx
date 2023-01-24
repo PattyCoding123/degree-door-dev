@@ -9,11 +9,11 @@ import Review from "../../components/Review";
 
 const DegreeHome: NextPage = () => {
   const router = useRouter(); 
-  const { degree } = router.query as { degree: string };
+  const { degree } = router.query as { degree: string | undefined };
 
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree }, { enabled: false });
-
-  const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: degree }, { enabled: false });
+  // Dependent query, will not run unless degree is definied: !!variable => boolean
+  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
+  const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: degree! }, { enabled: !!degree });
 
   const deleteReview = trpc.forum.deleteReview.useMutation({ 
     onSuccess: () => {
@@ -22,12 +22,6 @@ const DegreeHome: NextPage = () => {
     },
     onError: () => toast.error("There was an error deleting the post!", { position: "bottom-center", className: "text-xl" })
   });
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    queryReviews.refetch();
-    degreeQuery.refetch();
-  }, [router.isReady]);
 
   return (
     <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
