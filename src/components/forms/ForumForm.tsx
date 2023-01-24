@@ -1,6 +1,5 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 import { toast } from "react-hot-toast";
@@ -19,14 +18,7 @@ const ForumForm: React.FC = () => {
   const { data: sessionData } = useSession();
   const router = useRouter();
 
-  const [routerIsReady, setRouterIsReady] = useState(router.isReady);
-
-  useEffect(() => {
-    if(!router.isReady) return;
-    setRouterIsReady(true);
-  }, [router.isReady]);
-
-  const { degree } = router.query as { degree: string};
+  const { degree } = router.query as { degree: string | undefined };
 
   const createReview = trpc.forum.createReview.useMutation({
     onSuccess: () => {
@@ -37,7 +29,7 @@ const ForumForm: React.FC = () => {
   });
 
   const onSubmit2 = handleSubmit(async (data) => {
-    await createReview.mutateAsync({degreeId: degree, formData: data});
+    await createReview.mutateAsync({degreeId: degree!, formData: data});
   });
 
   return (
@@ -81,7 +73,7 @@ const ForumForm: React.FC = () => {
           {sessionData?.user ? 
           <Button 
             type="submit" 
-            disabled={!routerIsReady}
+            disabled={!router.isReady}
           >
             Submit
           </Button> :
