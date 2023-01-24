@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect } from 'react';
 import { Toaster, toast } from "react-hot-toast";
 
 import { trpc } from "../../utils/trpc";
