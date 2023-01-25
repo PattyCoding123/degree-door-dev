@@ -20,7 +20,8 @@ model Example {
   updatedAt DateTime @updatedAt
 }
 
-// Necessary for Next auth
+// Necessary for Next auth, represents information about OAuth accounts
+// that are associated with the user.
 model Account {
   id                String  @id @default(cuid())
   userId            String
