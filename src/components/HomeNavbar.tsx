@@ -3,11 +3,9 @@ import Link from "next/link";
 import React from "react";
 import { BsFillGearFill } from "react-icons/bs";
 
-interface HomeNavbarProps {
-  children?: React.ReactNode
-}
+import Searchbar from "./Searchbar";
 
-const HomeNavbar: React.FC<HomeNavbarProps> = ({ children }) => {
+const HomeNavbar: React.FC = () => {
   return (
     <nav className="max-w-screen bg-gray-900">
       <div className="px-6 py-4 flex flex-col items-center gap-8 md:grid md:grid-cols-3 w-full">
@@ -18,7 +16,7 @@ const HomeNavbar: React.FC<HomeNavbarProps> = ({ children }) => {
           </div>
         </Link>
         <div className="col-span-1 justify-self-center">
-          {children}
+          <Searchbar />
         </div>
         <div className="col-span-1 items-center justify-self-end">
           <BsFillGearFill className="text-lg text-white" />

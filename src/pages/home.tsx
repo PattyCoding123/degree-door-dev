@@ -2,15 +2,12 @@ import { type NextPage } from "next";
 
 import HeroBanner from "../components/HeroBanner";
 import HomeNavbar from "../components/HomeNavbar";
-import Searchbar from "../components/Searchbar";
 import Carousel from "../components/Carousel";
 
 const Home: NextPage = () => {
   return (
     <div className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white h-screen w-screen">
-      <HomeNavbar>
-        <Searchbar />
-      </HomeNavbar>
+      <HomeNavbar />
       <main>
         <HeroBanner />
         <section>

@@ -1,13 +1,10 @@
 import { type NextPage } from "next";
 import HomeNavbar from "../components/HomeNavbar";
-import Searchbar from "../components/Searchbar";
 
 const Profile : NextPage = () => {
   return (
     <div className="h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-      <HomeNavbar>
-        <Searchbar />
-      </HomeNavbar>
+      <HomeNavbar />
       <div className="p-8 mt-10">
         <main>
           <section 
