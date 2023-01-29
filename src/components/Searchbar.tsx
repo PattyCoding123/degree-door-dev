@@ -39,7 +39,7 @@ const Searchbar: React.FC = () => {
           <Link href={`/${degree.id}`} key={index}>
             <div 
               className="degree-item bg-white z-50 w-80 h-8 flex items-center p-4 
-            text-black border-b-2 border-gray-600"
+            text-black border-b-2 border-gray-600 hover:bg-gray-300"
             >
               <p>{degree.name}</p>
             </div>
