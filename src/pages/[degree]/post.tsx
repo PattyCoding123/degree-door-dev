@@ -5,6 +5,7 @@ import ForumForm from "../../components/forms/ForumForm";
 import DegreeNavbar from "../../components/DegreeNavbar";
 
 const Post: NextPage = () => {
+
   return (
     <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <Toaster />
