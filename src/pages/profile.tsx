@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import HomeNavbar from "../components/HomeNavbar";
 
 const Profile : NextPage = () => {
+  
   return (
     <div className="h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <HomeNavbar />
