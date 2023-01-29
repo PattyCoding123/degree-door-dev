@@ -28,15 +28,16 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
           </div>
         </Link>
         <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
-          {
+          {/* Only render the links if the data exists */}
+          { degreeQuery.data?.id &&
             [
-              [`/${degreeQuery.data?.id!}`, "OVERVIEW", "overview"],
-              [`/${degreeQuery.data?.id!}/reviews`, "REVIEWS", "reviews"],
-              [`/${degreeQuery.data?.id!}/post`, "POST A REVIEW", "post"]
+              [`/${degreeQuery.data.id}`, "OVERVIEW", "overview"],
+              [`/${degreeQuery.data.id}/reviews`, "REVIEWS", "reviews"],
+              [`/${degreeQuery.data.id}/post`, "POST A REVIEW", "post"]
             ].map(([href, label, id]) => (
-              <li key={label} id={id}>
+              <li key={label!} id={id!}>
                 <Link href={href!}>
-                  <p className={clsx("font-bold hover:opacity-50", {"text-indigo-600": active === id})}>{label!}</p>
+                  <p className={clsx("font-bold hover:opacity-50", {"text-indigo-600": active === id!})}>{label!}</p>
                 </Link>
               </li>
             ))
