@@ -5,11 +5,11 @@ const Profile : NextPage = () => {
   return (
     <div className="h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
       <HomeNavbar />
-      <div className="p-8 mt-10">
+      <div className="p-8 mt-10 max-h-screen max-w-screen">
         <main>
           <section 
-            className="bg-gradient-to-b from-rose-100 to-teal-100 rounded-md p-8
-            flex flex-col justify-center items-center"
+            className="w-2/3 bg-gradient-to-b from-rose-100 to-teal-100 rounded-md p-8
+            flex flex-col justify-center items-center mx-auto"
           >
             <div className="flex flex-col justify-center items-center">
               <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://cdn-icons-png.flaticon.com/512/1177/1177568.png" 
@@ -18,7 +18,7 @@ const Profile : NextPage = () => {
               <h1 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">First Name Last Name</h1>
             </div>
             <div className="w-full h-full mt-8">
-              <form className="p-8 w-2/3 mx-auto bg-white shadow-xl rounded-lg border border-red-500 grid grid-cols-2">
+              <form className="p-8 w-2/3 mx-auto bg-white shadow-2xl rounded-lg border-gray-300 border grid grid-cols-2">
                 <div className="w-full h-full col-span-2 grid grid-cols-2 mb-4">
                   <div className="col-span-1 px-4">
                     <label className="text-gray-900 font-bold" htmlFor="name">Display Name</label>
@@ -67,8 +67,8 @@ const Profile : NextPage = () => {
                     name="about" 
                     value="about" 
                     id="about"
-                    className="mt-2 bg-slate-50 border border-gray-400 text-gray-900 rounded-lg w-full p-2 outline-none
-                    hover:shadow-2xl duration-300"
+                    className="mt-2 bg-slate-50 border border-gray-400 text-gray-900 
+                    rounded-lg min-h-[8rem] w-full p-2 outline-none hover:shadow-2xl duration-300"
                   />
                 </div>
               </form>
