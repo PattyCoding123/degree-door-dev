@@ -2,23 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import { BsFillGearFill } from "react-icons/bs";
-import { useRouter } from "next/router";
-import { trpc } from "../utils/trpc";
 
 interface DegreeNavbarProps {
   active: string;
+  degreeName?: string;
+  degreeId?: string;
 }
 
-const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
-  const { degree } = useRouter().query as { degree: string | undefined };
-
-  // Dependent query, will not run unless degree is definied: !!variable => boolean
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
+const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active, degreeName, degreeId }) => {
 
   return (
     <nav className="max-w-screen m-auto flex flex-col shadow-lg">
       <header className="bg-gray-900 py-1">
-        <h1 className="font-bold text-white text-center">{degreeQuery.data?.name!}</h1>
+        {degreeName && <h1 className="font-bold text-white text-center">{degreeName}</h1>}
       </header>
       <div className="px-6 py-4 flex flex-col md:grid md:grid-cols-3 justify-between items-center gap-8 bg-gradient-to-b from-rose-100 to-teal-100">
         <Link href="/">
@@ -29,11 +25,11 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
         </Link>
         <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
           {/* Only render the links if the data exists */}
-          { degreeQuery.data?.id &&
+          { degreeId &&
             [
-              [`/${degreeQuery.data.id}`, "OVERVIEW", "overview"],
-              [`/${degreeQuery.data.id}/reviews`, "REVIEWS", "reviews"],
-              [`/${degreeQuery.data.id}/post`, "POST A REVIEW", "post"]
+              [`/${degreeId}`, "OVERVIEW", "overview"],
+              [`/${degreeId}/reviews`, "REVIEWS", "reviews"],
+              [`/${degreeId}/post`, "POST A REVIEW", "post"]
             ].map(([href, label, id]) => (
               <li key={label!} id={id!}>
                 <Link href={href!}>
