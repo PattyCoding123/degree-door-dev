@@ -12,7 +12,7 @@ const HomeNavbar: React.FC = () => {
         <Link href="/">
           <div className="col-span-1 navbar-brand cursor-pointer flex">
             <Image src="/degree_door_logo.png" alt="Degree Door Logo" width={24} height={24} />
-            <p className="font-bold">egree Door</p>
+            <p className="text-white font-bold">egree Door</p>
           </div>
         </Link>
         <div className="col-span-1 justify-self-center">
