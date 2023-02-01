@@ -5,13 +5,14 @@ import { Toaster, toast } from "react-hot-toast";
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 import Review from "../../components/Review";
+import ensure from "../../utils/ensure";
 
 const DegreeHome: NextPage = () => {
   const { degree } = useRouter().query as { degree: string | undefined };
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
-  const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: degree! }, { enabled: !!degree });
+  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: ensure(degree) }, { enabled: !!degree });
+  const queryReviews = trpc.forum.getAllReviews.useQuery({ degreeId: ensure(degree) }, { enabled: !!degree });
 
   const deleteReview = trpc.forum.deleteReview.useMutation({ 
     onSuccess: () => {
@@ -35,7 +36,7 @@ const DegreeHome: NextPage = () => {
           rounded-xl shadow-2xl bg-gradient-to-b from-rose-100 to-teal-100"
         >
           <section className="absolute inset-0 flex flex-col gap-2 justify-center text-center">
-            <h1 className="text-4xl md:text-6xl font-bold">{degreeQuery.data?.name!}</h1>
+            <h1 className="text-4xl md:text-6xl font-bold">{degreeQuery.data?.name}</h1>
             <p className="text-xl md:text-3xl">Reviews</p>
           </section>
         </div>
