@@ -2,20 +2,22 @@ import { SiDiscord } from "react-icons/si";
 import { signIn } from "next-auth/react";
 import { motion } from "framer-motion";
 
-const LoginForm:React.FC = () => {
-
+const LoginForm: React.FC = () => {
   return (
     <motion.form
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-white shadow-md rounded p-8 items-center flex flex-col gap-4"
+      className="flex flex-col items-center gap-4 rounded bg-white p-8 shadow-md"
     >
-      <h2 className="text-center text-2xl font-bold tracking text-gray-900">Welcome to Degree Door</h2>
+      <h2 className="tracking text-center text-2xl font-bold text-gray-900">
+        Welcome to Degree Door
+      </h2>
       <div>
-        <button className="p-4 py-2 text-md text-indigo-500 font-semibold rounded-full border
-          border-indigo-500 hover:bg-indigo-500 hover:text-gray-50 hover:border-transparent 
-          duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center gap-4"
+        <button
+          className="text-md flex items-center gap-4 rounded-full border border-indigo-500
+          p-4 py-2 font-semibold text-indigo-500 
+          duration-150 hover:border-transparent hover:bg-indigo-500 hover:text-gray-50"
           onClick={() => signIn("discord")}
           type="button"
         >
@@ -25,6 +27,6 @@ const LoginForm:React.FC = () => {
       </div>
     </motion.form>
   );
-}
+};
 
 export default LoginForm;

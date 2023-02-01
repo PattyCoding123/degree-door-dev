@@ -1,7 +1,7 @@
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { RouterOutputs } from "../utils/trpc";
+import { type RouterOutputs } from "../utils/trpc";
 
 interface ReviewProps {
   reviewPost: RouterOutputs["forum"]["getAllReviews"][0];
@@ -12,39 +12,39 @@ const Review: React.FC<ReviewProps> = ({ reviewPost, handleClick }) => {
   const { data: sessionData } = useSession();
   const { course, pros, cons, id, userId } = reviewPost;
   return (
-    <article className="w-2/3 p-4 border bg-gradient-to-b from-rose-100 to-teal-100 rounded-xl shadow-2xl flex flex-col gap-4">
+    <article className="flex w-2/3 flex-col gap-4 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
       <div className="flex items-center justify-between">
         <h1 className="text-center text-lg font-bold">{course}</h1>
-        { sessionData?.user?.id === userId && 
+        {sessionData?.user?.id === userId && (
           <button type="button" onClick={() => handleClick(id)}>
-            <BsFillTrashFill id={id} className="text-lg cursor-pointer" />
+            <BsFillTrashFill id={id} className="cursor-pointer text-lg" />
           </button>
-        }
+        )}
       </div>
       <section className="flex">
-        <div className="bg-white border-2 border-green-700 w-16 p-2 flex justify-center items-center rounded">
+        <div className="flex w-16 items-center justify-center rounded border-2 border-green-700 bg-white p-2">
           <IoMdThumbsUp className="text-lg text-green-700" />
         </div>
-        <div className="bg-white border-r-4 border-green-700 w-full p-4 rounded">
+        <div className="w-full rounded border-r-4 border-green-700 bg-white p-4">
           <div className="flex flex-col">
-            <h2 className="font-bold text-lg">PROS</h2>
-            <p className="text-gray-600 text-md">{pros}</p>
+            <h2 className="text-lg font-bold">PROS</h2>
+            <p className="text-md text-gray-600">{pros}</p>
           </div>
         </div>
       </section>
       <section className="flex">
-        <div className="bg-white border-2 border-red-700 w-16 p-2 flex justify-center items-center rounded">
+        <div className="flex w-16 items-center justify-center rounded border-2 border-red-700 bg-white p-2">
           <IoMdThumbsDown className="text-lg text-red-700" />
         </div>
-        <div className="bg-white border-r-4 border-red-700 w-full p-4 rounded">
+        <div className="w-full rounded border-r-4 border-red-700 bg-white p-4">
           <div className="flex flex-col">
-            <h2 className="font-bold text-lg">CONS</h2>
-            <p className="text-gray-600 text-md">{cons}</p>
+            <h2 className="text-lg font-bold">CONS</h2>
+            <p className="text-md text-gray-600">{cons}</p>
           </div>
         </div>
       </section>
     </article>
   );
-}
+};
 
 export default Review;

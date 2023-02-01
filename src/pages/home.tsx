@@ -6,7 +6,7 @@ import Carousel from "../components/Carousel";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white h-screen w-screen">
+    <div className="h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white">
       <HomeNavbar />
       <main>
         <HeroBanner />
@@ -16,6 +16,6 @@ const Home: NextPage = () => {
       </main>
     </div>
   );
-}
+};
 
 export default Home;

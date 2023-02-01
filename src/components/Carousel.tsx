@@ -10,8 +10,8 @@ const Carousel: React.FC = () => {
   const [ref, { width }] = useMeasure();
   const prev = usePrevious(count);
 
-  const direction: number = (typeof prev === "number" && count > prev ? 1 : -1);
-  
+  const direction: number = typeof prev === "number" && count > prev ? 1 : -1;
+
   return (
     <div className="text-white">
       <div className="flex justify-between">
@@ -23,15 +23,15 @@ const Carousel: React.FC = () => {
         </button>
       </div>
       <div className="mt-8 flex justify-center">
-        <div 
+        <div
           ref={ref}
-          className="flex h-24 w-1/2 items-center justify-center overflow-hidden
-          bg-gray-700 relative"
+          className="relative flex h-24 w-1/2 items-center justify-center
+          overflow-hidden bg-gray-700"
         >
           <AnimatePresence custom={{ direction, width }}>
             {/* Variants are sets (objects) of pre-defined targets,
              and they can be referred by label*/}
-            <motion.div 
+            <motion.div
               key={count}
               variants={variants}
               initial="enter"
@@ -39,7 +39,9 @@ const Carousel: React.FC = () => {
               exit="exit"
               transition={{ duration: 0.5 }}
               custom={{ direction, width }}
-              className={`absolute flex h-20 w-20 items-center justify-center ${colors[Math.abs(count) % 4]}`}
+              className={`absolute flex h-20 w-20 items-center justify-center ${
+                colors[Math.abs(count) % 4]
+              }`}
             >
               {count}
             </motion.div>
@@ -48,7 +50,7 @@ const Carousel: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 export default Carousel;
 
 const colors = ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-yellow-500"];
@@ -56,7 +58,11 @@ const colors = ["bg-red-500", "bg-green-500", "bg-blue-500", "bg-yellow-500"];
 // Custom variants, remember to automatically return an object in an arrow function
 // is to wrap in ()
 const variants = {
-  enter: (custom: { direction: number, width: number }) => ({ x: custom.direction * custom.width }),
+  enter: (custom: { direction: number; width: number }) => ({
+    x: custom.direction * custom.width,
+  }),
   center: { x: 0 },
-  exit: (custom: { direction: number, width: number}) => ({ x: custom.direction * -custom.width })
+  exit: (custom: { direction: number; width: number }) => ({
+    x: custom.direction * -custom.width,
+  }),
 };

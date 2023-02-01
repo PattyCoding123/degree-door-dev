@@ -8,11 +8,16 @@ import Searchbar from "./Searchbar";
 const HomeNavbar: React.FC = () => {
   return (
     <nav className="max-w-screen bg-gray-900">
-      <div className="px-6 py-4 flex flex-col items-center gap-8 md:grid md:grid-cols-3 w-full">
+      <div className="flex w-full flex-col items-center gap-8 px-6 py-4 md:grid md:grid-cols-3">
         <Link href="/">
-          <div className="col-span-1 navbar-brand cursor-pointer flex">
-            <Image src="/degree_door_logo.png" alt="Degree Door Logo" width={24} height={24} />
-            <p className="text-white font-bold">egree Door</p>
+          <div className="navbar-brand col-span-1 flex cursor-pointer">
+            <Image
+              src="/degree_door_logo.png"
+              alt="Degree Door Logo"
+              width={24}
+              height={24}
+            />
+            <p className="font-bold text-white">egree Door</p>
           </div>
         </Link>
         <div className="col-span-1 justify-self-center">
@@ -24,6 +29,6 @@ const HomeNavbar: React.FC = () => {
       </div>
     </nav>
   );
-}
+};
 
 export default HomeNavbar;
