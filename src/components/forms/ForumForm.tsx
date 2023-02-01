@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 import { trpc } from "../../utils/trpc";
 import { Button } from "../Buttons";
-import ensure from "../../utils/ensure";
 
 export interface ForumFormData {
   course: string;
@@ -43,7 +42,7 @@ const ForumForm: React.FC = () => {
 
   const onSubmit2 = handleSubmit(async (data) => {
     await createReview.mutateAsync({
-      degreeId: ensure(degree),
+      degreeId: degree as string,
       formData: data,
     });
   });

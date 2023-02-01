@@ -3,14 +3,13 @@ import { useRouter } from "next/router";
 
 import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
-import ensure from "../../utils/ensure";
 
 const DegreeHome: NextPage = () => {
   const { degree } = useRouter().query as { degree: string | undefined };
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
-    { degreeId: ensure(degree) },
+    { degreeId: degree as string },
     { enabled: !!degree }
   );
 
