@@ -9,42 +9,62 @@ interface DegreeNavbarProps {
   degreeId?: string;
 }
 
-const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active, degreeName, degreeId }) => {
-
+const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
+  active,
+  degreeName,
+  degreeId,
+}) => {
   return (
     <nav className="max-w-screen m-auto flex flex-col shadow-lg">
-      {degreeName && <header className="bg-gray-900 py-1">
-        <h1 className="font-bold text-white text-center">{degreeName}</h1>
-      </header>}
-      <div className="px-6 py-4 flex flex-col md:grid md:grid-cols-3 justify-between items-center gap-8 bg-gradient-to-b from-rose-100 to-teal-100">
+      {degreeName && (
+        <header className="bg-gray-900 py-1">
+          <h1 className="text-center font-bold text-white">{degreeName}</h1>
+        </header>
+      )}
+      <div className="flex flex-col items-center justify-between gap-8 bg-gradient-to-b from-rose-100 to-teal-100 px-6 py-4 md:grid md:grid-cols-3">
         <Link href="/">
-          <div className="col-span-1 navbar-brand cursor-pointer flex">
-            <Image src="/degree_door_logo_filled.png" alt="Degree Door Logo" width={24} height={24} />
+          <div className="navbar-brand col-span-1 flex cursor-pointer">
+            <Image
+              src="/degree_door_logo_filled.png"
+              alt="Degree Door Logo"
+              width={24}
+              height={24}
+            />
             <p className="font-bold">egree Door</p>
           </div>
         </Link>
-        <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
+        <ul className="flex flex-col items-center justify-center gap-10 md:col-span-1 md:flex-row md:gap-4">
           {/* Only render the links if the data exists */}
-          { degreeId &&
+          {degreeId &&
             [
               [`/${degreeId}`, "OVERVIEW", "overview"],
               [`/${degreeId}/reviews`, "REVIEWS", "reviews"],
-              [`/${degreeId}/post`, "POST A REVIEW", "post"]
-            ].map(([href, label, id]) => (
-              <li key={label!} id={id!}>
-                <Link href={href!}>
-                  <p className={clsx("font-bold hover:opacity-50", {"text-indigo-600": active === id!})}>{label!}</p>
-                </Link>
-              </li>
-            ))
-          }
+              [`/${degreeId}/post`, "POST A REVIEW", "post"],
+            ].map(([href, label, id]) => {
+              if (href && label && id) {
+                return (
+                  <li key={label} id={id}>
+                    <Link href={href}>
+                      <p
+                        className={clsx("font-bold hover:opacity-50", {
+                          "text-indigo-600": active === id,
+                        })}
+                      >
+                        {label}
+                      </p>
+                    </Link>
+                  </li>
+                );
+              }
+              return null;
+            })}
         </ul>
-        <div className="flex md:col-span-1 justify-end">
+        <div className="flex justify-end md:col-span-1">
           <BsFillGearFill className="text-lg" />
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default DegreeNavbar;
