@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 
 import { trpc } from "../../utils/trpc";
 import { Button } from "../Buttons";
+import ensure from "../../utils/ensure";
 
 export interface ForumFormData {
   course: string;
@@ -41,7 +42,10 @@ const ForumForm: React.FC = () => {
   });
 
   const onSubmit2 = handleSubmit(async (data) => {
-    await createReview.mutateAsync({ degreeId: degree!, formData: data });
+    await createReview.mutateAsync({
+      degreeId: ensure(degree),
+      formData: data,
+    });
   });
 
   return (
@@ -104,7 +108,7 @@ const ForumForm: React.FC = () => {
         </div>
         <div className="flex justify-end">
           {sessionData?.user ? (
-            <Button type="submit" disabled={!router.isReady}>
+            <Button type="submit" disabled={!!degree}>
               Submit
             </Button>
           ) : (
