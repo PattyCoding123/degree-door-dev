@@ -76,8 +76,8 @@ model Review {
   userId    String
   degreeId  String
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id]) 
-  degree    Degree  @relation(fields: [degreeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  degree    Degree   @relation(fields: [degreeId], references: [id])
 }
 
 model Degree {
