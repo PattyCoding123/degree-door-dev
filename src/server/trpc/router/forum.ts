@@ -13,23 +13,32 @@ export const forumRouter = router({
   getDegreeInfo: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(({ input, ctx }) => {
-      return ctx.prisma.degree.findUnique({ 
+      return ctx.prisma.degree.findUnique({
         where: {
-          id: input.degreeId
-        }
+          id: input.degreeId,
+        },
       });
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(({ input, ctx }) => {
       return ctx.prisma.review.findMany({
-        where: { 
-          degreeId: input.degreeId 
-        }
+        where: {
+          degreeId: input.degreeId,
+        },
       });
-  }),
+    }),
   createReview: protectedProcedure
-    .input(z.object({ degreeId: z.string(), formData: z.object({ course: z.string(), pros: z.string(), cons: z.string() }) }))
+    .input(
+      z.object({
+        degreeId: z.string(),
+        formData: z.object({
+          course: z.string(),
+          pros: z.string(),
+          cons: z.string(),
+        }),
+      })
+    )
     .mutation(async ({ input, ctx }) => {
       const { degreeId, formData } = input;
       const review = await ctx.prisma.review.create({
@@ -37,7 +46,7 @@ export const forumRouter = router({
           ...formData,
           userId: ctx.session.user.id,
           degreeId: degreeId,
-        }
+        },
       });
       return review;
     }),
@@ -46,19 +55,18 @@ export const forumRouter = router({
     .mutation(async ({ input, ctx }) => {
       const deletedReview = await ctx.prisma.review.delete({
         where: {
-          id: input.reviewId
-        }
+          id: input.reviewId,
+        },
       });
       return deletedReview;
     }),
-  getAllDegreePaths: publicProcedure
-    .query(async ({ ctx }) => {
-      const degreePaths = await ctx.prisma.degree.findMany({
-        select: {
-          id: true,
-          name: true
-        }
-      });
-      return degreePaths;
-    })
+  getAllDegreePaths: publicProcedure.query(async ({ ctx }) => {
+    const degreePaths = await ctx.prisma.degree.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return degreePaths;
+  }),
 });
