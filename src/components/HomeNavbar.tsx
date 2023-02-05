@@ -4,6 +4,7 @@ import React from "react";
 import { BsFillGearFill } from "react-icons/bs";
 
 import Searchbar from "./Searchbar";
+import Dropdown from "./Dropdown";
 
 const HomeNavbar: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ const HomeNavbar: React.FC = () => {
           <Searchbar />
         </div>
         <div className="col-span-1 items-center justify-self-end">
-          <BsFillGearFill className="text-lg text-white" />
+          <Dropdown />
         </div>
       </div>
     </nav>
