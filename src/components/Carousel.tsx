@@ -45,13 +45,17 @@ const Carousel: React.FC = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.5 }}
+              whileHover={{ scale: 0.9 }}
+              transition={{ duration: 0.4 }}
               custom={{ direction, width }}
               className="absolute flex h-full items-center justify-center rounded 
-                  bg-gradient-to-b from-rose-100 to-teal-100 p-8"
+                  bg-gradient-to-b from-rose-100 to-teal-100"
             >
-              <Link href={`/${data[current]?.id ?? ""}`}>
-                <p className="text-lg text-black">{data[current]?.name}</p>
+              <Link
+                href={`/${data[current]?.id ?? ""}`}
+                className="h-full w-full"
+              >
+                <p className="p-8 text-lg text-black">{data[current]?.name}</p>
               </Link>
             </motion.div>
           </AnimatePresence>
