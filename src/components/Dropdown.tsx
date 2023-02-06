@@ -4,9 +4,12 @@ import { useState } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 
+import useClickOutside from "../utils/useOutsideClick";
+
 const Dropdown: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { data: sessionData } = useSession();
+  const ref = useClickOutside(() => setIsVisible(false));
 
   return (
     <div className="inline-flex items-center justify-center rounded-md">
@@ -19,6 +22,7 @@ const Dropdown: React.FC = () => {
         <AnimatePresence>
           {isVisible && (
             <motion.div
+              ref={ref}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
