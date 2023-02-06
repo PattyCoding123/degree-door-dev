@@ -1,8 +1,12 @@
+import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
+
 const Dropdown: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { data: sessionData } = useSession();
 
   return (
     <div className="inline-flex items-center justify-center rounded-md">
@@ -25,30 +29,23 @@ const Dropdown: React.FC = () => {
               aria-labelledby="menu-button"
             >
               <div className="p-2" role="none">
-                <a
-                  href="#"
-                  className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
-                  role="menuitem"
-                  id="menu-item-0"
-                >
-                  ReactJS Dropdown 1
-                </a>
-                <a
-                  href="#"
-                  className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
-                  role="menuitem"
-                  id="menu-item-1"
-                >
-                  ReactJS Dropdown 2
-                </a>
-                <a
-                  href="#"
-                  className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
-                  role="menuitem"
-                  id="menu-item-2"
-                >
-                  ReactJS Dropdown 3
-                </a>
+                {sessionData ? (
+                  <Link
+                    href="/profile"
+                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                    role="menuitem"
+                    id="menu-item-0"
+                  >
+                    Profile
+                  </Link>
+                ) : (
+                  <button
+                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                    onClick={() => signIn()}
+                  >
+                    Sign In
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
