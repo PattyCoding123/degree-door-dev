@@ -12,12 +12,13 @@ const Dropdown: React.FC = () => {
           className="align-middle text-lg text-white duration-200 hover:scale-90 hover:cursor-pointer"
           aria-haspopup="true"
         />
-        {isVisible && (
-          <AnimatePresence>
+        <AnimatePresence>
+          {isVisible && (
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               className="from absolute right-0 z-10 mt-4 w-56 origin-top-right rounded-md border border-gray-100 bg-white shadow-lg"
               role="menu"
               aria-orientation="vertical"
@@ -50,8 +51,8 @@ const Dropdown: React.FC = () => {
                 </a>
               </div>
             </motion.div>
-          </AnimatePresence>
-        )}
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
