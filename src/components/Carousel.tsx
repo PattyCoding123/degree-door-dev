@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { useState } from "react";
+import { useState, type FC } from "react";
 import useMeasure from "react-use-measure";
 
 import { trpc } from "../utils/trpc";
 import usePrevious from "../utils/usePrevious";
 
-const Carousel: React.FC = () => {
+const Carousel: FC = () => {
   const [count, setCount] = useState(1);
   const [current, setCurrent] = useState(0);
   const prev = usePrevious(count);

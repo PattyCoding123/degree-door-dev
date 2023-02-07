@@ -1,9 +1,9 @@
 import { BsSearch } from "react-icons/bs";
 import { trpc } from "../utils/trpc";
-import { useState, useMemo } from "react";
+import { useState, useMemo, type FC } from "react";
 import Link from "next/link";
 
-const Searchbar: React.FC = () => {
+const Searchbar: FC = () => {
   const [query, setQuery] = useState("");
   const degreePathQuery = trpc.forum.getAllDegreePaths.useQuery();
 
