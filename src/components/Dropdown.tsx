@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, type FC } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 
 import useClickOutside from "../utils/useOutsideClick";
 
-const Dropdown: React.FC = () => {
+interface DropdownProps {
+  color: "black" | "white";
+}
+const Dropdown: FC<DropdownProps> = ({ color }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { data: sessionData } = useSession();
   const ref = useClickOutside(() => setIsVisible(false));
@@ -16,7 +19,7 @@ const Dropdown: React.FC = () => {
       <div className="relative">
         <BsFillGearFill
           onClick={() => setIsVisible(!isVisible)}
-          className="align-middle text-lg text-white duration-200 hover:scale-90 hover:cursor-pointer"
+          className={`align-middle text-lg text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
           aria-haspopup="true"
         />
         <AnimatePresence>
