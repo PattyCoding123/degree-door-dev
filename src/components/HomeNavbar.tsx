@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { BsFillGearFill } from "react-icons/bs";
 
 import Searchbar from "./Searchbar";
 import Dropdown from "./Dropdown";
