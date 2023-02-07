@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { type FC } from "react";
 
 import Searchbar from "./Searchbar";
 import Dropdown from "./Dropdown";
 
-const HomeNavbar: React.FC = () => {
+const HomeNavbar: FC = () => {
   return (
     <nav className="max-w-screen bg-gray-900">
       <div className="flex w-full flex-col items-center gap-8 px-6 py-4 md:grid md:grid-cols-3">
@@ -24,7 +24,7 @@ const HomeNavbar: React.FC = () => {
           <Searchbar />
         </div>
         <div className="col-span-1 items-center justify-self-end">
-          <Dropdown />
+          <Dropdown color="white" />
         </div>
       </div>
     </nav>

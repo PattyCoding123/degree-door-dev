@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
-import { BsFillGearFill } from "react-icons/bs";
 
+import Dropdown from "./Dropdown";
 interface DegreeNavbarProps {
   active: string;
   degreeName?: string;
@@ -60,7 +60,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
             })}
         </ul>
         <div className="flex justify-end md:col-span-1">
-          <BsFillGearFill className="text-lg" />
+          <Dropdown color="black" />
         </div>
       </div>
     </nav>
