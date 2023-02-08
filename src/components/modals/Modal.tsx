@@ -14,12 +14,13 @@ const Modal = ({ children }: ModalProps) => {
   if (!elRef.current) elRef.current = document.createElement("div");
 
   useEffect(() => {
-    const el = elRef.current!; // non-null assertion because it will never be null
+    if (!elRef.current) return;
+    const el = elRef.current; // non-null assertion because it will never be null
     modalRoot.appendChild(el);
     return () => {
       modalRoot.removeChild(el);
     };
-  }, []);
+  }, [elRef]);
 
   return createPortal(
     <AnimatePresence>
