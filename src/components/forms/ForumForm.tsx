@@ -107,7 +107,7 @@ const ForumForm: React.FC = () => {
         </div>
         <div className="flex justify-end">
           {sessionData?.user ? (
-            <Button type="submit" disabled={!!degree}>
+            <Button type="submit" disabled={!degree}>
               Submit
             </Button>
           ) : (
