@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 import Modal from "../Modal";
 
 interface ConfirmationDialogProps {
@@ -14,7 +16,11 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
     <>
       {show && (
         <Modal>
-          <div className="fixed inset-0 z-10 overflow-y-auto">
+          <motion.div
+            initial={{ y: -50 }}
+            animate={{ y: 0 }}
+            className="fixed inset-0 z-10 overflow-y-auto"
+          >
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               {/*
         Modal panel, show/hide based on modal state.
@@ -52,13 +58,12 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                         className="text-lg font-medium leading-6 text-gray-900"
                         id="modal-title"
                       >
-                        Deactivate account
+                        Delete your Review
                       </h3>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to deactivate your account? All
-                          of your data will be permanently removed. This action
-                          cannot be undone.
+                          Are you sure you want to delete your review? It cannot
+                          cannot be recovered once it is deleted.
                         </p>
                       </div>
                     </div>
@@ -82,7 +87,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </Modal>
       )}
     </>
