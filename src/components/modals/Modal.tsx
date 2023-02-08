@@ -15,7 +15,7 @@ const Modal = ({ children }: ModalProps) => {
 
   useEffect(() => {
     if (!elRef.current) return;
-    const el = elRef.current; // non-null assertion because it will never be null
+    const el = elRef.current;
     modalRoot.appendChild(el);
     return () => {
       modalRoot.removeChild(el);
