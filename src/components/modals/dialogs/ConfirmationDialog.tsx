@@ -25,7 +25,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
             <motion.div
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
-              exit={{ y: -50, opacity: 0, transition: { duration: 0.3 } }}
+              exit={{ y: -50, opacity: 0, transition: { duration: 0.2 } }}
               className="fixed inset-0 z-10 overflow-y-auto"
             >
               <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -76,7 +76,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                     </button>
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                       onClick={() => handleCancel()}
                     >
                       Cancel
