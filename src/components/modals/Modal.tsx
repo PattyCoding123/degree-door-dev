@@ -6,13 +6,13 @@ type ModalProps = {
 };
 
 const Modal = ({ children }: ModalProps) => {
+  const modalRoot = document.querySelector("#modal-root");
+
   // create div element only once using ref
   const elRef = useRef<HTMLDivElement | null>(null);
   if (!elRef.current) elRef.current = document.createElement("div");
 
   useEffect(() => {
-    const modalRoot = document.querySelector("#modal-root");
-
     if (!elRef.current || !modalRoot) return;
 
     const el = elRef.current;
@@ -20,7 +20,7 @@ const Modal = ({ children }: ModalProps) => {
     return () => {
       modalRoot.removeChild(el);
     };
-  }, [elRef]);
+  }, [elRef, modalRoot]);
 
   return createPortal(
     <div
