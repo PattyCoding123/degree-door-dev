@@ -6,7 +6,7 @@ import { trpc } from "../../utils/trpc";
 import DegreeNavbar from "../../components/DegreeNavbar";
 import Review from "../../components/Review";
 
-const DegreeHome: NextPage = () => {
+const ReviewsPage: NextPage = () => {
   const { degree } = useRouter().query as { degree: string | undefined };
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
@@ -70,4 +70,4 @@ const DegreeHome: NextPage = () => {
   );
 };
 
-export default DegreeHome;
+export default ReviewsPage;
