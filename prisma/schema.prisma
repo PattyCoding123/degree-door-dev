@@ -20,7 +20,8 @@ model Example {
   updatedAt DateTime @updatedAt
 }
 
-// Necessary for Next auth
+// Necessary for Next auth, represents information about OAuth accounts
+// that are associated with the user.
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -75,8 +76,8 @@ model Review {
   userId    String
   degreeId  String
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id]) 
-  degree    Degree  @relation(fields: [degreeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  degree    Degree   @relation(fields: [degreeId], references: [id])
 }
 
 model Degree {

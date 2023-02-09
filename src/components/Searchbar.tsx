@@ -1,45 +1,44 @@
 import { BsSearch } from "react-icons/bs";
-import { RouterOutputs, trpc } from "../utils/trpc";
-import { useState, useMemo } from "react";
+import { trpc } from "../utils/trpc";
+import { useState, useMemo, type FC } from "react";
 import Link from "next/link";
 
-const Searchbar: React.FC = () => {
+const Searchbar: FC = () => {
   const [query, setQuery] = useState("");
   const degreePathQuery = trpc.forum.getAllDegreePaths.useQuery();
 
   const filteredItems = useMemo(() => {
     if (query === "") return;
-    return degreePathQuery.data?.filter(item => 
+    return degreePathQuery.data?.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase())
-    )
-  }, [query]);
+    );
+  }, [degreePathQuery.data, query]);
 
-  
   return (
     <div className="flex flex-col">
-      <div 
-        className="flex items-center justify-between z-10 text-gray-600 w-80 bg-white
-        rounded-full relative"
+      <div
+        className="relative z-10 flex w-80 items-center justify-between rounded-full
+        bg-white text-gray-600"
       >
-        <input 
+        <input
           type="search"
           name="search"
           placeholder="Search for a degree..."
           value={query}
-          className="h-8 px-5 text-sm focus:outline-none rounded-full w-full"
-          onChange={e => setQuery(e.target.value)}
+          className="h-8 w-full rounded-full px-5 text-sm focus:outline-none"
+          onChange={(e) => setQuery(e.target.value)}
         />
-        <BsSearch className="text-black absolute right-2" />
+        <BsSearch className="absolute right-2 text-black" />
       </div>
-      <div 
-        className="flex flex-col items-center mt-10 h-2/5
-        overflow-x-hidden overflow-y-auto no-scrollbar fixed z-10"
+      <div
+        className="no-scrollbar fixed z-10 mt-10 flex
+        h-2/5 flex-col items-center overflow-y-auto overflow-x-hidden"
       >
         {filteredItems?.slice(0, 10).map((degree, index) => (
           <Link href={`/${degree.id}`} key={index}>
-            <div 
-              className="degree-item bg-white z-50 w-80 h-8 flex items-center p-4 
-            text-black border-b-2 border-gray-600"
+            <div
+              className="degree-item z-50 flex h-8 w-80 items-center border-b-2 border-gray-600 
+            bg-white p-4 text-black hover:bg-gray-300"
             >
               <p>{degree.name}</p>
             </div>
@@ -48,6 +47,6 @@ const Searchbar: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Searchbar;

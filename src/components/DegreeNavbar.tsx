@@ -1,53 +1,70 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
-import { BsFillGearFill } from "react-icons/bs";
-import { useRouter } from "next/router";
-import { trpc } from "../utils/trpc";
 
+import Dropdown from "./Dropdown";
 interface DegreeNavbarProps {
   active: string;
+  degreeName?: string;
+  degreeId?: string;
 }
 
-const DegreeNavbar: React.FC<DegreeNavbarProps> = ({ active }) => {
-  const { degree } = useRouter().query as { degree: string | undefined };
-
-  // Dependent query, will not run unless degree is definied: !!variable => boolean
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery({ degreeId: degree! }, { enabled: !!degree });
-
+const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
+  active,
+  degreeName,
+  degreeId,
+}) => {
   return (
     <nav className="max-w-screen m-auto flex flex-col shadow-lg">
-      <header className="bg-gray-900 py-1">
-        <h1 className="font-bold text-white text-center">{degreeQuery.data?.name!}</h1>
-      </header>
-      <div className="px-6 py-4 flex flex-col md:grid md:grid-cols-3 justify-between items-center gap-8 bg-gradient-to-b from-rose-100 to-teal-100">
+      {degreeName && (
+        <header className="bg-gray-900 py-1">
+          <h1 className="text-center font-bold text-white">{degreeName}</h1>
+        </header>
+      )}
+      <div className="flex flex-col items-center justify-between gap-8 bg-gradient-to-b from-rose-100 to-teal-100 px-6 py-4 md:grid md:grid-cols-3">
         <Link href="/">
-          <div className="col-span-1 navbar-brand cursor-pointer flex">
-            <Image src="/degree_door_logo_filled.png" alt="Degree Door Logo" width={24} height={24} />
+          <div className="navbar-brand col-span-1 flex cursor-pointer">
+            <Image
+              src="/degree_door_logo_filled.png"
+              alt="Degree Door Logo"
+              width={24}
+              height={24}
+            />
             <p className="font-bold">egree Door</p>
           </div>
         </Link>
-        <ul className="flex flex-col md:flex-row md:col-span-1 items-center justify-center gap-10 md:gap-4">
-          {
+        <ul className="flex flex-col items-center justify-center gap-10 md:col-span-1 md:flex-row md:gap-4">
+          {/* Only render the links if the data exists */}
+          {degreeId &&
             [
-              [`/${degreeQuery.data?.id!}`, "OVERVIEW", "overview"],
-              [`/${degreeQuery.data?.id!}/reviews`, "REVIEWS", "reviews"],
-              [`/${degreeQuery.data?.id!}/post`, "POST A REVIEW", "post"]
-            ].map(([href, label, id]) => (
-              <li key={label} id={id}>
-                <Link href={href!}>
-                  <p className={clsx("font-bold hover:opacity-50", {"text-indigo-600": active === id})}>{label!}</p>
-                </Link>
-              </li>
-            ))
-          }
+              [`/${degreeId}`, "OVERVIEW", "overview"],
+              [`/${degreeId}/reviews`, "REVIEWS", "reviews"],
+              [`/${degreeId}/post`, "POST A REVIEW", "post"],
+            ].map(([href, label, id]) => {
+              if (href && label && id) {
+                return (
+                  <li key={label} id={id}>
+                    <Link href={href}>
+                      <p
+                        className={clsx("font-bold hover:opacity-50", {
+                          "text-indigo-600": active === id,
+                        })}
+                      >
+                        {label}
+                      </p>
+                    </Link>
+                  </li>
+                );
+              }
+              return null;
+            })}
         </ul>
-        <div className="flex md:col-span-1 justify-end">
-          <BsFillGearFill className="text-lg" />
+        <div className="flex justify-end md:col-span-1">
+          <Dropdown color="black" />
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default DegreeNavbar;
