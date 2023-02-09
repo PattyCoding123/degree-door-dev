@@ -1,8 +1,5 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
-
-const modalRoot = document.querySelector("#modal-root") as HTMLElement;
 
 type ModalProps = {
   children: ReactNode;
@@ -14,7 +11,10 @@ const Modal = ({ children }: ModalProps) => {
   if (!elRef.current) elRef.current = document.createElement("div");
 
   useEffect(() => {
-    if (!elRef.current) return;
+    const modalRoot = document.querySelector("#modal-root");
+
+    if (!elRef.current || !modalRoot) return;
+
     const el = elRef.current;
     modalRoot.appendChild(el);
     return () => {
