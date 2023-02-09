@@ -23,16 +23,14 @@ const Modal = ({ children }: ModalProps) => {
   }, [elRef]);
 
   return createPortal(
-    <AnimatePresence>
-      <div
-        className="relative z-10"
-        aria-labelledby="modal-title"
-        role="dialog"
-        aria-modal="true"
-      >
-        {children}
-      </div>
-    </AnimatePresence>,
+    <div
+      className="relative z-10"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      {children}
+    </div>,
     elRef.current
   );
 };
