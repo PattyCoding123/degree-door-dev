@@ -24,19 +24,14 @@ const Modal = ({ children }: ModalProps) => {
 
   return createPortal(
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.3 } }}
-        exit={{ opacity: 0, transition: { duration: 0.2 } }}
+      <div
         className="relative z-10"
         aria-labelledby="modal-title"
         role="dialog"
         aria-modal="true"
       >
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
-          {children}
-        </div>
-      </motion.div>
+        {children}
+      </div>
     </AnimatePresence>,
     elRef.current
   );
