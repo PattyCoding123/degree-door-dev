@@ -19,6 +19,8 @@ const Review: FC<ReviewProps> = ({ reviewPost, handleClick }) => {
   return (
     <>
       <ConfirmationDialog
+        header="Delete your Review"
+        content="Are you sure you want to delete this review? It cannot be recovered after."
         handleOk={() => {
           handleClick(id);
           setShowDialog(false);
