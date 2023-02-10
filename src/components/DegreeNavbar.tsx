@@ -37,26 +37,23 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
           {/* Only render the links if the data exists */}
           {degreeId &&
             [
-              [`/${degreeId}`, "OVERVIEW", "overview"],
-              [`/${degreeId}/reviews`, "REVIEWS", "reviews"],
-              [`/${degreeId}/post`, "POST A REVIEW", "post"],
-            ].map(([href, label, id]) => {
-              if (href && label && id) {
-                return (
-                  <li key={label} id={id}>
-                    <Link href={href}>
-                      <p
-                        className={clsx("font-bold hover:opacity-50", {
-                          "text-indigo-600": active === id,
-                        })}
-                      >
-                        {label}
-                      </p>
-                    </Link>
-                  </li>
-                );
-              }
-              return null;
+              { href: `/${degreeId}`, label: "OVERVIEW", id: "overview" },
+              { href: `/${degreeId}/reviews`, label: "REVIEWS", id: "reviews" },
+              { href: `/${degreeId}/post`, label: "POST A REVIEW", id: "post" },
+            ].map(({ href, label, id }) => {
+              return (
+                <li key={label} id={id}>
+                  <Link href={href}>
+                    <p
+                      className={clsx("font-bold hover:opacity-50", {
+                        "text-indigo-600": active === id,
+                      })}
+                    >
+                      {label}
+                    </p>
+                  </Link>
+                </li>
+              );
             })}
         </ul>
         <div className="flex justify-end md:col-span-1">
