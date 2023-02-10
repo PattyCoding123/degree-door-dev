@@ -3,6 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Modal from "../Modal";
 
 interface ConfirmationDialogProps {
+  icon?: React.ReactNode;
+  header: string;
+  content: string;
   okBtnText: string;
   handleOk: () => void;
   handleCancel: () => void;
@@ -10,7 +13,8 @@ interface ConfirmationDialogProps {
 }
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
-  const { okBtnText, handleOk, handleCancel, show } = props;
+  const { okBtnText, handleOk, handleCancel, show, icon, header, content } =
+    props;
 
   return (
     <AnimatePresence>
@@ -19,13 +23,13 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.3 } }}
-            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            exit={{ opacity: 0, transition: { duration: 0.3 } }}
             className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           >
             <motion.div
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
-              exit={{ y: -50, opacity: 0, transition: { duration: 0.3 } }}
+              exit={{ y: -50, opacity: 0, transition: { duration: 0.2 } }}
               className="fixed inset-0 z-10 overflow-y-auto"
             >
               <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -34,34 +38,35 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                     <div className="sm:flex sm:items-start">
                       <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                         {/* Heroicon name: outline/exclamation-triangle */}
-                        <svg
-                          className="h-6 w-6 text-red-600"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                          />
-                        </svg>
+                        {icon ? (
+                          <>{icon}</>
+                        ) : (
+                          <svg
+                            className="h-6 w-6 text-red-600"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            aria-hidden="true"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                            />
+                          </svg>
+                        )}
                       </div>
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <h3
                           className="text-lg font-medium leading-6 text-gray-900"
                           id="modal-title"
                         >
-                          Delete your Review
+                          {header}
                         </h3>
                         <div className="mt-2">
-                          <p className="text-sm text-gray-500">
-                            Are you sure you want to delete your review? It
-                            cannot cannot be recovered once it is deleted.
-                          </p>
+                          <p className="text-sm text-gray-500">{content}</p>
                         </div>
                       </div>
                     </div>
@@ -76,7 +81,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                     </button>
                     <button
                       type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                      className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                       onClick={() => handleCancel()}
                     >
                       Cancel
