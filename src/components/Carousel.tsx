@@ -98,7 +98,7 @@ const LoadingCarousel = () => {
         <FiChevronLeft className="text-3xl" />
       </button>
       <div
-        className="relative flex h-24 w-1/3 items-center
+        className="relative flex h-28 w-1/3 items-center
             justify-center overflow-hidden"
       >
         <div
