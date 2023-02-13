@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 interface DegreeNavbarProps {
   active: string;
   degreeName?: string;

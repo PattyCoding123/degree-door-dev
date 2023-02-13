@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 
 import HeroBanner from "../components/HeroBanner";
-import HomeNavbar from "../components/HomeNavbar";
+import HomeNavbar from "../components/navigation/HomeNavbar";
 import Carousel from "../components/Carousel";
 
 const Home: NextPage = () => {

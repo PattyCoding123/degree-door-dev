@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { trpc } from "../../utils/trpc";
-import DegreeNavbar from "../../components/DegreeNavbar";
+import DegreeNavbar from "../../components/navigation/DegreeNavbar";
 
 const DegreeHome: NextPage = () => {
   const { degree } = useRouter().query as { degree: string | undefined };

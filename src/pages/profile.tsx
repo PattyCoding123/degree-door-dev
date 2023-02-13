@@ -3,7 +3,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import Image from "next/image";
 
 import { trpc } from "../utils/trpc";
-import HomeNavbar from "../components/HomeNavbar";
+import HomeNavbar from "../components/navigation/HomeNavbar";
 
 const Profile: NextPage = () => {
   return (

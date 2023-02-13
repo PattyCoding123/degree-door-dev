@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
 
 import { trpc } from "../../utils/trpc";
-import DegreeNavbar from "../../components/DegreeNavbar";
+import DegreeNavbar from "../../components/navigation/DegreeNavbar";
 import Review from "../../components/Review";
 
 const ReviewsPage: NextPage = () => {

@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { type FC } from "react";
 
-import Searchbar from "./Searchbar";
-import Dropdown from "./Dropdown";
+import Searchbar from "../Searchbar";
+import Dropdown from "../Dropdown";
 
 const HomeNavbar: FC = () => {
   return (
