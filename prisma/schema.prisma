@@ -49,14 +49,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String      @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?     @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   reviews       Review[]
+  favorites     Favorites[]
 }
 
 model VerificationToken {
@@ -81,8 +82,18 @@ model Review {
 }
 
 model Degree {
-  id        String   @id
+  id        String      @id
   name      String
-  createdAt DateTime @default(now())
+  createdAt DateTime    @default(now())
   reviews   Review[]
+  Favorites Favorites[]
+}
+
+model Favorites {
+  userId   String
+  degreeId String
+  user     User   @relation(fields: [userId], references: [id])
+  degree   Degree @relation(fields: [degreeId], references: [id])
+
+  @@id([userId, degreeId])
 }
