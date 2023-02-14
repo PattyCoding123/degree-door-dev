@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const forumRouter = router({
@@ -12,12 +13,18 @@ export const forumRouter = router({
     }),
   getDegreeInfo: publicProcedure
     .input(z.object({ degreeId: z.string() }))
-    .query(({ input, ctx }) => {
-      return ctx.prisma.degree.findUnique({
-        where: {
-          id: input.degreeId,
-        },
-      });
+    .query(async ({ input, ctx }) => {
+      try {
+        const degreeInfo = await ctx.prisma.degree.findUniqueOrThrow({
+          where: {
+            id: input.degreeId,
+          },
+        });
+
+        return degreeInfo;
+      } catch (_) {
+        throw new TRPCError({ code: "FORBIDDEN" });
+      }
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
