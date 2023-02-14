@@ -1,7 +1,11 @@
+import { AiOutlineStar } from "react-icons/ai";
+import { useSession } from "next-auth/react";
+
 import { trpc } from "../utils/trpc";
 
-const FavoriteCard = () => {
-  return <div>Favorites</div>;
+const Favorite = () => {
+  const { data: sessionData } = useSession();
+  return <AiOutlineStar />;
 };
 
-export default FavoriteCard;
+export default Favorite;
