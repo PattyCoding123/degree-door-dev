@@ -1,11 +1,12 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../utils/trpc";
-import DegreeNavbar from "../../components/navigation/DegreeNavbar";
+import { trpc } from "../../../utils/trpc";
+import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 
 const DegreeHome: NextPage = () => {
-  const { degree } = useRouter().query as { degree: string | undefined };
+  const router = useRouter();
+  const { degree } = router.query;
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(

@@ -2,9 +2,9 @@ import { type NextPage } from "next";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../utils/trpc";
-import ForumForm from "../../components/forms/ForumForm";
-import DegreeNavbar from "../../components/navigation/DegreeNavbar";
+import { trpc } from "../../../utils/trpc";
+import ForumForm from "../../../components/forms/ForumForm";
+import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 
 const Post: NextPage = () => {
   const { degree } = useRouter().query as { degree: string | undefined };

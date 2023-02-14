@@ -2,9 +2,9 @@ import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
 
-import { trpc } from "../../utils/trpc";
-import DegreeNavbar from "../../components/navigation/DegreeNavbar";
-import Review from "../../components/Review";
+import { trpc } from "../../../utils/trpc";
+import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
+import Review from "../../../components/Review";
 
 const ReviewsPage: NextPage = () => {
   const { degree } = useRouter().query;
