@@ -7,16 +7,16 @@ import DegreeNavbar from "../../components/navigation/DegreeNavbar";
 import Review from "../../components/Review";
 
 const ReviewsPage: NextPage = () => {
-  const { degree } = useRouter().query as { degree: string | undefined };
+  const { degree } = useRouter().query;
 
   // Dependent query, will not run unless degree is definied: !!variable => boolean
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
-    { enabled: !!degree }
+    { enabled: typeof degree === "string" }
   );
   const queryReviews = trpc.forum.getAllReviews.useQuery(
     { degreeId: degree as string },
-    { enabled: !!degree }
+    { enabled: typeof degree === "string" }
   );
 
   const deleteReview = trpc.forum.deleteReview.useMutation({

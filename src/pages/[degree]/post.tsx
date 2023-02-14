@@ -12,7 +12,7 @@ const Post: NextPage = () => {
   // Dependent query, will not run unless degree is definied: !!variable => boolean
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
-    { enabled: !!degree }
+    { enabled: typeof degree === "string" }
   );
 
   return (
