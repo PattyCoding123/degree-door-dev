@@ -37,9 +37,21 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
           {/* Only render the links if the data exists */}
           {degreeId &&
             [
-              { href: `/${degreeId}`, label: "OVERVIEW", id: "overview" },
-              { href: `/${degreeId}/reviews`, label: "REVIEWS", id: "reviews" },
-              { href: `/${degreeId}/post`, label: "POST A REVIEW", id: "post" },
+              {
+                href: `/degree/${degreeId}`,
+                label: "OVERVIEW",
+                id: "overview",
+              },
+              {
+                href: `/degree/${degreeId}/reviews`,
+                label: "REVIEWS",
+                id: "reviews",
+              },
+              {
+                href: `/degree/${degreeId}/post`,
+                label: "POST A REVIEW",
+                id: "post",
+              },
             ].map(({ href, label, id }) => {
               return (
                 <li key={label} id={id}>
