@@ -8,10 +8,15 @@ const DegreeHome: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
-  // Dependent query, will not run unless degree is definied: !!variable => boolean
+  // Dependent query, will not run unless degree is definied
+  // Push to 404 if degree cannot be found.
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
-    { enabled: typeof degree === "string" }
+    {
+      enabled: typeof degree === "string",
+      retry: false,
+      onError: () => router.push("/404"),
+    }
   );
 
   return (
