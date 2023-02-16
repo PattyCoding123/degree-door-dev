@@ -35,7 +35,7 @@ const Searchbar: FC = () => {
         h-2/5 flex-col items-center overflow-y-auto overflow-x-hidden"
       >
         {filteredItems?.slice(0, 10).map((degree, index) => (
-          <Link href={`/${degree.id}`} key={index}>
+          <Link href={`/degree/${degree.id}`} key={index}>
             <div
               className="degree-item z-50 flex h-8 w-80 items-center border-b-2 border-gray-600 
             bg-white p-4 text-black hover:bg-gray-300"
