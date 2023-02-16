@@ -13,9 +13,9 @@ export const forumRouter = router({
     }),
   getDegreeInfo: publicProcedure
     .input(z.object({ degreeId: z.string() }))
-    .query(({ input, ctx }) => {
+    .query(async ({ input, ctx }) => {
       try {
-        return ctx.prisma.degree.findUniqueOrThrow({
+        return await ctx.prisma.degree.findUniqueOrThrow({
           where: {
             id: input.degreeId,
           },
