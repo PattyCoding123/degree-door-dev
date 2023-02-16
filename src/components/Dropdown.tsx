@@ -36,9 +36,9 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
               aria-labelledby="menu-button"
             >
               <div className="p-2" role="none">
-                {sessionData ? (
+                {sessionData?.user ? (
                   <Link
-                    href="/profile"
+                    href={`/profile/${sessionData.user.id}`}
                     className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
                     role="menuitem"
                     id="menu-item-0"
