@@ -47,7 +47,7 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
                   </Link>
                 ) : (
                   <button
-                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
                     onClick={() => signIn()}
                   >
                     Sign In
