@@ -14,11 +14,15 @@ export const forumRouter = router({
   getDegreeInfo: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(({ input, ctx }) => {
-      return ctx.prisma.degree.findUniqueOrThrow({
-        where: {
-          id: input.degreeId,
-        },
-      });
+      try {
+        return ctx.prisma.degree.findUniqueOrThrow({
+          where: {
+            id: input.degreeId,
+          },
+        });
+      } catch (err) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
