@@ -7,12 +7,18 @@ import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 import Review from "../../../components/Review";
 
 const ReviewsPage: NextPage = () => {
-  const { degree } = useRouter().query;
+  const router = useRouter();
+  const { degree } = router.query;
 
-  // Dependent query, will not run unless degree is definied: !!variable => boolean
+  // Dependent query, will not run unless degree is definied
+  // Push to page /404 if degree info is not found
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
-    { enabled: typeof degree === "string" }
+    {
+      enabled: typeof degree === "string",
+      retry: false,
+      onError: () => router.push("/404"),
+    }
   );
   const queryReviews = trpc.forum.getAllReviews.useQuery(
     { degreeId: degree as string },
