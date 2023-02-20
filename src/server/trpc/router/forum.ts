@@ -95,12 +95,10 @@ export const forumRouter = router({
   favoriteDegree: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const degree = await ctx.prisma.favorites.delete({
-        where: {
-          userId_degreeId: {
-            userId: ctx.session.user.id,
-            degreeId: input.degreeId,
-          },
+      const degree = await ctx.prisma.favorites.create({
+        data: {
+          userId: ctx.session.user.id,
+          degreeId: input.degreeId,
         },
       });
 
@@ -109,10 +107,12 @@ export const forumRouter = router({
   unfavoriteDegree: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const degree = await ctx.prisma.favorites.create({
-        data: {
-          userId: ctx.session.user.id,
-          degreeId: input.degreeId,
+      const degree = await ctx.prisma.favorites.delete({
+        where: {
+          userId_degreeId: {
+            userId: ctx.session.user.id,
+            degreeId: input.degreeId,
+          },
         },
       });
 
