@@ -5,7 +5,15 @@ import { trpc } from "../utils/trpc";
 
 const Favorite = () => {
   const { data: sessionData } = useSession();
-  return <AiOutlineStar />;
+
+  if (sessionData?.user !== undefined) {
+    return <AiOutlineStar />;
+  }
+  return (
+    <button disabled={true}>
+      <AiOutlineStar />
+    </button>
+  );
 };
 
 export default Favorite;
