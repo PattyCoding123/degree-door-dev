@@ -74,4 +74,15 @@ export const forumRouter = router({
     });
     return degreePaths;
   }),
+  checkIfFavorite: protectedProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      // ! Fix favoriteDegree query
+      // const favoriteDegree = await ctx.prisma.favorites.findUnique({
+      //   where: {
+      //     degreeId: input.degreeId,
+      //     userId: ctx.session.user.userId,
+      //   },
+      // });
+    }),
 });
