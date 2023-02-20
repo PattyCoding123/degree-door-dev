@@ -7,7 +7,7 @@ import { trpc } from "../utils/trpc";
 interface FavoriteProps {
   degreeId: string;
 }
-const Favorite: React.FC<FavoriteProps> = ({ degreeId }) => {
+const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   const { data: sessionData } = useSession();
   const favoriteQuery = trpc.forum.checkIfFavorite.useQuery(
     {
@@ -28,4 +28,4 @@ const Favorite: React.FC<FavoriteProps> = ({ degreeId }) => {
   );
 };
 
-export default Favorite;
+export default FavoriteIndicator;
