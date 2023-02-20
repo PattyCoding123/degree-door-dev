@@ -77,12 +77,19 @@ export const forumRouter = router({
   checkIfFavorite: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(async ({ ctx, input }) => {
-      // ! Fix favoriteDegree query
-      // const favoriteDegree = await ctx.prisma.favorites.findUnique({
-      //   where: {
-      //     degreeId: input.degreeId,
-      //     userId: ctx.session.user.userId,
-      //   },
-      // });
+      /*
+       * Prisma API has a special syntax when querying object by a
+       * composite key!
+       */
+      const favoriteDegree = await ctx.prisma.favorites.findUnique({
+        where: {
+          userId_degreeId: {
+            degreeId: input.degreeId,
+            userId: ctx.session.user.id,
+          },
+        },
+      });
+
+      return favoriteDegree;
     }),
 });
