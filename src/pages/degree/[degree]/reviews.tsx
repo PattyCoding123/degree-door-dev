@@ -21,26 +21,31 @@ const ReviewsPage: NextPage = () => {
     }
   );
 
-  if (degreeQuery.isSuccess) {
-    const queryReviews = trpc.forum.getAllReviews.useQuery({
+  const reviewsQuery = trpc.forum.getAllReviews.useQuery(
+    {
       degreeId: degree as string,
-    });
+    },
+    {
+      enabled: degreeQuery.isSuccess,
+    }
+  );
 
-    const deleteReview = trpc.forum.deleteReview.useMutation({
-      onSuccess: () => {
-        queryReviews.refetch();
-        toast.success("Review successfully deleted!", {
-          position: "bottom-center",
-          className: "text-xl",
-        });
-      },
-      onError: () =>
-        toast.error("There was an error deleting the post!", {
-          position: "bottom-center",
-          className: "text-xl",
-        }),
-    });
+  const deleteReview = trpc.forum.deleteReview.useMutation({
+    onSuccess: () => {
+      reviewsQuery.refetch();
+      toast.success("Review successfully deleted!", {
+        position: "bottom-center",
+        className: "text-xl",
+      });
+    },
+    onError: () =>
+      toast.error("There was an error deleting the post!", {
+        position: "bottom-center",
+        className: "text-xl",
+      }),
+  });
 
+  if (degreeQuery.isSuccess) {
     return (
       <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
         <Toaster />
@@ -62,7 +67,7 @@ const ReviewsPage: NextPage = () => {
             </section>
           </div>
           <section className="my-8 flex flex-col items-center justify-center gap-8 align-middle">
-            {queryReviews.data?.map((review) => (
+            {reviewsQuery.data?.map((review) => (
               <Review
                 key={review.id}
                 reviewPost={review}
