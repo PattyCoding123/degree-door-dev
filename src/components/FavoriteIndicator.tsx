@@ -1,6 +1,5 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useSession } from "next-auth/react";
-import clsx from "clsx";
 
 import { trpc } from "../utils/trpc";
 
