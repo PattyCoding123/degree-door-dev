@@ -17,16 +17,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
     }
   );
 
-  const favoriteMutation = trpc.forum.favoriteDegree.useMutation({
+  const alterMutation = trpc.forum.favoriteDegree.useMutation({
     onSuccess: () => {
-      console.log("Degree was favorited");
-      favoriteQuery.refetch();
-    },
-  });
-
-  const unfavoriteMutation = trpc.forum.unfavoriteDegree.useMutation({
-    onSuccess: () => {
-      console.log("Degree was removed from your favorites");
       favoriteQuery.refetch();
     },
   });
@@ -38,14 +30,14 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
           <AiFillStar
             className="fill-yellow-500 text-3xl hover:animate-pulse hover:cursor-pointer"
             onClick={async () =>
-              unfavoriteMutation.mutateAsync({ degreeId: degreeId })
+              alterMutation.mutateAsync({ degreeId: degreeId })
             }
           />
         ) : (
           <AiOutlineStar
             className="text-3xl hover:animate-pulse hover:cursor-pointer"
             onClick={async () =>
-              favoriteMutation.mutateAsync({ degreeId: degreeId })
+              alterMutation.mutateAsync({ degreeId: degreeId })
             }
           />
         )}
