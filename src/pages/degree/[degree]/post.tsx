@@ -15,7 +15,7 @@ const Post: NextPage = () => {
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
     {
-      enabled: typeof degree === "string",
+      enabled: typeof degree !== "undefined",
       retry: false,
       onError: () => router.push("/404"),
     }
