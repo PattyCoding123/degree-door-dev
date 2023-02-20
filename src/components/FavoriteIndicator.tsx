@@ -19,11 +19,16 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   );
 
   if (sessionData?.user !== undefined) {
-    return <AiOutlineStar className={favoriteQuery ? "bg-yellow-500" : ""} />;
+    return (
+      <AiOutlineStar
+        className="text-2xl hover:animate-pulse hover:cursor-pointer"
+        onClick={() => console.log("Favorited")}
+      />
+    );
   }
   return (
     <button disabled={true}>
-      <AiOutlineStar />
+      <AiOutlineStar className="text-2xl hover:cursor-pointer" />
     </button>
   );
 };
