@@ -3,6 +3,7 @@ import Link from "next/link";
 import clsx from "clsx";
 
 import Dropdown from "../Dropdown";
+import FavoriteIndicator from "../FavoriteIndicator";
 interface DegreeNavbarProps {
   active: string;
   degreeName?: string;
@@ -67,6 +68,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
                 </li>
               );
             })}
+          <li>{degreeId && <FavoriteIndicator degreeId={degreeId} />}</li>
         </ul>
         <div className="flex justify-end md:col-span-1">
           <Dropdown color="black" />
