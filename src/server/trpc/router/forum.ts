@@ -26,8 +26,8 @@ export const forumRouter = router({
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
-    .query(({ input, ctx }) => {
-      return ctx.prisma.review.findMany({
+    .query(async ({ input, ctx }) => {
+      return await ctx.prisma.review.findMany({
         where: {
           degreeId: input.degreeId,
         },
