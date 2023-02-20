@@ -10,7 +10,7 @@ const ReviewsPage: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
-  // Dependent query, will not run unless degree is definied
+  // Dependent query, will not run unless degree is defined
   // Push to page /404 if degree info is not found
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
