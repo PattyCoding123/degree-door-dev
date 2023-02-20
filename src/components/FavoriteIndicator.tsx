@@ -1,4 +1,4 @@
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import clsx from "clsx";
 
@@ -20,15 +20,24 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
 
   if (sessionData?.user !== undefined) {
     return (
-      <AiOutlineStar
-        className="text-2xl hover:animate-pulse hover:cursor-pointer"
-        onClick={() => console.log("Favorited")}
-      />
+      <>
+        {favoriteQuery.data ? (
+          <AiFillStar
+            className="text-2xl text-yellow-500 hover:animate-pulse hover:cursor-pointer"
+            onClick={() => console.log("Unfavorited")}
+          />
+        ) : (
+          <AiOutlineStar
+            className="text-2xl hover:animate-pulse hover:cursor-pointer"
+            onClick={() => console.log("Favorited")}
+          />
+        )}
+      </>
     );
   }
   return (
     <button disabled={true}>
-      <AiOutlineStar className="text-2xl hover:cursor-pointer" />
+      <AiOutlineStar className="text-2xl hover:animate-pulse hover:cursor-pointer" />
     </button>
   );
 };
