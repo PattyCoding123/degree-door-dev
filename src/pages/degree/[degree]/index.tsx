@@ -34,7 +34,7 @@ const DegreeHome: NextPage = () => {
           >
             <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
               <h1 className="text-4xl font-bold md:text-6xl">
-                {degreeQuery.data?.name}
+                {degreeQuery.data.name}
               </h1>
               <p className="text-lg md:text-xl">
                 Apart of the College of Engineering at Wayne State University
