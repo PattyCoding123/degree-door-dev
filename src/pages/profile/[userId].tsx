@@ -85,7 +85,7 @@ const Profile: NextPage = () => {
                   name="about"
                   value="about"
                   id="about"
-                  className="mt-2 h-32 w-full resize-none rounded-lg 
+                  className="mt-2 h-40 w-full resize-none rounded-lg 
                   border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
                 />
               </div>
