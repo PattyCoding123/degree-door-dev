@@ -21,24 +21,28 @@ const Post: NextPage = () => {
     }
   );
 
-  return (
-    <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-      <Toaster />
-      <DegreeNavbar
-        active="post"
-        degreeName={degreeQuery.data?.name}
-        degreeId={degreeQuery.data?.id}
-      />
-      <main>
-        <section>
-          <h1 className="p-8 text-center text-4xl text-white">
-            Write your Review
-          </h1>
-          <ForumForm />
-        </section>
-      </main>
-    </div>
-  );
+  if (degreeQuery.isSuccess) {
+    return (
+      <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+        <Toaster />
+        <DegreeNavbar
+          active="post"
+          degreeName={degreeQuery.data.name}
+          degreeId={degreeQuery.data.id}
+        />
+        <main>
+          <section>
+            <h1 className="p-8 text-center text-4xl text-white">
+              Write your Review
+            </h1>
+            <ForumForm />
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default Post;
