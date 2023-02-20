@@ -17,6 +17,18 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
     }
   );
 
+  const favoriteMutation = trpc.forum.favoriteDegree.useMutation({
+    onSuccess: () => {
+      console.log("Degree was favorited");
+    },
+  });
+
+  const unfavoriteMutation = trpc.forum.unfavoriteDegree.useMutation({
+    onSuccess: () => {
+      console.log("Degree was removed from your favorites");
+    },
+  });
+
   if (sessionData?.user !== undefined) {
     return (
       <>
