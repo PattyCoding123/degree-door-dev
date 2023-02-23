@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { trpc } from "../../utils/trpc";
 import { Button } from "../Buttons";
 
-export interface ForumFormData {
+interface ForumFormData {
   course: string;
   pros: string;
   cons: string;
