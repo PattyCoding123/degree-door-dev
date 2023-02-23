@@ -18,7 +18,7 @@ const ForumForm: React.FC = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ForumFormData>();
   const { data: sessionData } = useSession();
   const router = useRouter();
@@ -63,6 +63,7 @@ const ForumForm: React.FC = () => {
             className="text-md mt-2 block w-56 max-w-fit flex-1 rounded-md border-gray-700
             p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="Ex. CSC 0000"
+            disabled={isSubmitting}
             {...register("course", {
               required: "Course is required",
               pattern: {
@@ -85,6 +86,7 @@ const ForumForm: React.FC = () => {
             className="text-md mt-2 block h-32 max-h-fit w-full flex-1 rounded-md border-gray-700
             p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you enjoy about this particular course? (If nothing, you can put N/A)"
+            disabled={isSubmitting}
             {...register("pros", { required: "This field is required" })}
           />
           {errors.pros && <ErrorMessage message={errors.pros?.message} />}
@@ -102,6 +104,7 @@ const ForumForm: React.FC = () => {
             p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you dislike about this particular course? (If nothing, you can put N/A)"
             {...register("cons", { required: "This field is required" })}
+            disabled={isSubmitting}
           />
           {errors.cons && <ErrorMessage message={errors.cons?.message} />}
         </div>
@@ -109,7 +112,7 @@ const ForumForm: React.FC = () => {
           {sessionData?.user ? (
             // * react-hook-form will handle errors if the user presses submit button
             // * when the form is incomplete or if the user enters invalid input
-            <Button type="submit" disabled={!degree}>
+            <Button type="submit" disabled={!degree || isSubmitting}>
               Submit
             </Button>
           ) : (
