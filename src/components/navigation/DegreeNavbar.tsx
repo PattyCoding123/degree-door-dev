@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Dropdown from "../Dropdown";
 import FavoriteIndicator from "../FavoriteIndicator";
 interface DegreeNavbarProps {
-  active: string;
+  active: "overview" | "reviews" | "post";
   degreeName?: string;
   degreeId?: string;
 }
