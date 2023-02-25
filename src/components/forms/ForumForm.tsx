@@ -1,5 +1,4 @@
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { BiError } from "react-icons/bi";
 import { toast } from "react-hot-toast";
@@ -13,7 +12,7 @@ interface ForumFormData {
   cons: string;
 }
 
-const ForumForm: React.FC = () => {
+const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
   const {
     register,
     handleSubmit,
@@ -21,9 +20,6 @@ const ForumForm: React.FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<ForumFormData>();
   const { data: sessionData } = useSession();
-  const router = useRouter();
-
-  const { degree } = router.query as { degree: string | undefined };
 
   const createReview = trpc.forum.createReview.useMutation({
     onSuccess: () => {
@@ -42,7 +38,7 @@ const ForumForm: React.FC = () => {
 
   const onSubmit2 = handleSubmit(async (data) => {
     await createReview.mutateAsync({
-      degreeId: degree as string,
+      degreeId: degreeId,
       formData: data,
     });
   });
@@ -112,7 +108,7 @@ const ForumForm: React.FC = () => {
           {sessionData?.user ? (
             // * react-hook-form will handle errors if the user presses submit button
             // * when the form is incomplete or if the user enters invalid input
-            <Button type="submit" disabled={!degree || isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               Submit
             </Button>
           ) : (

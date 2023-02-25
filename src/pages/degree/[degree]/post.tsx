@@ -42,7 +42,7 @@ const Post: NextPage = () => {
               <h1 className="p-8 text-center text-4xl text-white">
                 Write your Review
               </h1>
-              <ForumForm />
+              <ForumForm degreeId={degreeQuery.data.id} />
             </section>
           </main>
         </div>
