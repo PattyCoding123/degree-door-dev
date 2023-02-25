@@ -24,8 +24,8 @@ const DegreeHome: NextPage = () => {
     return (
       <>
         <Head>
-          <title>Degree Door</title>
-          <meta name="description" content="The Degree Door home page" />
+          <title>Degree Door: {degreeQuery.data.name}</title>
+          <meta name="description" content="Degree index page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
