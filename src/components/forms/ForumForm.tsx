@@ -50,7 +50,7 @@ const ForumForm: React.FC = () => {
   return (
     <form onSubmit={onSubmit2}>
       <div className="mx-auto w-1/2 rounded-md bg-slate-200 p-8 shadow-2xl">
-        <div className="mb-6">
+        <div className="relative mb-12">
           <label
             htmlFor="course-id"
             className="block text-xl font-medium text-gray-900"
@@ -74,7 +74,7 @@ const ForumForm: React.FC = () => {
           />
           {errors.course && <ErrorMessage message={errors.course?.message} />}
         </div>
-        <div className="mb-6">
+        <div className="relative mb-12">
           <label
             htmlFor="pros"
             className="block text-xl font-medium text-gray-900"
@@ -91,7 +91,7 @@ const ForumForm: React.FC = () => {
           />
           {errors.pros && <ErrorMessage message={errors.pros?.message} />}
         </div>
-        <div className="mb-6">
+        <div className="relative mb-12">
           <label
             htmlFor="cons"
             className="block text-xl font-medium text-gray-900"
@@ -129,8 +129,11 @@ const ForumForm: React.FC = () => {
 const ErrorMessage = (props: { message: string | undefined }) => {
   const { message } = props;
   return (
-    <div className=" mt-2 flex items-center gap-2 text-red-700" role="alert">
-      <div className="text-xl">
+    <div
+      className="absolute mt-2 flex items-center gap-2 text-sm text-red-700"
+      role="alert"
+    >
+      <div className="text-lg">
         <BiError />
       </div>
       <p className="font-medium">{message}</p>
