@@ -25,8 +25,10 @@ const Carousel: FC = () => {
       <div className="mt-8 flex justify-center">
         <button
           onClick={() => {
-            setCurrent(current !== 0 ? current - 1 : data.length - 1);
-            setCount(count - 1);
+            setCurrent((current) =>
+              current !== 0 ? current - 1 : data.length - 1
+            );
+            setCount((count) => count - 1);
           }}
         >
           <FiChevronLeft className="text-3xl" />
@@ -65,8 +67,10 @@ const Carousel: FC = () => {
         </div>
         <button
           onClick={() => {
-            setCurrent(current !== data.length - 1 ? current + 1 : 0);
-            setCount(count + 1);
+            setCurrent((current) =>
+              current !== data.length - 1 ? current + 1 : 0
+            );
+            setCount((count) => count + 1);
           }}
         >
           <FiChevronRight className="text-3xl" />
