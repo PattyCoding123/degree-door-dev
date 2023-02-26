@@ -37,6 +37,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -48,10 +49,8 @@
 
 ## About The Project
 
-The project is a fullstack web application that will allow users to find information regarding the degrees and their relative courses at Wayne State University. Users will be able to register an account to access the main functionalities of the website. From there, users can see forums with reviews posted by current students, past students, alumni, or professors that have some insight on a degree.
-<br>
-The project was originally developed for a required software engineering course at Wayne State University. We have decided to rework the project to implement more typesafety and better handling of authentication, as well as to challenge our skills as software engineers.
-<br>
+The project is a fullstack web application that will allow users to find information regarding the degrees and their relative courses at Wayne State University. Users will be able to register an account to access the main functionalities of the website. From there, users can see forums with reviews posted by current students, past students, alumni, or professors that have some insight on a degree.<br><br>
+The project was originally developed for a required software engineering course at Wayne State University. We have decided to rework the project to implement more typesafety and better handling of authentication, as well as to challenge our skills as software engineers.<br><br>
 For the technology stack, the project utilizes the [T3 Stack](https://create.t3.gg/), and the project was bootstrapped with `create-t3-app`.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -65,6 +64,21 @@ For the technology stack, the project utilizes the [T3 Stack](https://create.t3.
 - [tRPC](https://trpc.io)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- Installation -->
+## Installation
+1. Clone the repo
+```sh
+$ git clone https://github.com/PattyCoding123/degree-door-dev.git
+```
+<br><br>
+2. Install the needed dependencies with [npm](https://www.npmjs.com/):
+```sh
+$ npm install --save npm-install-global
+```
+<br><br>
+3. Follow the instructions for getting started with T3 stack here:<br>
+[First Steps with the T3 Stack](https://create.t3.gg/en/usage/first-steps)
 
 <!-- ROADMAP -->
 
