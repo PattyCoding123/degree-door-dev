@@ -35,8 +35,8 @@ const Carousel: FC = () => {
         </button>
         <div
           ref={ref}
-          className="relative flex h-28 w-1/3 items-center justify-center
-            overflow-hidden"
+          className="relative flex h-28 w-2/3 items-center justify-center
+            overflow-hidden md:w-1/3"
         >
           {/*Null coalescing since Link href cannot be optional*/}
           <AnimatePresence custom={{ direction, width }}>
