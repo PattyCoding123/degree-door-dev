@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const LoginForm: React.FC = () => {
-  /* 
-    When signIn is invoked with no inputs, it will redirect
-    user to the Sign In page. The callbackUrl will then be in the URL path
-    as a query param, so we must access it and pass it into the callbackUrl
-    parameter for each provider's button that calls the provider's signIn function.
-  */
+  /*
+   * When signIn is invoked with no inputs, it will redirect
+   * user to the Sign In page. The callbackUrl will then be in the URL path
+   * as a query param, so we must access it and pass it into the callbackUrl
+   * parameter for each provider's button that calls the provider's signIn function.
+   */
   const router = useRouter();
   const { callbackUrl } = router.query;
 
