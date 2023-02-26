@@ -72,7 +72,7 @@ For the technology stack, the project utilizes the [T3 Stack](https://create.t3.
 $ git clone https://github.com/PattyCoding123/degree-door-dev.git
 ```
 <br><br>
-2. Install the needed dependencies with [npm](https://www.npmjs.com/):
+2. In the root directory, install the needed dependencies with [npm](https://www.npmjs.com/):
 ```sh
 $ npm install --save npm-install-global
 ```
