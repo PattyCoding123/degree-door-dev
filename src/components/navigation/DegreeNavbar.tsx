@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
+import FavoriteIndicator from "../FavoriteIndicator";
 interface DegreeNavbarProps {
-  active: string;
+  active: "overview" | "reviews" | "post";
   degreeName?: string;
   degreeId?: string;
 }
@@ -37,9 +38,21 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
           {/* Only render the links if the data exists */}
           {degreeId &&
             [
-              { href: `/${degreeId}`, label: "OVERVIEW", id: "overview" },
-              { href: `/${degreeId}/reviews`, label: "REVIEWS", id: "reviews" },
-              { href: `/${degreeId}/post`, label: "POST A REVIEW", id: "post" },
+              {
+                href: `/degree/${degreeId}`,
+                label: "OVERVIEW",
+                id: "overview",
+              },
+              {
+                href: `/degree/${degreeId}/reviews`,
+                label: "REVIEWS",
+                id: "reviews",
+              },
+              {
+                href: `/degree/${degreeId}/post`,
+                label: "POST A REVIEW",
+                id: "post",
+              },
             ].map(({ href, label, id }) => {
               return (
                 <li key={label} id={id}>
@@ -55,6 +68,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
                 </li>
               );
             })}
+          <li>{degreeId && <FavoriteIndicator degreeId={degreeId} />}</li>
         </ul>
         <div className="flex justify-end md:col-span-1">
           <Dropdown color="black" />

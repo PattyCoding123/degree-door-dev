@@ -25,16 +25,18 @@ const Carousel: FC = () => {
       <div className="mt-8 flex justify-center">
         <button
           onClick={() => {
-            setCurrent(current !== 0 ? current - 1 : data.length - 1);
-            setCount(count - 1);
+            setCurrent((current) =>
+              current !== 0 ? current - 1 : data.length - 1
+            );
+            setCount((count) => count - 1);
           }}
         >
           <FiChevronLeft className="text-3xl" />
         </button>
         <div
           ref={ref}
-          className="relative flex h-28 w-1/3 items-center justify-center
-            overflow-hidden"
+          className="relative flex h-28 w-2/3 items-center justify-center
+            overflow-hidden md:w-1/3"
         >
           {/*Null coalescing since Link href cannot be optional*/}
           <AnimatePresence custom={{ direction, width }}>
@@ -53,7 +55,7 @@ const Carousel: FC = () => {
                   rounded bg-gradient-to-b from-rose-100 to-teal-100"
             >
               <Link
-                href={`/${data[current]?.id ?? ""}`}
+                href={`/degree/${data[current]?.id ?? ""}`}
                 className="h-full w-full"
               >
                 <p className="flex h-full w-full items-center justify-center p-8 text-lg text-black">
@@ -65,8 +67,10 @@ const Carousel: FC = () => {
         </div>
         <button
           onClick={() => {
-            setCurrent(current !== data.length - 1 ? current + 1 : 0);
-            setCount(count + 1);
+            setCurrent((current) =>
+              current !== data.length - 1 ? current + 1 : 0
+            );
+            setCount((count) => count + 1);
           }}
         >
           <FiChevronRight className="text-3xl" />

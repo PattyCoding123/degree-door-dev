@@ -7,7 +7,7 @@ const HeroBanner: React.FC = () => {
       from-rose-100 to-teal-100 p-8 text-center text-black shadow-2xl"
     >
       <h1 className="text-4xl">Welcome to Degree Door</h1>
-      <p className="w-2/5">
+      <p className="md:w-2/5">
         A collaborative space allowing students and faculty to share their
         experiences with upcoming students. Providing information on courses,
         degrees, and work loads in a forum like style allowing access to

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const forumRouter = router({
@@ -12,17 +13,21 @@ export const forumRouter = router({
     }),
   getDegreeInfo: publicProcedure
     .input(z.object({ degreeId: z.string() }))
-    .query(({ input, ctx }) => {
-      return ctx.prisma.degree.findUnique({
-        where: {
-          id: input.degreeId,
-        },
-      });
+    .query(async ({ input, ctx }) => {
+      try {
+        return await ctx.prisma.degree.findUniqueOrThrow({
+          where: {
+            id: input.degreeId,
+          },
+        });
+      } catch (err) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
     }),
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
-    .query(({ input, ctx }) => {
-      return ctx.prisma.review.findMany({
+    .query(async ({ input, ctx }) => {
+      return await ctx.prisma.review.findMany({
         where: {
           degreeId: input.degreeId,
         },
@@ -69,4 +74,55 @@ export const forumRouter = router({
     });
     return degreePaths;
   }),
+  checkIfFavorite: protectedProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      /*
+       * Prisma API has a special syntax when querying object by a
+       * composite key!
+       */
+      const favoriteDegree = await ctx.prisma.favorites.findUnique({
+        where: {
+          userId_degreeId: {
+            degreeId: input.degreeId,
+            userId: ctx.session.user.id,
+          },
+        },
+      });
+
+      return favoriteDegree;
+    }),
+  favoriteDegree: protectedProcedure
+    .input(z.object({ degreeId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      const prismaDb = ctx.prisma;
+      let degree;
+
+      const isFavorite = !!(await prismaDb.favorites.findUnique({
+        where: {
+          userId_degreeId: {
+            userId: userId,
+            degreeId: input.degreeId,
+          },
+        },
+      }));
+
+      if (isFavorite) {
+        degree = await prismaDb.favorites.delete({
+          where: {
+            userId_degreeId: {
+              userId: userId,
+              degreeId: input.degreeId,
+            },
+          },
+        });
+      } else {
+        degree = await prismaDb.favorites.create({
+          data: { userId: userId, degreeId: input.degreeId },
+        });
+      }
+
+      return degree;
+    }),
 });

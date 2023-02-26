@@ -19,7 +19,7 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
       <div className="relative">
         <BsFillGearFill
           onClick={() => setIsVisible(!isVisible)}
-          className={`align-middle text-lg text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
+          className={`align-middle text-xl text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
           aria-haspopup="true"
         />
         <AnimatePresence>
@@ -36,10 +36,10 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
               aria-labelledby="menu-button"
             >
               <div className="p-2" role="none">
-                {sessionData ? (
+                {sessionData?.user ? (
                   <Link
-                    href="/profile"
-                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
+                    href={`/profile/${sessionData.user.id}`}
+                    className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
                     role="menuitem"
                     id="menu-item-0"
                   >
@@ -47,7 +47,7 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
                   </Link>
                 ) : (
                   <button
-                    className="block rounded-lg px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+                    className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
                     onClick={() => signIn()}
                   >
                     Sign In
