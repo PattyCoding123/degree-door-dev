@@ -20,6 +20,16 @@ const Home: NextPage = () => {
           <section>
             <Carousel />
           </section>
+          <section className="mt-10">
+            <div className="flex h-4/5 flex-col items-center justify-center">
+              <h2 className="mb-4 text-2xl font-semibold">Favorited Degrees</h2>
+              <div className="flex h-full w-full items-center justify-center gap-4">
+                {/* {favDegrees && favDegrees.map((degree, index) => (
+              <FavoriteDegree key={index} degree={degree} user={userID} />
+            ))} */}
+              </div>
+            </div>
+          </section>
         </main>
       </div>
     </>
