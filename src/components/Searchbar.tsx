@@ -17,18 +17,18 @@ const Searchbar: FC = () => {
   return (
     <div className="flex flex-col">
       <div
-        className="relative z-10 flex w-80 items-center justify-between rounded-full
-        bg-white text-gray-600"
+        className="relative z-10 flex w-80 items-center justify-between rounded-full bg-white
+        px-2 text-gray-600"
       >
+        <BsSearch className="text-black" />
         <input
           type="search"
           name="search"
           placeholder="Search for a degree..."
           value={query}
-          className="h-8 w-full rounded-full px-5 text-sm focus:outline-none"
+          className="h-8 w-full rounded-full px-2 text-sm focus:outline-none"
           onChange={(e) => setQuery(e.target.value)}
         />
-        <BsSearch className="absolute right-2 text-black" />
       </div>
       <div
         className="no-scrollbar fixed z-10 mt-10 flex flex-col
