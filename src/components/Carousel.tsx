@@ -14,13 +14,11 @@ const Carousel: FC = () => {
   const prev = usePrevious(count);
   const [ref, { width }] = useMeasure();
 
-  const { data, isSuccess } = trpc.forum.getAllDegreePaths.useQuery(undefined, {
-    initialData: [],
-  });
+  const { data, isSuccess } = trpc.forum.getAllDegreePaths.useQuery(undefined);
 
   const direction: number = typeof prev === "number" && count > prev ? 1 : -1;
 
-  if (isSuccess) {
+  if (isSuccess && data.length > 0) {
     return (
       <div className="mt-8 flex justify-center">
         <button
