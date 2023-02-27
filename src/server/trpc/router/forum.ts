@@ -92,36 +92,36 @@ export const forumRouter = router({
 
       return favoriteDegree;
     }),
-  favoriteDegree: protectedProcedure
+  removeFavoriteDegree: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
       const prismaDb = ctx.prisma;
-      let degree;
 
-      const isFavorite = !!(await prismaDb.favorites.findUnique({
+      const degree = await prismaDb.favorites.delete({
         where: {
           userId_degreeId: {
             userId: userId,
             degreeId: input.degreeId,
           },
         },
-      }));
+      });
 
-      if (isFavorite) {
-        degree = await prismaDb.favorites.delete({
-          where: {
-            userId_degreeId: {
-              userId: userId,
-              degreeId: input.degreeId,
-            },
-          },
-        });
-      } else {
-        degree = await prismaDb.favorites.create({
-          data: { userId: userId, degreeId: input.degreeId },
-        });
-      }
+      return degree;
+    }),
+  favoriteDegree: protectedProcedure
+    .input(z.object({ degreeId: z.string(), degreeName: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      const prismaDb = ctx.prisma;
+
+      const degree = await prismaDb.favorites.create({
+        data: {
+          userId: userId,
+          degreeId: input.degreeId,
+          degreeName: input.degreeName,
+        },
+      });
 
       return degree;
     }),
