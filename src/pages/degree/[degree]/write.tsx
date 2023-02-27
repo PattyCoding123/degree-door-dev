@@ -7,7 +7,7 @@ import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
 import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 
-const Post: NextPage = () => {
+const Write: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
@@ -53,4 +53,4 @@ const Post: NextPage = () => {
   return null;
 };
 
-export default Post;
+export default Write;
