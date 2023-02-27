@@ -68,7 +68,7 @@ const ReviewsPage: NextPage = () => {
             >
               <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
                 <h1 className="text-4xl font-bold md:text-6xl">
-                  {degreeQuery.data?.name}
+                  {degreeQuery.data.name}
                 </h1>
                 <p className="text-xl md:text-3xl">Reviews</p>
               </section>
