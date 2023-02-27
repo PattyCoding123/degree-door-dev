@@ -15,17 +15,19 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
   const ref = useClickOutside(() => setIsVisible(false));
 
   return (
-    <div className="inline-flex items-center justify-center rounded-md">
+    <div
+      className="inline-flex items-center justify-center rounded-md"
+      ref={ref}
+    >
       <div className="relative">
         <BsFillGearFill
-          onClick={() => setIsVisible(!isVisible)}
+          onClick={() => setIsVisible((prev) => !prev)}
           className={`align-middle text-xl text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
           aria-haspopup="true"
         />
         <AnimatePresence>
           {isVisible && (
             <motion.div
-              ref={ref}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
