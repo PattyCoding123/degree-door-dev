@@ -31,13 +31,13 @@ const Searchbar: FC = () => {
         <BsSearch className="absolute right-2 text-black" />
       </div>
       <div
-        className="no-scrollbar fixed z-10 mt-10 flex
-        h-2/5 flex-col items-center overflow-y-auto overflow-x-hidden"
+        className="no-scrollbar fixed z-10 mt-10 flex flex-col
+        items-center overflow-y-auto overflow-x-hidden rounded-md"
       >
         {filteredItems?.slice(0, 10).map((degree, index) => (
           <Link href={`/degree/${degree.id}`} key={index}>
             <div
-              className="degree-item z-50 flex h-8 w-80 items-center border-b-2 border-gray-600 
+              className="degree-item z-50 flex h-8 w-80 items-center  
             bg-white p-4 text-black hover:bg-gray-300"
             >
               <p>{degree.name}</p>
