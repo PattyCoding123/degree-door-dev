@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Dropdown from "../Dropdown";
 import FavoriteIndicator from "../FavoriteIndicator";
 interface DegreeNavbarProps {
-  active: "overview" | "reviews" | "post";
+  active: "overview" | "reviews" | "write";
   degreeName?: string;
   degreeId?: string;
 }
@@ -49,9 +49,9 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
                 id: "reviews",
               },
               {
-                href: `/degree/${degreeId}/post`,
-                label: "POST A REVIEW",
-                id: "post",
+                href: `/degree/${degreeId}/write`,
+                label: "WRITE A REVIEW",
+                id: "write",
               },
             ].map(({ href, label, id }) => {
               return (
