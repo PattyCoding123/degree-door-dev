@@ -35,9 +35,9 @@ const Home: NextPage = () => {
                   Favorited Degrees
                 </h2>
                 <div className="flex h-full w-full items-center justify-center gap-4">
-                  {favorites.data.map((degree, index) => (
+                  {favorites.data.map((degree) => (
                     <FavoriteDegree
-                      key={index}
+                      key={degree.degreeId}
                       degreeId={degree.degreeId}
                       degreeName={degree.degreeName}
                     />
