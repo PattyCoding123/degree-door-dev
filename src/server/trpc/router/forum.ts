@@ -125,4 +125,11 @@ export const forumRouter = router({
 
       return degree;
     }),
+  getFavorites: protectedProcedure.query(async ({ ctx }) => {
+    const favoriteDegrees = await ctx.prisma.favorites.findMany({
+      where: { userId: ctx.session.user.id },
+    });
+
+    return favoriteDegrees;
+  }),
 });
