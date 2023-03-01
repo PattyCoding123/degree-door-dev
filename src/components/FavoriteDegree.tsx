@@ -12,7 +12,10 @@ const FavoriteDegree: React.FC<FavoriteDegreeProps> = ({
 }) => {
   return (
     <Link href={`/degree/${degreeId}`}>
-      <div className="flex w-[250px] cursor-pointer rounded-xl border bg-[#f9f9f9] p-4 shadow-sm transition duration-200 ease-in-out hover:scale-90">
+      <div
+        className="flex w-[250px] cursor-pointer rounded-xl border bg-[#f9f9f9]
+      p-4 text-black shadow-sm transition duration-200 ease-in-out hover:scale-90"
+      >
         <div className="flex gap-3">
           <AiFillStar className="text-2xl" color="#de9b61" />
           <p>{degreeName}</p>
