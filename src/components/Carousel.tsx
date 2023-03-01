@@ -47,7 +47,6 @@ const Carousel: FC = () => {
               animate="center"
               exit="exit"
               whileHover={{ scale: 0.9, transition: { duration: 0.2 } }}
-              transition={{ duration: 0.4 }}
               custom={{ direction, width }}
               className="absolute flex h-full min-w-[15rem] items-center justify-center 
               rounded bg-gradient-to-b from-rose-100 to-teal-100"
@@ -86,10 +85,12 @@ export default Carousel;
 const variants = {
   enter: (custom: { direction: number; width: number }) => ({
     x: custom.direction * custom.width,
+    transition: { duration: 0.4 },
   }),
-  center: { x: 0 },
+  center: { x: 0, transition: { duration: 0.4 } },
   exit: (custom: { direction: number; width: number }) => ({
     x: custom.direction * -custom.width,
+    transition: { duration: 0.4 },
   }),
 };
 
