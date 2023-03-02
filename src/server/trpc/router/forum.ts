@@ -110,7 +110,7 @@ export const forumRouter = router({
       return degree;
     }),
   favoriteDegree: protectedProcedure
-    .input(z.object({ degreeId: z.string(), degreeName: z.string() }))
+    .input(z.object({ degreeId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
       const prismaDb = ctx.prisma;
@@ -119,7 +119,6 @@ export const forumRouter = router({
         data: {
           userId: userId,
           degreeId: input.degreeId,
-          degreeName: input.degreeName,
         },
       });
 
@@ -128,6 +127,11 @@ export const forumRouter = router({
   getFavorites: protectedProcedure.query(async ({ ctx }) => {
     const favoriteDegrees = await ctx.prisma.favorites.findMany({
       where: { userId: ctx.session.user.id },
+      include: {
+        degree: {
+          select: { name: true },
+        },
+      },
     });
 
     return favoriteDegrees;
