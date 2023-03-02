@@ -37,7 +37,6 @@
     </li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#authors">Authors</a></li>
   </ol>
 </details>
