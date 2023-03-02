@@ -14,13 +14,11 @@ const Carousel: FC = () => {
   const prev = usePrevious(count);
   const [ref, { width }] = useMeasure();
 
-  const { data, isSuccess } = trpc.forum.getAllDegreePaths.useQuery(undefined, {
-    initialData: [],
-  });
+  const { data, isSuccess } = trpc.forum.getAllDegreePaths.useQuery(undefined);
 
   const direction: number = typeof prev === "number" && count > prev ? 1 : -1;
 
-  if (isSuccess) {
+  if (isSuccess && data.length > 0) {
     return (
       <div className="mt-8 flex justify-center">
         <button
@@ -48,11 +46,10 @@ const Carousel: FC = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              whileHover={{ scale: 0.9 }}
-              transition={{ duration: 0.4 }}
+              whileHover={{ scale: 0.9, transition: { duration: 0.2 } }}
               custom={{ direction, width }}
               className="absolute flex h-full min-w-[15rem] items-center justify-center 
-                  rounded bg-gradient-to-b from-rose-100 to-teal-100"
+              rounded bg-gradient-to-b from-rose-100 to-teal-100"
             >
               <Link
                 href={`/degree/${data[current]?.id ?? ""}`}
@@ -88,10 +85,12 @@ export default Carousel;
 const variants = {
   enter: (custom: { direction: number; width: number }) => ({
     x: custom.direction * custom.width,
+    transition: { duration: 0.4 },
   }),
-  center: { x: 0 },
+  center: { x: 0, transition: { duration: 0.4 } },
   exit: (custom: { direction: number; width: number }) => ({
     x: custom.direction * -custom.width,
+    transition: { duration: 0.4 },
   }),
 };
 

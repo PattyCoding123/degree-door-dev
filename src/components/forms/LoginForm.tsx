@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
 const LoginForm: React.FC = () => {
+  /*
+   * When signIn is invoked with no inputs, it will redirect
+   * user to the Sign In page. The callbackUrl will then be in the URL path
+   * as a query param, so we must access it and pass it into the callbackUrl
+   * parameter for each provider's button that calls the provider's signIn function.
+   */
   const router = useRouter();
   const { callbackUrl } = router.query;
 
@@ -23,7 +29,7 @@ const LoginForm: React.FC = () => {
             className="text-md flex items-center gap-4 rounded-full border border-indigo-500
             p-4 py-2 font-semibold text-indigo-500 duration-150 hover:border-transparent 
             hover:bg-indigo-500 hover:text-gray-50"
-            onClick={() => signIn("discord", { callbackUrl: callbackUrl })}
+            onClick={() => signIn("discord", { callbackUrl: callbackUrl })} // * Pass the callbackUrl from router
             type="button"
           >
             <SiDiscord />

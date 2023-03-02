@@ -1,11 +1,19 @@
 import { type NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 
+import { trpc } from "../utils/trpc";
 import HeroBanner from "../components/HeroBanner";
 import HomeNavbar from "../components/navigation/HomeNavbar";
 import Carousel from "../components/Carousel";
+import FavoriteDegree from "../components/FavoriteDegree";
 
 const Home: NextPage = () => {
+  const { data: sessionData } = useSession();
+  const favorites = trpc.forum.getFavorites.useQuery(undefined, {
+    enabled: sessionData?.user !== undefined,
+  });
+
   return (
     <>
       <Head>
@@ -19,6 +27,26 @@ const Home: NextPage = () => {
           <HeroBanner />
           <section>
             <Carousel />
+          </section>
+          <section className="mt-10">
+            {favorites.data ? (
+              <div className="flex h-4/5 flex-col items-center justify-center">
+                <h2 className="mb-4 text-2xl font-semibold">
+                  Favorited Degrees
+                </h2>
+                <div className="flex h-full w-full items-center justify-center gap-4">
+                  {favorites.data.map((degree) => (
+                    <FavoriteDegree
+                      key={degree.degreeId}
+                      degreeId={degree.degreeId}
+                      degreeName={degree.degreeName}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <p>Hello</p>
+            )}
           </section>
         </main>
       </div>

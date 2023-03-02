@@ -30,7 +30,7 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
       reset();
     },
     onError: () =>
-      toast.error("There was an error creating the post!", {
+      toast.error("There was an error creating the review!", {
         position: "bottom-center",
         className: "text-xl",
       }),

@@ -4,8 +4,13 @@ import { getServerAuthSession } from "../../server/common/get-server-auth-sessio
 import LoginForm from "../../components/forms/LoginForm";
 
 const Login: NextPage = () => {
+  // * Check LoginForm for documentation regarding the NextAuth signIn function
+  // * and how the callbackUrl is passed inside.
   return (
-    <main className="flex h-screen flex-col items-center justify-center bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+    <main
+      className="flex h-screen flex-col items-center justify-center 
+      bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500"
+    >
       <LoginForm />
     </main>
   );

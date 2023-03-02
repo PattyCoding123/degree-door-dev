@@ -5,8 +5,13 @@ import { trpc } from "../utils/trpc";
 
 interface FavoriteProps {
   degreeId: string;
+  degreeName: string;
 }
-const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
+
+const FavoriteIndicator: React.FC<FavoriteProps> = ({
+  degreeId,
+  degreeName,
+}) => {
   const { data: sessionData } = useSession();
   const favoriteQuery = trpc.forum.checkIfFavorite.useQuery(
     {
@@ -17,7 +22,13 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
     }
   );
 
-  const alterMutation = trpc.forum.favoriteDegree.useMutation({
+  const addFavorite = trpc.forum.favoriteDegree.useMutation({
+    onSuccess: () => {
+      favoriteQuery.refetch();
+    },
+  });
+
+  const removeFavorite = trpc.forum.removeFavoriteDegree.useMutation({
     onSuccess: () => {
       favoriteQuery.refetch();
     },
@@ -30,14 +41,19 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
           <AiFillStar
             className="fill-yellow-500 text-3xl hover:animate-pulse hover:cursor-pointer"
             onClick={async () =>
-              alterMutation.mutateAsync({ degreeId: degreeId })
+              removeFavorite.mutateAsync({
+                degreeId: degreeId,
+              })
             }
           />
         ) : (
           <AiOutlineStar
             className="text-3xl hover:animate-pulse hover:cursor-pointer"
             onClick={async () =>
-              alterMutation.mutateAsync({ degreeId: degreeId })
+              addFavorite.mutateAsync({
+                degreeId: degreeId,
+                degreeName: degreeName,
+              })
             }
           />
         )}

@@ -7,7 +7,7 @@ import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
 import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 
-const Post: NextPage = () => {
+const Write: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
@@ -27,13 +27,13 @@ const Post: NextPage = () => {
       <>
         <Head>
           <title>Degree Door: {degreeQuery.data.name}</title>
-          <meta name="description" content="Degree post page" />
+          <meta name="description" content="Degree write page" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
           <Toaster />
           <DegreeNavbar
-            active="post"
+            active="write"
             degreeName={degreeQuery.data.name}
             degreeId={degreeQuery.data.id}
           />
@@ -53,4 +53,4 @@ const Post: NextPage = () => {
   return null;
 };
 
-export default Post;
+export default Write;
