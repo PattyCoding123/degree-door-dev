@@ -68,7 +68,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
             );
           })}
           <li>
-            <FavoriteIndicator degreeId={degreeId} degreeName={degreeName} />
+            <FavoriteIndicator degreeId={degreeId} />
           </li>
         </ul>
         <div className="flex justify-end md:col-span-1">
