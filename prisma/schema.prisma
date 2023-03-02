@@ -92,7 +92,6 @@ model Degree {
 model Favorites {
   userId     String
   degreeId   String
-  degreeName String @default("Degree")
   user       User   @relation(fields: [userId], references: [id])
   degree     Degree @relation(fields: [degreeId], references: [id])
 
