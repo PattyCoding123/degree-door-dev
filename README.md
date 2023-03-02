@@ -76,6 +76,11 @@ $ git clone https://github.com/PattyCoding123/degree-door-dev.git
 ```sh
 $ npm install --save npm-install-global
 ```
+
+with yarn
+```sh
+$ yarn
+```
 <br><br>
 3. Follow the instructions for getting started with T3 stack here:<br>
 [First Steps with the T3 Stack](https://create.t3.gg/en/usage/first-steps)
