@@ -2,8 +2,6 @@
 
 <!-- PROJECT SHIELDS -->
 
-[![MIT License][license-shield]][license-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -40,7 +38,6 @@
     <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#authors">Authors</a></li>
   </ol>
 </details>
@@ -95,29 +92,6 @@ $ yarn
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-If you have a suggestion that would make this project better or more optimal,
-please fork the repo and create a pull request.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/NewFeature`)
-3. Commit your Changes (`git commit -m 'Add some NewFeature'`)
-4. Push to the Branch (`git push origin feature/NewFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE.md` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- Authors -->
 
 ## Authors
@@ -132,6 +106,3 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-
-[license-shield]: https://img.shields.io/github/license/WSU-4110/Degree-Door?style=for-the-badge
-[license-url]: https://github.com/WSU-4110/Degree-Door/blob/main/LICENSE.md
