@@ -15,8 +15,18 @@ const DegreeHome: NextPage = () => {
     { degreeId: degree as string },
     {
       enabled: typeof degree !== "undefined",
-      retry: false,
-      onError: () => router.push("/404"),
+      retry: (failureCount, error) => {
+        if (error.message === "NOT_FOUND") {
+          router.push("/404");
+          return false;
+        }
+
+        if (failureCount + 1 < 4) {
+          router.push("/500");
+          return false;
+        }
+        return true;
+      },
     }
   );
 
