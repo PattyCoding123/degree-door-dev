@@ -16,7 +16,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
   degreeId,
 }) => {
   return (
-    <nav className="max-w-screen m-auto flex flex-col shadow-lg">
+    <nav className="m-auto flex w-full flex-col shadow-lg">
       {degreeName && (
         <header className="bg-gray-900 py-1">
           <h1 className="text-center font-bold text-white">{degreeName}</h1>
