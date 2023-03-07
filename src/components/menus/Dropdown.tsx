@@ -4,7 +4,7 @@ import { useState, type FC } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 
-import useClickOutside from "../utils/useOutsideClick";
+import useClickOutside from "../../utils/useOutsideClick";
 
 interface DropdownProps {
   color: "black" | "white";

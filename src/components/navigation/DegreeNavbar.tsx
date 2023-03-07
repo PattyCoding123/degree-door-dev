@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 
-import Dropdown from "../Dropdown";
+import Dropdown from "../menus/Dropdown";
 import FavoriteIndicator from "../FavoriteIndicator";
 interface DegreeNavbarProps {
   active: "overview" | "reviews" | "write";
