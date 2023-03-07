@@ -32,35 +32,35 @@ const Write: NextPage = () => {
     }
   );
 
-  if (degreeQuery.isSuccess) {
-    return (
-      <>
-        <Head>
-          <title>Degree Door: {degreeQuery.data.name}</title>
-          <meta name="description" content="Degree write page" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-          <Toaster />
-          <DegreeNavbar
-            active="write"
-            degreeName={degreeQuery.data.name}
-            degreeId={degreeQuery.data.id}
-          />
-          <main>
-            <section>
-              <h1 className="p-8 text-center text-4xl text-white">
-                Write your Review
-              </h1>
-              <ForumForm degreeId={degreeQuery.data.id} />
-            </section>
-          </main>
-        </div>
-      </>
-    );
-  }
-
-  return null;
+  return (
+    <>
+      <Head>
+        <title>Degree Door Post Creation</title>
+        <meta name="description" content="Degree write page" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+        {degreeQuery.isSuccess && (
+          <>
+            <Toaster />
+            <DegreeNavbar
+              active="write"
+              degreeName={degreeQuery.data.name}
+              degreeId={degreeQuery.data.id}
+            />
+            <main>
+              <section>
+                <h1 className="p-8 text-center text-4xl text-white">
+                  Write your Review
+                </h1>
+                <ForumForm degreeId={degreeQuery.data.id} />
+              </section>
+            </main>
+          </>
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Write;
