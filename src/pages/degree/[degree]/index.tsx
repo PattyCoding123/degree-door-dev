@@ -115,8 +115,6 @@ const DegreeHome: NextPage = () => {
       </div>
     </>
   );
-
-  return null;
 };
 
 export default DegreeHome;
