@@ -23,8 +23,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className="min-w-screen min-h-screen bg-gradient-to-r
-       from-rose-400 via-fuchsia-500 to-indigo-500 text-white"
+        className="min-w-screen pb-footer-fit relative min-h-screen
+       bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white"
       >
         <HomeNavbar />
         <main>
@@ -53,8 +53,8 @@ const Home: NextPage = () => {
             )}
           </section>
         </main>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 };
