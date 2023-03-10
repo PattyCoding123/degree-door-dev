@@ -9,6 +9,9 @@ module.exports = {
       textColor: {
         'tokyo-night': '#ffffff',
       },
+      padding: {
+        "footer-fit": "14rem",
+      }
     },
   },
   plugins: [],
