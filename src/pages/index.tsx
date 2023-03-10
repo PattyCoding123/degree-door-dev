@@ -7,6 +7,7 @@ import HeroBanner from "../components/HeroBanner";
 import HomeNavbar from "../components/navigation/HomeNavbar";
 import Carousel from "../components/Carousel";
 import FavoriteDegree from "../components/FavoriteDegree";
+import Footer from "../components/Footer";
 
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
@@ -53,7 +54,7 @@ const Home: NextPage = () => {
           </section>
         </main>
       </div>
-      {/*<Footer />*/}
+      <Footer />
     </>
   );
 };
