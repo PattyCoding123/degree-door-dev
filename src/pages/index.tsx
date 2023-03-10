@@ -21,7 +21,10 @@ const Home: NextPage = () => {
         <meta name="description" content="The Degree Door home page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-h-screen w-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 text-white">
+      <div
+        className="min-w-screen min-h-screen bg-gradient-to-r
+       from-rose-400 via-fuchsia-500 to-indigo-500 text-white"
+      >
         <HomeNavbar />
         <main>
           <HeroBanner />
@@ -34,7 +37,7 @@ const Home: NextPage = () => {
                 <h2 className="mb-4 text-2xl font-semibold">
                   Favorited Degrees
                 </h2>
-                <div className="flex h-full w-full items-center justify-center gap-4">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:flex-row">
                   {favorites.data.map((favorite) => (
                     <FavoriteDegree
                       key={favorite.degreeId}
@@ -50,6 +53,7 @@ const Home: NextPage = () => {
           </section>
         </main>
       </div>
+      {/*<Footer />*/}
     </>
   );
 };
