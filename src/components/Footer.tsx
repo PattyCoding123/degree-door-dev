@@ -13,26 +13,28 @@ const Footer: React.FC = () => {
           </Link>
         </section>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
-          <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
-            Resources
-          </h2>
-          <ul className="text-gray-600 dark:text-gray-400">
-            <li className="mb-2">
-              <Link href="/">
-                <p className="cursor-pointer hover:underline">Contact Us</p>
-              </Link>
-            </li>
-            <li className="mb-2">
-              <Link href="/">
-                <p className="cursor-pointer hover:underline">FAQ</p>
-              </Link>
-            </li>
-            <li>
-              <Link href="/">
-                <p className="cursor-pointer hover:underline">About Us</p>
-              </Link>
-            </li>
-          </ul>
+          <section>
+            <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
+              Resources
+            </h2>
+            <ul className="text-gray-600 dark:text-gray-400">
+              <li className="mb-2">
+                <Link href="/">
+                  <p className="cursor-pointer hover:underline">Contact Us</p>
+                </Link>
+              </li>
+              <li className="mb-2">
+                <Link href="/">
+                  <p className="cursor-pointer hover:underline">FAQ</p>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <p className="cursor-pointer hover:underline">About Us</p>
+                </Link>
+              </li>
+            </ul>
+          </section>
         </div>
       </div>
       <div className="sm:flex sm:items-center sm:justify-between">
