@@ -25,7 +25,7 @@ const Home: NextPage = () => {
       <HomeNavbar />
       <div
         className="min-w-screen relative min-h-screen bg-gradient-to-r
-       from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit text-white"
+       from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit-small text-white md:pb-footer-fit"
       >
         <main>
           <HeroBanner />

@@ -17,7 +17,7 @@ const About: NextPage = () => {
       <div
         className="min-w-screen relative flex min-h-screen flex-col
         items-center justify-center bg-gradient-to-r from-rose-400
-       via-fuchsia-500 to-indigo-500 pb-footer-fit"
+       via-fuchsia-500 to-indigo-500 pb-footer-fit-small md:pb-footer-fit"
       >
         <main>
           <div
