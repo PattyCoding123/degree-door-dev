@@ -34,7 +34,7 @@ const Profile: NextPage = () => {
                 src={
                   sessionData?.user?.image
                     ? `${sessionData.user?.image}`
-                    : "/avatar"
+                    : "/avatar.png"
                 }
                 alt="profile avatar"
                 width={96}
