@@ -11,6 +11,9 @@ const ReviewsPage: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
+  // Get utils from trpc.useContext() for query invalidation
+  const utils = trpc.useContext();
+
   // Dependent query, will not run unless degree is defined
   // Push to page /404 if degree info is not found
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
@@ -43,7 +46,9 @@ const ReviewsPage: NextPage = () => {
 
   const deleteReview = trpc.forum.deleteReview.useMutation({
     onSuccess: () => {
-      reviewsQuery.refetch();
+      // Invalidate queries only for the degree forum from which
+      // the degree was deleted from.
+      utils.forum.getAllReviews.invalidate({ degreeId: degree as string });
       toast.success("Review successfully deleted!", {
         position: "bottom-center",
         className: "text-xl",
