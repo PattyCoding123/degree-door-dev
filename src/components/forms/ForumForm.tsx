@@ -79,8 +79,8 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
           </label>
           <textarea
             id="pros-input"
-            className="text-md mt-2 block h-32 max-h-fit w-full flex-1 rounded-md border-gray-700
-            p-4 outline-none duration-200 hover:shadow-xl"
+            className="text-md mt-2 block h-32 max-h-fit w-full flex-1 resize-none rounded-md
+            border-gray-700 p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you enjoy about this particular course? (If nothing, you can put N/A)"
             disabled={isSubmitting}
             {...register("pros", { required: "This field is required" })}
@@ -96,8 +96,8 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
           </label>
           <textarea
             id="cons-input"
-            className="text-md mt-2 block h-32 max-h-fit w-full flex-1 rounded-md border-gray-700
-            p-4 outline-none duration-200 hover:shadow-xl"
+            className="text-md mt-2 block h-32 max-h-fit w-full flex-1 resize-none rounded-md
+            border-gray-700 p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you dislike about this particular course? (If nothing, you can put N/A)"
             {...register("cons", { required: "This field is required" })}
             disabled={isSubmitting}
