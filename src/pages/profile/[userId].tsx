@@ -6,6 +6,7 @@ import Head from "next/head";
 import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 import HomeNavbar from "../../components/navigation/HomeNavbar";
+import Footer from "../../components/Footer";
 
 const Profile: NextPage = () => {
   return (
@@ -15,7 +16,10 @@ const Profile: NextPage = () => {
         <meta name="description" content="The Degree Door profile page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen w-screen overflow-y-auto bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <div
+        className="min-w-screen relative min-h-screen
+        bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
+      >
         <HomeNavbar />
         <main className="p-8">
           <section
@@ -101,6 +105,7 @@ const Profile: NextPage = () => {
           </section>
           <AuthShowcase />
         </main>
+        <Footer />
       </div>
     </>
   );
