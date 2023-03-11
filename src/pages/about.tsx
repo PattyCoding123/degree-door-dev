@@ -6,7 +6,7 @@ const About: NextPage = () => {
   return (
     <Layout
       title="Degree Door About Page"
-      description="The Degree Door About Page"
+      description="The Degree Door about page"
     >
       <main className="relative flex h-full w-full flex-1 flex-col">
         <div
