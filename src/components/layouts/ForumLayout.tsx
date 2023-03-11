@@ -9,7 +9,7 @@ interface ForumLayoutProps extends LayoutProps {
   active: "overview" | "reviews" | "write";
 }
 
-const Layout: React.FC<ForumLayoutProps> = ({
+const ForumLayout: React.FC<ForumLayoutProps> = ({
   title,
   description,
   children,
@@ -47,4 +47,4 @@ const Layout: React.FC<ForumLayoutProps> = ({
   );
 };
 
-export default Layout;
+export default ForumLayout;
