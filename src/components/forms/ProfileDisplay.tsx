@@ -1,11 +1,11 @@
-interface ProfileFormProps {
+interface ProfileDisplayProps {
   displayName?: string | null;
   email?: string | null;
   status?: string | null;
   about?: string | null;
 }
 
-const ProfileForm: React.FC<ProfileFormProps> = ({
+const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
   displayName,
   email,
   status,
@@ -83,4 +83,4 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   );
 };
 
-export default ProfileForm;
+export default ProfileDisplay;
