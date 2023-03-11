@@ -39,6 +39,7 @@ const Profile: NextPage = () => {
                 alt="profile avatar"
                 width={96}
                 height={96}
+                priority={true}
               />
               <h1 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                 First Name Last Name
@@ -52,9 +53,14 @@ const Profile: NextPage = () => {
                       Display Name
                     </label>
                     <input
+                      readOnly={true}
                       type="text"
                       name="displayName"
-                      value="displayName"
+                      value={
+                        sessionData?.user?.name
+                          ? `${sessionData.user?.name}`
+                          : "Degree Door User"
+                      }
                       id="displayName"
                       className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
                     duration-300 hover:shadow-2xl"
@@ -65,9 +71,14 @@ const Profile: NextPage = () => {
                       Email Address
                     </label>
                     <input
+                      readOnly={true}
                       type="text"
                       name="email"
-                      value="email"
+                      value={
+                        sessionData?.user?.email
+                          ? `${sessionData.user?.email}`
+                          : "..."
+                      }
                       id="email"
                       className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
                     duration-300 hover:shadow-2xl"
@@ -99,11 +110,13 @@ const Profile: NextPage = () => {
                     About Me
                   </label>
                   <textarea
+                    readOnly={true}
                     name="about"
                     value="about"
                     id="about"
                     className="mt-2 h-40 w-full resize-none rounded-lg 
-                  border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                    border border-gray-400 bg-slate-50 p-2 text-gray-900 
+                    outline-none duration-300 hover:shadow-2xl"
                   />
                 </div>
               </form>
