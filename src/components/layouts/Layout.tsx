@@ -1,5 +1,6 @@
 import Head from "next/head";
 import HomeNavbar from "../navigation/HomeNavbar";
+import Footer from "../Footer";
 
 export interface LayoutProps {
   title: string;
@@ -21,6 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
      from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit-small text-white md:pb-footer-fit"
       >
         {children}
+        <Footer />
       </div>
     </>
   );

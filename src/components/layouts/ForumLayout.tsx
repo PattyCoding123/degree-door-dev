@@ -1,7 +1,8 @@
 import Head from "next/head";
-import { LayoutProps } from "./Layout";
-import DegreeNavbar from "../navigation/DegreeNavbar";
 
+import { type LayoutProps } from "./Layout";
+import DegreeNavbar from "../navigation/DegreeNavbar";
+import Footer from "../Footer";
 interface ForumLayoutProps extends LayoutProps {
   degreeId?: string;
   degreeName?: string;
@@ -35,6 +36,7 @@ const Layout: React.FC<ForumLayoutProps> = ({
      from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit-small text-white md:pb-footer-fit"
       >
         {children}
+        <Footer />
       </div>
     </>
   );
