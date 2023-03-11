@@ -4,8 +4,8 @@ import Image from "next/image";
 import Head from "next/head";
 
 import { trpc } from "../../utils/trpc";
-import HomeNavbar from "../../components/navigation/HomeNavbar";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
+import HomeNavbar from "../../components/navigation/HomeNavbar";
 
 const Profile: NextPage = () => {
   return (
@@ -133,7 +133,7 @@ const AuthShowcase: React.FC = () => {
 export default Profile;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const sessionData = await getServerAuthSession(context); // Get Session
+  const session = await getServerAuthSession(context); // Get Session
   const { userId } = context.query;
 
   if (typeof userId !== "string") {
@@ -146,7 +146,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   // Redirect to home page if session doesn't exist
-  if (!sessionData || sessionData.user?.id !== userId) {
+  if (!session || session.user?.id !== userId) {
     return {
       redirect: {
         destination: "/",
@@ -156,6 +156,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    props: {},
+    props: { session },
   };
 };
