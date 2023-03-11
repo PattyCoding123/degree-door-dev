@@ -6,6 +6,7 @@ import Head from "next/head";
 import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
 import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
+import Footer from "../../../components/Footer";
 
 const Write: NextPage = () => {
   const router = useRouter();
@@ -39,7 +40,10 @@ const Write: NextPage = () => {
         <meta name="description" content="Degree write page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <div
+        className="max-w-screen relative min-h-screen bg-gradient-to-r
+        from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
+      >
         {degreeQuery.isSuccess && (
           <>
             <Toaster />
@@ -58,6 +62,7 @@ const Write: NextPage = () => {
             </main>
           </>
         )}
+        <Footer />
       </div>
     </>
   );
