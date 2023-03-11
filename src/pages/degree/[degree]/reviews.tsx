@@ -6,6 +6,7 @@ import Head from "next/head";
 import { trpc } from "../../../utils/trpc";
 import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 import Review from "../../../components/Review";
+import Footer from "../../../components/Footer";
 
 const ReviewsPage: NextPage = () => {
   const router = useRouter();
@@ -68,7 +69,10 @@ const ReviewsPage: NextPage = () => {
         <meta name="description" content="Degree reviews page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="min-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <div
+        className="min-w-screen relative min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500
+        pb-footer-fit"
+      >
         {degreeQuery.isSuccess && (
           <>
             <Toaster />
@@ -103,6 +107,7 @@ const ReviewsPage: NextPage = () => {
             </main>
           </>
         )}
+        <Footer />
       </div>
     </>
   );
