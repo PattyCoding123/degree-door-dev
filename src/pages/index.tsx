@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout title="Degree Door" description="The Degree Door home page">
-      <main>
+      <main className="text-white">
         <HeroBanner />
         <section>
           <Carousel />
