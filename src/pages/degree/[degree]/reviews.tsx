@@ -68,7 +68,7 @@ const ReviewsPage: NextPage = () => {
         <meta name="description" content="Degree reviews page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
+      <div className="min-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
         {degreeQuery.isSuccess && (
           <>
             <Toaster />
