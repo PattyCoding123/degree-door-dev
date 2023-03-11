@@ -31,6 +31,9 @@ const Layout: React.FC<ForumLayoutProps> = ({
           active={active}
         />
       )}
+      {/* Use flex and flex-col to define available space for
+      main tag since we don't want to include the space taken 
+      by bottom padding and footer. */}
       <div
         id="content-container"
         className="min-w-screen relative flex min-h-screen

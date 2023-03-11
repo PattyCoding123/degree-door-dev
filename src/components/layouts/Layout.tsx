@@ -17,6 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeNavbar />
+      {/* Use flex and flex-col to define available space for
+      main tag since we don't want to include the space taken 
+      by bottom padding and footer. */}
       <div
         id="content-container"
         className="min-w-screen relative flex min-h-screen
