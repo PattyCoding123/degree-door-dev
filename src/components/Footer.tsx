@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           </Link>
         </section>
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
-          <section>
+          <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
               Resources
             </h2>
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
             </ul>
-          </section>
+          </div>
         </div>
       </div>
       <div className="sm:flex sm:items-center sm:justify-between">
