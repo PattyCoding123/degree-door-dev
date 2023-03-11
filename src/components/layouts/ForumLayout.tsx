@@ -32,8 +32,10 @@ const Layout: React.FC<ForumLayoutProps> = ({
         />
       )}
       <div
-        className="min-w-screen relative min-h-screen bg-gradient-to-r
-     from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit-small text-white md:pb-footer-fit"
+        id="content-container"
+        className="min-w-screen relative flex min-h-screen
+        flex-col bg-gradient-to-r from-rose-400 via-fuchsia-500 
+        to-indigo-500 pb-footer-fit-small md:pb-footer-fit"
       >
         {children}
         <Footer />
