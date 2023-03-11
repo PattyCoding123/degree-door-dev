@@ -1,12 +1,10 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
-import Head from "next/head";
 
 import { trpc } from "../../../utils/trpc";
-import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
 import Review from "../../../components/Review";
-import Footer from "../../../components/Footer";
+import ForumLayout from "../../../components/layouts/ForumLayout";
 
 const ReviewsPage: NextPage = () => {
   const router = useRouter();
@@ -63,57 +61,43 @@ const ReviewsPage: NextPage = () => {
   });
 
   return (
-    <>
-      <Head>
-        <title>Degree Door Reviews</title>
-        <meta name="description" content="Degree reviews page" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <ForumLayout
+      title="Degree Door Forum Reviews"
+      description="Degree Door forum reviews page"
+      degreeId={degreeQuery.data?.id}
+      degreeName={degreeQuery.data?.name}
+      active="reviews"
+    >
+      <Toaster />
       {degreeQuery.isSuccess && (
         <>
-          <DegreeNavbar
-            active="reviews"
-            degreeName={degreeQuery.data.name}
-            degreeId={degreeQuery.data.id}
-          />
+          <main className="flex flex-col">
+            <div
+              className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
+                border bg-gradient-to-b from-rose-100 to-teal-100 shadow-2xl"
+            >
+              <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
+                <h1 className="text-4xl font-bold md:text-6xl">
+                  {degreeQuery.data.name}
+                </h1>
+                <p className="text-xl md:text-3xl">Reviews</p>
+              </section>
+            </div>
+            <section className="my-8 flex flex-col items-center justify-center gap-8 align-middle">
+              {reviewsQuery.data?.map((review) => (
+                <Review
+                  key={review.id}
+                  reviewPost={review}
+                  handleClick={async (reviewId: string) => {
+                    await deleteReview.mutateAsync({ reviewId: reviewId });
+                  }}
+                />
+              ))}
+            </section>
+          </main>
         </>
       )}
-      <div
-        className="min-w-screen relative min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500
-        pb-footer-fit-small md:pb-footer-fit"
-      >
-        <Toaster />
-        {degreeQuery.isSuccess && (
-          <>
-            <main className="flex flex-col">
-              <div
-                className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
-                border bg-gradient-to-b from-rose-100 to-teal-100 shadow-2xl"
-              >
-                <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
-                  <h1 className="text-4xl font-bold md:text-6xl">
-                    {degreeQuery.data.name}
-                  </h1>
-                  <p className="text-xl md:text-3xl">Reviews</p>
-                </section>
-              </div>
-              <section className="my-8 flex flex-col items-center justify-center gap-8 align-middle">
-                {reviewsQuery.data?.map((review) => (
-                  <Review
-                    key={review.id}
-                    reviewPost={review}
-                    handleClick={async (reviewId: string) => {
-                      await deleteReview.mutateAsync({ reviewId: reviewId });
-                    }}
-                  />
-                ))}
-              </section>
-            </main>
-          </>
-        )}
-        <Footer />
-      </div>
-    </>
+    </ForumLayout>
   );
 };
 
