@@ -39,7 +39,7 @@ const DegreeHome: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className="max-w-screen relative min-h-screen bg-gradient-to-r 
+        className="min-w-screen relative min-h-screen bg-gradient-to-r 
       from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
       >
         {degreeQuery.isSuccess && (
