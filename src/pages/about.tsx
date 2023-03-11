@@ -12,6 +12,8 @@ const About: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeNavbar />
+      {/* In About Page content div, use flex to center
+      the about description. */}
       <div
         className="min-w-screen relative flex min-h-screen flex-col
         items-center justify-center bg-gradient-to-r from-rose-400
