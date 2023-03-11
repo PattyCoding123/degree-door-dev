@@ -18,11 +18,11 @@ const Profile: NextPage = () => {
         <meta name="description" content="The Degree Door profile page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <HomeNavbar />
       <div
         className="min-w-screen relative min-h-screen
         bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
       >
-        <HomeNavbar />
         <main className="p-8">
           <section
             className="mx-auto flex w-1/2 flex-col items-center justify-center

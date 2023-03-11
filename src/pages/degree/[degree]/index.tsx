@@ -38,17 +38,21 @@ const DegreeHome: NextPage = () => {
         <meta name="description" content="Degree Index Page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {degreeQuery.isSuccess && (
+        <>
+          <DegreeNavbar
+            active="overview"
+            degreeName={degreeQuery.data.name}
+            degreeId={degreeQuery.data.id}
+          />
+        </>
+      )}
       <div
         className="min-w-screen relative min-h-screen bg-gradient-to-r 
       from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
       >
         {degreeQuery.isSuccess && (
           <>
-            <DegreeNavbar
-              active="overview"
-              degreeName={degreeQuery.data.name}
-              degreeId={degreeQuery.data.id}
-            />
             <main className="p-8">
               <div
                 className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 

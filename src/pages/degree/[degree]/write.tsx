@@ -40,18 +40,22 @@ const Write: NextPage = () => {
         <meta name="description" content="Degree write page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {degreeQuery.isSuccess && (
+        <>
+          <DegreeNavbar
+            active="write"
+            degreeName={degreeQuery.data.name}
+            degreeId={degreeQuery.data.id}
+          />
+        </>
+      )}
       <div
         className="min-w-screen relative min-h-screen bg-gradient-to-r
         from-rose-400 via-fuchsia-500 to-indigo-500 pb-footer-fit"
       >
+        <Toaster />
         {degreeQuery.isSuccess && (
           <>
-            <Toaster />
-            <DegreeNavbar
-              active="write"
-              degreeName={degreeQuery.data.name}
-              degreeId={degreeQuery.data.id}
-            />
             <main>
               <section>
                 <h1 className="p-8 text-center text-4xl text-white">
