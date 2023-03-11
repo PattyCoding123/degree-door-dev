@@ -1,8 +1,8 @@
 interface ProfileFormProps {
-  displayName?: string;
-  email?: string;
-  status?: string;
-  about?: string;
+  displayName?: string | null;
+  email?: string | null;
+  status?: string | null;
+  about?: string | null;
 }
 
 const ProfileForm: React.FC<ProfileFormProps> = ({
