@@ -10,7 +10,7 @@ module.exports = {
         'tokyo-night': '#ffffff',
       },
       padding: {
-        "footer-fit": "16rem",
+        "footer-fit": "168px",
       }
     },
   },
