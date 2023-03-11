@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/about">
                   <p className="cursor-pointer hover:underline">About Us</p>
                 </Link>
               </li>
@@ -40,6 +40,7 @@ const Footer: React.FC = () => {
           © 2023 Degree Door™ All Rights Reserved.
         </span>
         <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+          {/* Use pure HTML <a> tag for external links */}
           <a
             href="https://github.com/PattyCoding123/degree-door-dev"
             className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
