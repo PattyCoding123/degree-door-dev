@@ -9,6 +9,8 @@ import HomeNavbar from "../../components/navigation/HomeNavbar";
 import Footer from "../../components/Footer";
 
 const Profile: NextPage = () => {
+  const { data: sessionData } = useSession();
+
   return (
     <>
       <Head>
@@ -29,7 +31,11 @@ const Profile: NextPage = () => {
             <div className="flex flex-col items-center justify-center">
               <Image
                 className="mb-3 rounded-full shadow-lg"
-                src="/avatar.png"
+                src={
+                  sessionData?.user?.image
+                    ? `${sessionData.user?.image}`
+                    : "/avatar"
+                }
                 alt="profile avatar"
                 width={96}
                 height={96}
