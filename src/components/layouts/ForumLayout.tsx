@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { type LayoutProps } from "./Layout";
 import DegreeNavbar from "../navigation/DegreeNavbar";
-import Footer from "../Footer";
+import Footer from "../navigation/Footer";
 interface ForumLayoutProps extends LayoutProps {
   degreeId?: string;
   degreeName?: string;

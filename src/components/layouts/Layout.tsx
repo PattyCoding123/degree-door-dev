@@ -1,6 +1,6 @@
 import Head from "next/head";
 import HomeNavbar from "../navigation/HomeNavbar";
-import Footer from "../Footer";
+import Footer from "../navigation/Footer";
 
 export interface LayoutProps {
   title: string;
