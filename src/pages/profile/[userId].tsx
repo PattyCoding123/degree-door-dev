@@ -45,7 +45,10 @@ const Profile: NextPage = () => {
             email={sessionData?.user?.email}
           />
         </section>
-        <EditProfileDialog show={showForm} />
+        <EditProfileDialog
+          show={showForm}
+          closeModal={() => setShowForm(false)}
+        />
         <AuthShowcase />
       </main>
     </Layout>
