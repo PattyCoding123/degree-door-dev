@@ -1,14 +1,17 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useSession, signOut, signIn } from "next-auth/react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
+import EditProfileDialog from "../../components/modals/dialogs/EditProfileDialog";
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 
 const Profile: NextPage = () => {
   const { data: sessionData } = useSession();
+  const [showForm, setShowForm] = useState(true);
 
   return (
     <Layout
@@ -42,6 +45,7 @@ const Profile: NextPage = () => {
             email={sessionData?.user?.email}
           />
         </section>
+        <EditProfileDialog show={showForm} />
         <AuthShowcase />
       </main>
     </Layout>
