@@ -1,4 +1,4 @@
-interface ProfileDisplayProps {
+export interface ProfileDisplayProps {
   displayName?: string | null;
   email?: string | null;
   status?: string | null;
