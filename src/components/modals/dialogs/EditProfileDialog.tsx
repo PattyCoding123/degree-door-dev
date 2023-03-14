@@ -130,19 +130,19 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   );
 };
 
-const ErrorMessage = (props: { message: string | undefined }) => {
-  const { message } = props;
-  return (
-    <div
-      className="absolute mt-2 flex items-center gap-2 text-sm text-red-700"
-      role="alert"
-    >
-      <div className="text-lg">
-        <BiError />
-      </div>
-      <p className="font-medium">{message}</p>
-    </div>
-  );
-};
+// const ErrorMessage = (props: { message: string | undefined }) => {
+//   const { message } = props;
+//   return (
+//     <div
+//       className="absolute mt-2 flex items-center gap-2 text-sm text-red-700"
+//       role="alert"
+//     >
+//       <div className="text-lg">
+//         <BiError />
+//       </div>
+//       <p className="font-medium">{message}</p>
+//     </div>
+//   );
+// };
 
 export default EditProfileDialog;
