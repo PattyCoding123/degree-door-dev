@@ -1,6 +1,7 @@
+import { type ProfileDisplayProps } from "../../forms/ProfileDisplay";
 import Modal from "../Modal";
 
-interface EditProfileDialogProps {
+interface EditProfileDialogProps extends ProfileDisplayProps {
   handleOk: () => void;
   handleCancel: () => void;
   show: boolean;
