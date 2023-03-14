@@ -1,21 +1,42 @@
+import { useForm } from "react-hook-form";
+import { BiError } from "react-icons/bi";
+
 import useClickOutside from "../../../utils/useOutsideClick";
 import { Button } from "../../Buttons";
 import { type ProfileDisplayProps } from "../../forms/ProfileDisplay";
 import Modal from "../Modal";
 
 interface EditProfileDialogProps extends ProfileDisplayProps {
-  handleOk?: () => void;
-  handleCancel?: () => void;
+  closeModal: () => void;
   show: boolean;
 }
 
 const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
-  handleOk,
-  handleCancel,
   show,
+  closeModal,
+  displayName,
+  email,
+  status,
+  about,
 }) => {
-  const ref = useClickOutside(() => {
-    return;
+  const ref = useClickOutside(() => closeModal());
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ProfileDisplayProps>({
+    defaultValues: {
+      displayName: displayName ?? "",
+      email: email ?? "",
+      status: status ?? "Upcoming Student",
+      about: about ?? "",
+    },
+  });
+
+  const onSubmit2 = handleSubmit(async (data) => {
+    //
   });
 
   return (
@@ -27,20 +48,22 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
               ref={ref}
               className="flex h-full w-full flex-col items-center justify-center"
             >
-              <form className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-6 shadow-2xl">
+              <form
+                className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-6 shadow-2xl"
+                onSubmit={onSubmit2}
+              >
                 <div className="col-span-2 mb-4 grid h-full w-full grid-cols-2">
                   <div className="col-span-1 px-4">
                     <label className="font-bold text-gray-900" htmlFor="name">
                       Display Name
                     </label>
                     <input
-                      readOnly={true}
                       type="text"
-                      name="displayName"
-                      // value={displayName ? `${displayName}` : "Degree Door User"}
                       id="displayName"
-                      className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
-                    duration-300 hover:shadow-2xl"
+                      className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2
+                      text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                      disabled={isSubmitting}
+                      {...register("displayName")}
                     />
                   </div>
                   <div className="col-span-1 px-4">
@@ -51,9 +74,10 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                       readOnly={true}
                       type="text"
                       name="email"
-                      // value={email ? `${email}` : "..."}
                       id="email"
-                      className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                      className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 
+                      text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                      disabled={true}
                     />
                   </div>
                 </div>
@@ -63,8 +87,10 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                   </label>
                   <select
                     id="status"
-                    name="status"
-                    className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                    className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 
+                    text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                    disabled={isSubmitting}
+                    {...register("status")}
                   >
                     <option value="Upcoming Student">Upcoming Student</option>
                     <option value="Freshman">Freshman</option>
@@ -81,26 +107,17 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     About Me
                   </label>
                   <textarea
-                    readOnly={true}
-                    name="about"
-                    value="about"
                     id="about"
-                    className="mt-2 min-h-[10rem] w-full resize-none rounded-lg 
-                border border-gray-400 bg-slate-50 p-2 text-gray-900 
-                outline-none duration-300 hover:shadow-2xl"
+                    className="mt-2 min-h-[10rem] w-full resize-none rounded-lg border border-gray-400 
+                    bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
+                    {...register("about")}
                   />
                 </div>
                 <div className="col-span-2 mt-2 flex justify-end gap-4 px-4">
-                  <Button
-                    type="button"
-                    // disabled={isSubmitting}
-                  >
+                  <Button type="button" disabled={isSubmitting}>
                     Cancel
                   </Button>
-                  <Button
-                    type="submit"
-                    // disabled={isSubmitting}
-                  >
+                  <Button type="submit" disabled={isSubmitting}>
                     Submit
                   </Button>
                 </div>
@@ -110,6 +127,21 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
         </Modal>
       )}
     </>
+  );
+};
+
+const ErrorMessage = (props: { message: string | undefined }) => {
+  const { message } = props;
+  return (
+    <div
+      className="absolute mt-2 flex items-center gap-2 text-sm text-red-700"
+      role="alert"
+    >
+      <div className="text-lg">
+        <BiError />
+      </div>
+      <p className="font-medium">{message}</p>
+    </div>
   );
 };
 
