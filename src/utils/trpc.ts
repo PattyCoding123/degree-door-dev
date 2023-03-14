@@ -1,5 +1,6 @@
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
+import { type NextPageContext } from "next";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import superjson from "superjson";
 
@@ -11,7 +12,11 @@ const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 };
 
-export const trpc = createTRPCNext<AppRouter>({
+export const trpc = createTRPCNext<
+  AppRouter,
+  NextPageContext,
+  "ExperimentalSuspense"
+>({
   config() {
     return {
       transformer: superjson,
