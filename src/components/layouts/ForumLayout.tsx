@@ -24,13 +24,11 @@ const ForumLayout: React.FC<ForumLayoutProps> = ({
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {degreeId && degreeName && (
-        <DegreeNavbar
-          degreeId={degreeId}
-          degreeName={degreeName}
-          active={active}
-        />
-      )}
+      <DegreeNavbar
+        degreeId={degreeId}
+        degreeName={degreeName}
+        active={active}
+      />
       {/* Use flex and flex-col to define available space for
       main tag since we don't want to include the space taken 
       by bottom padding and footer. */}
