@@ -31,7 +31,7 @@ const Profile: NextPage = () => {
       <main className="p-8">
         <section
           className="mx-auto flex w-1/2 flex-col items-center justify-center
-          rounded-md bg-gradient-to-b from-rose-100 to-teal-100 p-8"
+          rounded-md bg-gray-200 p-8"
         >
           <div className="flex flex-col items-center justify-center">
             {/* Render the user's avatar image */}
