@@ -12,7 +12,7 @@ const About: NextPage = () => {
       <main className="relative flex h-full w-full flex-1 flex-col">
         <div
           className="my-auto flex h-fit w-3/5 flex-col gap-4 self-center rounded-lg 
-            bg-gradient-to-b from-rose-100 to-teal-100 p-8"
+            bg-primary p-8"
         >
           <h1 className="text-center text-5xl font-bold">Degree Door</h1>
           <p className="text-lg">
