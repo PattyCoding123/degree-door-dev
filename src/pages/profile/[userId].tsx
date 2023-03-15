@@ -13,6 +13,13 @@ const Profile: NextPage = () => {
   const { data: sessionData } = useSession();
   const [showForm, setShowForm] = useState(true);
 
+  const userProfile = {
+    displayName: sessionData?.user?.name,
+    email: sessionData?.user?.email,
+    status: "Upcoming Student",
+    about: "...",
+  };
+
   return (
     <Layout
       title="Degree Door Profile"
@@ -41,15 +48,14 @@ const Profile: NextPage = () => {
             </h1>
           </div>
           <ProfileDisplay
-            displayName={sessionData?.user?.name}
-            email={sessionData?.user?.email}
-            about={"Example About"}
-            status={"Upcoming Student"}
+            userProfile={userProfile}
+            openEditForm={() => setShowForm(true)}
           />
         </section>
         <EditProfileDialog
+          userProfile={userProfile}
           show={showForm}
-          closeModal={() => setShowForm(false)}
+          closeEditForm={() => setShowForm(false)}
         />
         <AuthShowcase />
       </main>
