@@ -1,8 +1,24 @@
+import clsx from "clsx";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const GeneralLoadingIndicator: React.FC = () => {
+interface GeneralLoadingIndicatorProps {
+  size: "small" | "medium" | "large" | "extra-large";
+}
+
+const sizes = new Map<string, string>([
+  ["small", "text-md"],
+  ["medium", "text-xl"],
+  ["large", "text-3xl"],
+  ["extra-large", "text-6xl"],
+]);
+
+const GeneralLoadingIndicator: React.FC<GeneralLoadingIndicatorProps> = ({
+  size,
+}) => {
   return (
-    <AiOutlineLoading3Quarters className="animate-spin text-5xl font-bold" />
+    <AiOutlineLoading3Quarters
+      className={`animate-spin font-bold ${sizes.get(size)}`}
+    />
   );
 };
 
