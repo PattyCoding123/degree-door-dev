@@ -21,12 +21,13 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
             </label>
             <input
               readOnly={true}
+              disabled={true}
               type="text"
               name="displayName"
-              value={displayName ? `${displayName}` : "Degree Door User"}
+              value={displayName ?? "Degree Door User"}
               id="displayName"
-              className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
-        duration-300 hover:shadow-2xl"
+              className="mt-2 w-full rounded-lg border border-gray-400 
+              bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
             />
           </div>
           <div className="col-span-1 px-4">
@@ -35,12 +36,13 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
             </label>
             <input
               readOnly={true}
+              disabled={true}
               type="text"
               name="email"
-              value={email ? `${email}` : "..."}
+              value={email ?? ""}
               id="email"
-              className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
-        duration-300 hover:shadow-2xl"
+              className="mt-2 w-full rounded-lg border border-gray-400 
+              bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
             />
           </div>
         </div>
@@ -48,30 +50,26 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
           <label htmlFor="status" className="font-bold text-gray-900">
             Status
           </label>
-          <select
-            id="status"
-            name="status"
-            className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 text-gray-900 outline-none
-      duration-300 hover:shadow-2xl"
-          >
-            <option value="Upcoming Student">Upcoming Student</option>
-            <option value="Freshman">Freshman</option>
-            <option value="Sophomore">Sophomore</option>
-            <option value="Junior">Junior</option>
-            <option value="Senior">Senior</option>
-            <option value="Graduate">Graduate</option>
-            <option value="Alumni">Alumni</option>
-            <option value="Professor">Professor</option>
-          </select>
+          <input
+            disabled={true}
+            readOnly={true}
+            type="text"
+            name="email"
+            value={status ?? "Upcoming Student"}
+            id="email"
+            className="mt-2 w-full rounded-lg border border-gray-400 
+            bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
+          />
         </div>
         <div className="col-span-2 px-4">
           <label htmlFor="about" className="font-bold text-gray-900">
             About Me
           </label>
           <textarea
+            disabled={true}
             readOnly={true}
+            value={about ?? ""}
             name="about"
-            value="about"
             id="about"
             className="mt-2 h-40 w-full resize-none rounded-lg 
             border border-gray-400 bg-slate-50 p-2 text-gray-900 
