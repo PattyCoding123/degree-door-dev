@@ -22,7 +22,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<ProfileDisplayProps>({
     defaultValues: {
       displayName: displayName ?? "",
