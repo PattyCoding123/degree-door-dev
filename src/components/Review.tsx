@@ -1,42 +1,34 @@
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { useState, type FC } from "react";
 
 import { type RouterOutputs } from "../utils/trpc";
-import ConfirmationDialog from "./modals/dialogs/ConfirmationDialog";
 
 interface ReviewProps {
-  reviewPost: RouterOutputs["forum"]["getAllReviews"][0];
-  handleClick: (reviewId: string) => void;
+  reviewPost: RouterOutputs["forum"]["getAllReviews"][0]; // Single review from procedure
+  handleClick: () => void; // Function that sets the selectedId of review page and shows dialog.
 }
 
-const Review: FC<ReviewProps> = ({ reviewPost, handleClick }) => {
-  const [showDialog, setShowDialog] = useState(false);
+/*
+  The Review component will render an individual review for a specific degree page.
+*/
+const Review: React.FC<ReviewProps> = ({ reviewPost, handleClick }) => {
   const { data: sessionData } = useSession();
-  const { course, pros, cons, id, userId } = reviewPost;
+  const { course, pros, cons, id, userId } = reviewPost; // Destructure review post
 
   return (
     <>
-      <ConfirmationDialog
-        header="Delete your Review"
-        content="Are you sure you want to delete this review? It cannot be recovered after."
-        handleOk={() => {
-          handleClick(id);
-          setShowDialog(false);
-        }}
-        handleCancel={() => setShowDialog(false)}
-        show={showDialog}
-        okBtnText="Delete"
-      />
       <article className="flex w-2/3 flex-col gap-4 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
         <div className="flex items-center justify-between">
           <h1 className="text-center text-lg font-bold">{course}</h1>
-          {sessionData?.user?.id === userId && (
-            <button type="button" onClick={() => setShowDialog(true)}>
-              <BsFillTrashFill id={id} className="cursor-pointer text-lg" />
-            </button>
-          )}
+          {
+            // ! Only render the delete button if the user wrote the review
+            sessionData?.user?.id === userId && (
+              <button type="button" onClick={handleClick}>
+                <BsFillTrashFill id={id} className="cursor-pointer text-lg" />
+              </button>
+            )
+          }
         </div>
         <section className="flex">
           <div className="flex w-16 items-center justify-center rounded border-2 border-green-700 bg-white p-2">
