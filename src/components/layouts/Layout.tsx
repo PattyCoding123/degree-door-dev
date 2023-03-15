@@ -14,7 +14,7 @@ export interface LayoutProps {
 
   Each page wrapped with this component will render a HomeNavber and a
   content container div that contains a Footer which will always render
-  below the content.
+  below
 */
 const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
   return (
@@ -31,8 +31,8 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
       <div
         id="content-container"
         className="min-w-screen relative flex min-h-screen
-        flex-col bg-gradient-to-r from-rose-400 via-fuchsia-500 
-        to-indigo-500 pb-footer-fit-small md:pb-footer-fit"
+        flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
+      from-green-500 to-green-700 pb-footer-fit-small md:pb-footer-fit"
       >
         {children}
         <Footer />
