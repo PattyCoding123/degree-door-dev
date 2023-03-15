@@ -1,6 +1,7 @@
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
+[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -37,6 +38,7 @@
     </li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
     <li><a href="#authors">Authors</a></li>
   </ol>
 </details>
@@ -91,6 +93,13 @@ $ yarn
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- Authors -->
 
 ## Authors
@@ -105,3 +114,5 @@ $ yarn
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
+[license-shield]: https://img.shields.io/github/license/PattyCoding123/degree-door-dev?color=%23808080&style=for-the-badge
+[license-url]: https://github.com/PattyCoding123/degree-door-dev/blob/main/LICENSE.md
