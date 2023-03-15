@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { BiError } from "react-icons/bi";
 
 import useClickOutside from "../../../utils/useOutsideClick";
 import { Button } from "../../Buttons";
@@ -26,7 +25,14 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ProfileDisplayProps>();
+  } = useForm<ProfileDisplayProps>({
+    defaultValues: {
+      displayName: displayName ?? "",
+      email: email ?? "",
+      status: status ?? "Upcoming Student",
+      about: about ?? "",
+    },
+  });
 
   const onSubmit2 = handleSubmit(async (data) => {
     //
