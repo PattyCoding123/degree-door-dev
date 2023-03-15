@@ -43,6 +43,8 @@ const Profile: NextPage = () => {
           <ProfileDisplay
             displayName={sessionData?.user?.name}
             email={sessionData?.user?.email}
+            about={"Example About"}
+            status={"Upcoming Student"}
           />
         </section>
         <EditProfileDialog
