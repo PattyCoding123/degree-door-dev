@@ -80,8 +80,9 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     readOnly={true}
                     type="text"
                     name="email"
+                    value={email ?? ""}
                     id="email"
-                    className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 
+                    className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-200 p-2 
                       text-gray-900 outline-none duration-300 hover:shadow-2xl"
                     disabled={true}
                   />
