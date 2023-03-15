@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         <section className="mt-10">
           <div className="flex h-4/5 flex-col items-center justify-center">
             <h2 className="mb-4 text-2xl font-semibold">Favorited Degrees</h2>
-            {favorites.isLoading && (
+            {favorites.isFetching && (
               <GeneralLoadingIndicator size="extra-large" />
             )}
             {favorites.data && (
