@@ -29,18 +29,26 @@ const Home: NextPage = () => {
             {favorites.isFetching && (
               <GeneralLoadingIndicator size="extra-large" />
             )}
-            {favorites.data && (
-              <>
-                <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:flex-row">
-                  {favorites.data.map((favorite) => (
-                    <FavoriteDegree
-                      key={favorite.degreeId}
-                      degreeId={favorite.degreeId}
-                      degreeName={favorite.degree.name}
-                    />
-                  ))}
-                </div>
-              </>
+            {sessionData ? (
+              favorites.data ? (
+                <>
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:flex-row">
+                    {favorites.data.map((favorite) => (
+                      <FavoriteDegree
+                        key={favorite.degreeId}
+                        degreeId={favorite.degreeId}
+                        degreeName={favorite.degree.name}
+                      />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p className="mt-4 text-xl">You have no favorited degrees</p>
+              )
+            ) : (
+              <p className="mt-4 text-xl">
+                Log in to start favoriting degrees!
+              </p>
             )}
           </div>
         </section>
