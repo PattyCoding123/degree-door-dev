@@ -5,12 +5,10 @@ import { trpc } from "../utils/trpc";
 
 interface FavoriteProps {
   degreeId: string;
-  degreeName: string;
 }
 
 const FavoriteIndicator: React.FC<FavoriteProps> = ({
   degreeId,
-  degreeName,
 }) => {
   const { data: sessionData } = useSession();
   const favoriteQuery = trpc.forum.checkIfFavorite.useQuery(
@@ -52,7 +50,6 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({
             onClick={async () =>
               addFavorite.mutateAsync({
                 degreeId: degreeId,
-                degreeName: degreeName,
               })
             }
           />

@@ -1,5 +1,3 @@
-import { Button } from "./Buttons";
-
 const HeroBanner: React.FC = () => {
   return (
     <header
@@ -13,7 +11,6 @@ const HeroBanner: React.FC = () => {
         degrees, and work loads in a forum like style allowing access to
         important information.
       </p>
-      <Button type="button">Learn More</Button>
     </header>
   );
 };

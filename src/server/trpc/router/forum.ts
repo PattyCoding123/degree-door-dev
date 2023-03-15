@@ -77,10 +77,8 @@ export const forumRouter = router({
   checkIfFavorite: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(async ({ ctx, input }) => {
-      /*
-       * Prisma API has a special syntax when querying object by a
-       * composite key!
-       */
+      // Prisma API has a special syntax when querying object by a
+      // composite key!
       const favoriteDegree = await ctx.prisma.favorites.findUnique({
         where: {
           userId_degreeId: {
@@ -110,7 +108,7 @@ export const forumRouter = router({
       return degree;
     }),
   favoriteDegree: protectedProcedure
-    .input(z.object({ degreeId: z.string(), degreeName: z.string() }))
+    .input(z.object({ degreeId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const userId = ctx.session.user.id;
       const prismaDb = ctx.prisma;
@@ -119,7 +117,6 @@ export const forumRouter = router({
         data: {
           userId: userId,
           degreeId: input.degreeId,
-          degreeName: input.degreeName,
         },
       });
 
@@ -128,6 +125,16 @@ export const forumRouter = router({
   getFavorites: protectedProcedure.query(async ({ ctx }) => {
     const favoriteDegrees = await ctx.prisma.favorites.findMany({
       where: { userId: ctx.session.user.id },
+      // The following property is required for Prisma's relation query.
+      // which is the ability to query relations between two or more models.
+      // See documentation:
+      // https://www.prisma.io/docs/concepts/components/prisma-client/relation-queries
+
+      include: {
+        degree: {
+          select: { name: true },
+        },
+      },
     });
 
     return favoriteDegrees;

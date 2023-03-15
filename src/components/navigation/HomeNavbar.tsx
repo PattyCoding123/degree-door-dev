@@ -3,11 +3,11 @@ import Link from "next/link";
 import { type FC } from "react";
 
 import Searchbar from "../Searchbar";
-import Dropdown from "../Dropdown";
+import Dropdown from "../menus/Dropdown";
 
 const HomeNavbar: FC = () => {
   return (
-    <nav className="max-w-screen bg-gray-900">
+    <nav className="w-full bg-gray-900">
       <div className="flex w-full flex-col items-center gap-8 px-6 py-4 md:grid md:grid-cols-3">
         <Link href="/">
           <div className="navbar-brand col-span-1 flex cursor-pointer">

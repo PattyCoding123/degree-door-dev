@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 
 /*
-  * useClickOutside hook returns a ref which you can attach to a DOM element in your component. 
-  * When someone clicks or touches outside of the element, the callback function will be triggered.
-
+ * useClickOutside hook returns a ref which you can attach to a Div element in your component.
+ * When someone clicks or touches outside of the element, the callback function will be triggered.
  */
 const useClickOutside = (callback: () => void) => {
   const ref = useRef<HTMLDivElement>(null);

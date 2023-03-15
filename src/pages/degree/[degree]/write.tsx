@@ -1,11 +1,10 @@
 import { type NextPage } from "next";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
 import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
-import DegreeNavbar from "../../../components/navigation/DegreeNavbar";
+import ForumLayout from "../../../components/layouts/ForumLayout";
 
 const Write: NextPage = () => {
   const router = useRouter();
@@ -17,40 +16,40 @@ const Write: NextPage = () => {
     { degreeId: degree as string },
     {
       enabled: typeof degree !== "undefined",
-      retry: false,
-      onError: () => router.push("/404"),
+      retry: (failureCount, error) => {
+        if (error.message === "NOT_FOUND") {
+          router.push("/404");
+          return false;
+        }
+
+        if (failureCount + 1 < 4) {
+          router.push("/500");
+          return false;
+        }
+        return true;
+      },
     }
   );
 
-  if (degreeQuery.isSuccess) {
-    return (
-      <>
-        <Head>
-          <title>Degree Door: {degreeQuery.data.name}</title>
-          <meta name="description" content="Degree write page" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className="max-w-screen min-h-screen bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500">
-          <Toaster />
-          <DegreeNavbar
-            active="write"
-            degreeName={degreeQuery.data.name}
-            degreeId={degreeQuery.data.id}
-          />
-          <main>
-            <section>
-              <h1 className="p-8 text-center text-4xl text-white">
-                Write your Review
-              </h1>
-              <ForumForm degreeId={degreeQuery.data.id} />
-            </section>
-          </main>
-        </div>
-      </>
-    );
-  }
-
-  return null;
+  return (
+    <ForumLayout
+      title="Degree Door Forum Post Creation"
+      description="Degree Door forum post creation page"
+      degreeId={degreeQuery.data?.id}
+      degreeName={degreeQuery.data?.name}
+      active="write"
+    >
+      <Toaster />
+      {degreeQuery.isSuccess && (
+        <main>
+          <h1 className="p-8 text-center text-4xl text-white">
+            Write your Review
+          </h1>
+          <ForumForm degreeId={degreeQuery.data.id} />
+        </main>
+      )}
+    </ForumLayout>
+  );
 };
 
 export default Write;
