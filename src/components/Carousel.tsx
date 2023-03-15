@@ -53,7 +53,7 @@ const Carousel: FC = () => {
               whileHover={{ scale: 0.9, transition: { duration: 0.2 } }}
               custom={{ direction, width }}
               className="absolute flex h-full min-w-[15rem] items-center justify-center 
-              rounded bg-gradient-to-b from-rose-100 to-teal-100"
+              rounded bg-primary"
             >
               {/* Null coalescing since Link href cannot be undefined */}
               <Link

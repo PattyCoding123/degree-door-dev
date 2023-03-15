@@ -14,7 +14,7 @@ const LoadingCarousel = () => {
       >
         <div
           className="absolute flex h-full w-60 cursor-pointer items-center justify-center 
-                  rounded bg-gradient-to-b from-rose-100 to-teal-100 duration-300 hover:scale-90"
+                  rounded bg-primary duration-300 hover:scale-90"
         >
           <ImSpinner2 className="animate-spin text-black" />
         </div>
