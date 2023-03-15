@@ -40,7 +40,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     <>
       {show && (
         <Modal>
-          <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75">
+          <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-500 bg-opacity-75">
             <form
               className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-6 shadow-2xl"
               onSubmit={onSubmit2}
