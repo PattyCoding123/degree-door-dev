@@ -1,19 +1,22 @@
+import { BsFillPencilFill } from "react-icons/bs";
+import { type UserProfile } from "../../types/user-profile";
+
 export interface ProfileDisplayProps {
-  displayName?: string | null;
-  email?: string | null;
-  status?: string | null;
-  about?: string | null;
+  userProfile: UserProfile;
+  openEditForm: () => void;
 }
 
 const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
-  displayName,
-  email,
-  status,
-  about,
+  userProfile,
+  openEditForm,
 }) => {
+  const { displayName, email, status, about } = userProfile;
   return (
     <div className="h-full w-full p-4">
-      <form className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-8 shadow-2xl">
+      <form className="relative mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-8 shadow-2xl">
+        <button id="cancel-profile-edit" type="button" onClick={openEditForm}>
+          <BsFillPencilFill className="absolute top-3 right-3 text-2xl text-gray-500 active:text-gray-800" />
+        </button>
         <div className="col-span-2 mb-4 grid h-full w-full grid-cols-2">
           <div className="col-span-1 px-4">
             <label className="font-bold text-gray-900" htmlFor="name">
