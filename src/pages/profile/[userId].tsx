@@ -9,9 +9,11 @@ import EditProfileDialog from "../../components/modals/dialogs/EditProfileDialog
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 
+// Profile page will render the user's profile information and also will allow users
+// to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
-  const { data: sessionData } = useSession();
-  const [showForm, setShowForm] = useState(true);
+  const { data: sessionData } = useSession(); // To get profile information
+  const [showForm, setShowForm] = useState(false); // Control the form dialog
 
   // Format user displayable data into an object.
   const userProfile = {
@@ -32,6 +34,7 @@ const Profile: NextPage = () => {
           rounded-md bg-gradient-to-b from-rose-100 to-teal-100 p-8"
         >
           <div className="flex flex-col items-center justify-center">
+            {/* Render the user's avatar image */}
             <Image
               className="mb-3 rounded-full shadow-lg"
               src={
@@ -90,6 +93,8 @@ const AuthShowcase: React.FC = () => {
 
 export default Profile;
 
+// The use of getServerSideProps in the profile page is to make sure
+// the user is actually logged in and accessing their profile page.
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context); // Get Session
   const { userId } = context.query;
