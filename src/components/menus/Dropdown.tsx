@@ -25,7 +25,7 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
       <div className="relative">
         <BsFillGearFill
           onClick={() => setIsVisible((prev) => !prev)}
-          className={`align-middle text-xl text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
+          className={`align-middle text-xl text-${color} duration-200 hover:cursor-pointer active:scale-90`}
           aria-haspopup="true"
         />
         {/* AnimatePresence to display exit animation. */}
