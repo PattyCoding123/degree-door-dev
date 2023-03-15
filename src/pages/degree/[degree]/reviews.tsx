@@ -1,12 +1,19 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { Toaster, toast } from "react-hot-toast";
+import { useState } from "react";
 
 import { trpc } from "../../../utils/trpc";
 import Review from "../../../components/Review";
 import ForumLayout from "../../../components/layouts/ForumLayout";
+import ConfirmationDialog from "../../../components/modals/dialogs/ConfirmationDialog";
 
+// The Reviews page will render all the reviews for a specific degree forum.
+// It will also allow user's to delete reviews if they are the author
 const ReviewsPage: NextPage = () => {
+  const [showDialog, setShowDialog] = useState(false); // State to control dialog
+  const [selectedReview, setSelectedReview] = useState<string>(); // To determine which
+
   const router = useRouter();
   const { degree } = router.query;
 
@@ -34,6 +41,7 @@ const ReviewsPage: NextPage = () => {
     }
   );
 
+  // Only query for reviews if the degreeQuery is successful
   const reviewsQuery = trpc.forum.getAllReviews.useQuery(
     {
       degreeId: degree as string,
@@ -43,6 +51,7 @@ const ReviewsPage: NextPage = () => {
     }
   );
 
+  // Procedure to delete a review for that degree forum.
   const deleteReview = trpc.forum.deleteReview.useMutation({
     onSuccess: () => {
       // Invalidate queries only for the degree forum from which
@@ -68,8 +77,29 @@ const ReviewsPage: NextPage = () => {
       degreeName={degreeQuery.data?.name}
       active="reviews"
     >
-      <Toaster />
+      {/* The confirmation dialog */}
+      <ConfirmationDialog
+        header="Delete your Review"
+        content="Are you sure you want to delete this review? It cannot be recovered after."
+        handleOk={async () => {
+          if (typeof selectedReview === "string") {
+            // Delete review if the selectedReview state is not undefined
+            deleteReview.mutateAsync({ reviewId: selectedReview });
+          }
+          setSelectedReview(undefined); // Reset selectedReview state
+          setShowDialog(false); // Remove ConfirmationDialog
+        }}
+        handleCancel={() => {
+          setSelectedReview(undefined); // Reset selectedReview state
+          setShowDialog(false); // Remove ConfirmationDialog
+        }} // close dialog
+        show={showDialog}
+        okBtnText="Delete"
+      />
+      <Toaster />{" "}
+      {/* Toaster component for rendering react-hot-toast messages */}
       {degreeQuery.isSuccess && (
+        // ! Only render the degrees if the degreeQuery is a success
         <main className="flex flex-col">
           <div
             className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
@@ -84,11 +114,13 @@ const ReviewsPage: NextPage = () => {
           </div>
           <section className="my-8 flex flex-col items-center justify-center gap-8 align-middle">
             {reviewsQuery.data?.map((review) => (
+              // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
               <Review
                 key={review.id}
                 reviewPost={review}
-                handleClick={async (reviewId: string) => {
-                  await deleteReview.mutateAsync({ reviewId: reviewId });
+                handleClick={() => {
+                  setSelectedReview(review.id);
+                  setShowDialog(true);
                 }}
               />
             ))}

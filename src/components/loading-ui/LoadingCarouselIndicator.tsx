@@ -1,6 +1,7 @@
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { ImSpinner2 } from "react-icons/im";
 
+// Component that will render a skeleton UI of the degree carousel.
 const LoadingCarousel = () => {
   return (
     <div className="mt-8 flex justify-center">

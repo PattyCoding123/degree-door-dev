@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { trpc } from "../../../utils/trpc";
 import ForumLayout from "../../../components/layouts/ForumLayout";
 
+// DegreeHome is a page that will render an overview of the degree information.
 const DegreeHome: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;

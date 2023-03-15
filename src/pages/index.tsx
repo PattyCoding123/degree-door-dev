@@ -6,9 +6,10 @@ import HeroBanner from "../components/HeroBanner";
 import Carousel from "../components/Carousel";
 import FavoriteDegree from "../components/FavoriteDegree";
 import Layout from "../components/layouts/Layout";
-import FavoritesLoadingIndicator from "../components/loading-ui/FavoritesLoadingIndicator";
 import GeneralLoadingIndicator from "../components/loading-ui/GeneralLoadingIndicator";
 
+// The Home page will render the HeroBanner, degree Carousel, and all favorite
+// degrees of a user IF they are logged in and have favorite degrees.
 const Home: NextPage = () => {
   const { data: sessionData } = useSession();
   const favorites = trpc.forum.getFavorites.useQuery(undefined, {

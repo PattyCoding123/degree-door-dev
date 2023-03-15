@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 
 import Layout from "../components/layouts/Layout";
 
+// About page will render the mission statement of the Degree Door team.
 const About: NextPage = () => {
   return (
     <Layout

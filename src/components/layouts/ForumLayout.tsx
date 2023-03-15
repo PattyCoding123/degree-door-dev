@@ -9,6 +9,14 @@ interface ForumLayoutProps extends LayoutProps {
   active: "overview" | "reviews" | "write";
 }
 
+/* 
+  The ForumLayout component wraps a Head component which provides metadata
+  for the specific forum page that uses this layout.
+
+  Each page wrapped with this component will render a DegreeNavbar and a
+  content container div that contains a Footer which will always render
+  below the content.
+*/
 const ForumLayout: React.FC<ForumLayoutProps> = ({
   title,
   description,

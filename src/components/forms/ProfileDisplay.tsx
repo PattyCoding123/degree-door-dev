@@ -3,17 +3,21 @@ import { type UserProfile } from "../../types/user-profile";
 
 export interface ProfileDisplayProps {
   userProfile: UserProfile;
-  openEditForm: () => void;
+  openEditForm: () => void; // Handle parent state
 }
 
+// Display the user's name, email, status, and about section
+// within the div. The form will not submit anything.
 const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
   userProfile,
   openEditForm,
 }) => {
+  // Destructure userProfile properties.
   const { displayName, email, status, about } = userProfile;
   return (
     <div className="h-full w-full p-4">
       <form className="relative mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-8 shadow-2xl">
+        {/* Icon to open a form that allows a user to edit their profile */}
         <button id="cancel-profile-edit" type="button" onClick={openEditForm}>
           <BsFillPencilFill className="absolute top-3 right-3 text-2xl text-gray-500 active:text-gray-800" />
         </button>
@@ -27,7 +31,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
               disabled={true}
               type="text"
               name="displayName"
-              value={displayName ?? "Degree Door User"}
+              value={displayName ?? "Degree Door User"} // Default name
               id="displayName"
               className="mt-2 w-full rounded-lg border border-gray-400 
               bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
@@ -58,7 +62,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
             readOnly={true}
             type="text"
             name="email"
-            value={status ?? "Upcoming Student"}
+            value={status ?? "Upcoming Student"} // Default status
             id="email"
             className="mt-2 w-full rounded-lg border border-gray-400 
             bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"

@@ -6,6 +6,7 @@ import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
 import ForumLayout from "../../../components/layouts/ForumLayout";
 
+// The Write page will render the forum for creating a review.
 const Write: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
@@ -39,6 +40,7 @@ const Write: NextPage = () => {
       degreeName={degreeQuery.data?.name}
       active="write"
     >
+      {/* Toaster component will react-hot-toast messages */}
       <Toaster />
       {degreeQuery.isSuccess && (
         <main>

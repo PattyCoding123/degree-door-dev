@@ -8,6 +8,14 @@ export interface LayoutProps {
   children: React.ReactNode;
 }
 
+/* 
+  The Layout component wraps a Head component which provides metadata
+  for the specific page that uses this layout.
+
+  Each page wrapped with this component will render a HomeNavber and a
+  content container div that contains a Footer which will always render
+  below the content.
+*/
 const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
   return (
     <>

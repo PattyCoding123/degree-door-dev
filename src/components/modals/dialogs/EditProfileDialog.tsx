@@ -11,19 +11,25 @@ interface EditProfileDialogProps {
   show: boolean;
 }
 
+// The following component renders a modal form that will allow user to edit certain
+// pieces of their profile information.
+// ! email is left as disabled for now
 const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   userProfile,
   show,
   closeEditForm,
 }) => {
+  // Destructure userProfile props
   const { displayName, email, status, about } = userProfile;
 
+  // Destructure properties from useForm
   const {
     register,
     handleSubmit,
     reset,
     formState: { isSubmitting },
   } = useForm<UserProfile>({
+    // Default values to pass into the submit function.
     defaultValues: {
       displayName: displayName ?? "",
       email: email ?? "",

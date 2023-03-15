@@ -1,3 +1,4 @@
+// A component to render the HeroBanner on the home page
 const HeroBanner: React.FC = () => {
   return (
     <header
