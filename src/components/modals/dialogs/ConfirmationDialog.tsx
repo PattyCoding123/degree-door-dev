@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { AiFillWarning } from "react-icons/ai";
 
 import Modal from "../Modal";
 
@@ -14,9 +15,10 @@ interface ConfirmationDialogProps {
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
   const { okBtnText, handleOk, handleCancel, show, icon, header, content } =
-    props;
+    props; // Destructure props for ConfirmationDialog
 
   return (
+    // AnimatePresence will display exit animations.
     <AnimatePresence>
       {show && (
         <Modal>
@@ -41,21 +43,8 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = (props) => {
                         {icon ? (
                           <>{icon}</>
                         ) : (
-                          <svg
-                            className="h-6 w-6 text-red-600"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                            />
-                          </svg>
+                          // Default icon for confirmation dialog
+                          <AiFillWarning className=" h-6 w-6 text-red-600" />
                         )}
                       </div>
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
