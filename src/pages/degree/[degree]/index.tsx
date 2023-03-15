@@ -42,7 +42,7 @@ const DegreeHome: NextPage = () => {
         <main className="p-8">
           <div
             className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
-                border bg-gradient-to-b from-rose-100 to-teal-100 shadow-2xl"
+                border bg-primary shadow-2xl"
           >
             <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
               <h1 className="text-4xl font-bold md:text-6xl">
@@ -58,7 +58,7 @@ const DegreeHome: NextPage = () => {
               More Info...
             </h1>
             <div className="mt-8 flex flex-col items-center justify-center gap-16 align-middle md:flex-row">
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University
@@ -71,7 +71,7 @@ const DegreeHome: NextPage = () => {
                   </p>
                 </div>
               </article>
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University
@@ -84,7 +84,7 @@ const DegreeHome: NextPage = () => {
                   </p>
                 </div>
               </article>
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University
