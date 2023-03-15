@@ -1,29 +1,29 @@
 import { useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
 
+import { type UserProfile } from "../../../types/user-profile";
 import { Button } from "../../Buttons";
-import { type ProfileDisplayProps } from "../../forms/ProfileDisplay";
 import Modal from "../Modal";
 
-interface EditProfileDialogProps extends ProfileDisplayProps {
+interface EditProfileDialogProps {
+  userProfile: UserProfile;
   closeModal: () => void;
   show: boolean;
 }
 
 const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
+  userProfile,
   show,
   closeModal,
-  displayName,
-  email,
-  status,
-  about,
 }) => {
+  const { displayName, email, status, about } = userProfile;
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { isSubmitting },
-  } = useForm<ProfileDisplayProps>({
+  } = useForm<UserProfile>({
     defaultValues: {
       displayName: displayName ?? "",
       email: email ?? "",
