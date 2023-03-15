@@ -36,8 +36,8 @@ const Profile: NextPage = () => {
               height={96}
               priority={true}
             />
-            <h1 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-              First Name Last Name
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              Profile Information
             </h1>
           </div>
           <ProfileDisplay
