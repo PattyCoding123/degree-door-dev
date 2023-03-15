@@ -12,7 +12,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
   about,
 }) => {
   return (
-    <div className="mt-8 h-full w-full p-4">
+    <div className="h-full w-full p-4">
       <form className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-8 shadow-2xl">
         <div className="col-span-2 mb-4 grid h-full w-full grid-cols-2">
           <div className="col-span-1 px-4">
