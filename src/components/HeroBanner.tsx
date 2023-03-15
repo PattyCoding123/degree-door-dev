@@ -2,8 +2,8 @@
 const HeroBanner: React.FC = () => {
   return (
     <header
-      className="relative mx-auto mb-8 flex w-auto flex-col items-center gap-8 bg-gradient-to-b 
-      from-rose-100 to-teal-100 p-8 text-center text-black shadow-2xl"
+      className="relative mx-auto mb-8 flex w-auto flex-col items-center gap-8 bg-primary
+      p-8 text-center text-black shadow-2xl"
     >
       <h1 className="text-4xl">Welcome to Degree Door</h1>
       <p className="md:w-2/5">
