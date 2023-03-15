@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface GeneralLoadingIndicatorProps {
