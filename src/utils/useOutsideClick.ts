@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
  */
 const useClickOutside = (callback: () => void) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   /* 
     We check !ref.current.contains(event.target as Node) because we only want
