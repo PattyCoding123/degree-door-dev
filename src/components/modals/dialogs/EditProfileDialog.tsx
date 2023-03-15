@@ -26,14 +26,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ProfileDisplayProps>({
-    defaultValues: {
-      displayName: displayName ?? "",
-      email: email ?? "",
-      status: status ?? "Upcoming Student",
-      about: about ?? "",
-    },
-  });
+  } = useForm<ProfileDisplayProps>();
 
   const onSubmit2 = handleSubmit(async (data) => {
     //
