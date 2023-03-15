@@ -13,6 +13,7 @@ const Profile: NextPage = () => {
   const { data: sessionData } = useSession();
   const [showForm, setShowForm] = useState(true);
 
+  // Format user displayable data into an object.
   const userProfile = {
     displayName: sessionData?.user?.name,
     email: sessionData?.user?.email,
