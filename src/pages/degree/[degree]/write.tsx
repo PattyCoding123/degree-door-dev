@@ -42,12 +42,10 @@ const Write: NextPage = () => {
       <Toaster />
       {degreeQuery.isSuccess && (
         <main>
-          <section>
-            <h1 className="p-8 text-center text-4xl text-white">
-              Write your Review
-            </h1>
-            <ForumForm degreeId={degreeQuery.data.id} />
-          </section>
+          <h1 className="p-8 text-center text-4xl text-white">
+            Write your Review
+          </h1>
+          <ForumForm degreeId={degreeQuery.data.id} />
         </main>
       )}
     </ForumLayout>

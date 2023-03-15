@@ -13,7 +13,7 @@ const FavoriteDegree: React.FC<FavoriteDegreeProps> = ({
   return (
     <Link href={`/degree/${degreeId}`}>
       <div
-        className="flex w-[250px] cursor-pointer rounded-xl border bg-[#f9f9f9]
+        className="flex min-w-[15rem] cursor-pointer rounded-xl border bg-[#f9f9f9]
       p-4 text-black shadow-sm transition duration-200 ease-in-out hover:scale-90"
       >
         <div className="flex gap-3">
