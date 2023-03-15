@@ -27,7 +27,7 @@ const Home: NextPage = () => {
             {favorites.isLoading && <FavoritesLoadingIndicator />}
             {favorites.data && (
               <>
-                <div className="flex h-full w-full flex-col items-center justify-center gap-4 sm:flex-row">
+                <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:flex-row">
                   {favorites.data.map((favorite) => (
                     <FavoriteDegree
                       key={favorite.degreeId}
