@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
+import { MdOutlineCancel } from "react-icons/md";
 
-import useClickOutside from "../../../utils/useOutsideClick";
 import { Button } from "../../Buttons";
 import { type ProfileDisplayProps } from "../../forms/ProfileDisplay";
 import Modal from "../Modal";
@@ -42,10 +42,25 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
         <Modal>
           <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-500 bg-opacity-75">
             <form
-              className="mx-auto grid grid-cols-2 rounded-lg border border-gray-300 bg-white p-6 shadow-2xl"
+              id="edit-profile-form"
+              className="mx-auto grid grid-cols-2 
+              rounded-lg border border-gray-300 bg-white p-6 shadow-2xl"
               onSubmit={onSubmit2}
             >
               <div className="col-span-2 mb-4 grid h-full w-full grid-cols-2">
+                <div className="col-span-2 flex justify-end px-4">
+                  <button
+                    id="cancel-profile-edit"
+                    type="button"
+                    onClick={() => {
+                      // Reset form and close the modal if cancel button is clicked.
+                      reset();
+                      closeModal();
+                    }}
+                  >
+                    <MdOutlineCancel className="text-2xl text-gray-500 active:text-gray-800" />
+                  </button>
+                </div>
                 <div className="col-span-1 px-4">
                   <label className="font-bold text-gray-900" htmlFor="name">
                     Display Name
@@ -107,9 +122,6 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                 />
               </div>
               <div className="col-span-2 mt-2 flex justify-end gap-4 px-4">
-                <Button type="button" disabled={isSubmitting}>
-                  Cancel
-                </Button>
                 <Button type="submit" disabled={isSubmitting}>
                   Submit
                 </Button>
