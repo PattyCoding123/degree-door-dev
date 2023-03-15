@@ -7,14 +7,14 @@ import Modal from "../Modal";
 
 interface EditProfileDialogProps {
   userProfile: UserProfile;
-  closeModal: () => void;
+  closeEditForm: () => void;
   show: boolean;
 }
 
 const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   userProfile,
   show,
-  closeModal,
+  closeEditForm,
 }) => {
   const { displayName, email, status, about } = userProfile;
 
@@ -53,7 +53,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                 onClick={() => {
                   // Reset form and close the modal if cancel button is clicked.
                   reset();
-                  closeModal();
+                  closeEditForm();
                 }}
               >
                 <MdOutlineCancel className="absolute top-3 right-3 text-2xl text-gray-500 active:text-gray-800" />
