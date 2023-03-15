@@ -3,7 +3,7 @@ import { BsGithub } from "react-icons/bs";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="absolute bottom-0 max-h-64 w-full bg-white p-4 dark:bg-gray-900 sm:p-6">
+    <footer className="absolute bottom-0 max-h-64 w-full bg-primary p-4 dark:bg-gray-900 sm:p-6">
       <div className="md:flex md:justify-between">
         <section className="mb-6 md:mb-0">
           <Link href="/" className="flex items-center">
