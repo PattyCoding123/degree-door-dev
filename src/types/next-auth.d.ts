@@ -7,6 +7,14 @@ declare module "next-auth" {
   interface Session {
     user?: {
       id: string;
+      status: string;
+      about?: string | null;
     } & DefaultSession["user"];
+  }
+
+  // ! Augment user to include about and status information.
+  interface User {
+    about?: string;
+    status: string;
   }
 }
