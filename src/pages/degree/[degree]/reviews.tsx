@@ -1,13 +1,15 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 
 import { trpc } from "../../../utils/trpc";
 import Review from "../../../components/Review";
 import ForumLayout from "../../../components/layouts/ForumLayout";
 import ConfirmationDialog from "../../../components/modals/dialogs/ConfirmationDialog";
+import useDegreeQuery from "../../../utils/custom-hooks/useDegreeQuery";
+import useDeleteReview from "../../../utils/custom-hooks/useDeleteReview";
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
@@ -19,29 +21,9 @@ const ReviewsPage: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
-  // Get utils from trpc.useContext() for query invalidation
-  const utils = trpc.useContext();
-
   // Dependent query, will not run unless degree is defined
   // Push to page /404 if degree info is not found
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
-    { degreeId: degree as string },
-    {
-      enabled: typeof degree !== "undefined",
-      retry: (failureCount, error) => {
-        if (error.message === "NOT_FOUND") {
-          router.push("/404");
-          return false;
-        }
-
-        if (failureCount + 1 < 4) {
-          router.push("/500");
-          return false;
-        }
-        return true;
-      },
-    }
-  );
+  const degreeQuery = useDegreeQuery(degree);
 
   // Only query for reviews if the degreeQuery is successful
   const reviewsQuery = trpc.forum.getAllReviews.useQuery(
@@ -54,22 +36,7 @@ const ReviewsPage: NextPage = () => {
   );
 
   // Procedure to delete a review for that degree forum.
-  const deleteReview = trpc.forum.deleteReview.useMutation({
-    onSuccess: () => {
-      // Invalidate queries only for the degree forum from which
-      // the degree was deleted from.
-      utils.forum.getAllReviews.invalidate({ degreeId: degree as string });
-      toast.success("Review successfully deleted!", {
-        position: "bottom-center",
-        className: "text-xl",
-      });
-    },
-    onError: () =>
-      toast.error("There was an error deleting the post!", {
-        position: "bottom-center",
-        className: "text-xl",
-      }),
-  });
+  const deleteReview = useDeleteReview(degree);
 
   return (
     <ForumLayout
