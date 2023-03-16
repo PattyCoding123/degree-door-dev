@@ -19,8 +19,8 @@ const Profile: NextPage = () => {
   const userProfile = {
     displayName: sessionData?.user?.name,
     email: sessionData?.user?.email,
-    status: "Upcoming Student",
-    about: "",
+    status: sessionData?.user?.status,
+    about: sessionData?.user?.about,
   };
 
   return (
