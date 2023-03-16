@@ -21,10 +21,19 @@ const Footer: React.FC = () => {
               Resources
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
-              <li>
+              <li className="mb-4">
                 <Link href="/about">
                   <p className="cursor-pointer hover:underline">About Us</p>
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/PattyCoding123/degree-door-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="cursor-pointer hover:underline">GitHub</p>
+                </a>
               </li>
             </ul>
           </div>
