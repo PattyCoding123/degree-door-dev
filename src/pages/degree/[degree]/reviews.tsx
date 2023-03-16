@@ -96,14 +96,14 @@ const ReviewsPage: NextPage = () => {
         show={showDialog}
         okBtnText="Delete"
       />
-      <Toaster />{" "}
+      <Toaster />
       {/* Toaster component for rendering react-hot-toast messages */}
       {degreeQuery.isSuccess && (
         // ! Only render the degrees if the degreeQuery is a success
         <main className="flex flex-col">
           <div
             className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
-                border bg-gradient-to-b from-rose-100 to-teal-100 shadow-2xl"
+                border bg-primary shadow-2xl"
           >
             <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
               <h1 className="text-4xl font-bold md:text-6xl">
