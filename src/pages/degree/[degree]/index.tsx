@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../../utils/trpc";
 import ForumLayout from "../../../components/layouts/ForumLayout";
+import { useDegreeQuery } from "../../../utils/custom-hooks";
 
 // DegreeHome is a page that will render an overview of the degree information.
 const DegreeHome: NextPage = () => {
@@ -11,24 +11,7 @@ const DegreeHome: NextPage = () => {
 
   // Dependent query, will not run unless degree is defined
   // Push to 404 if degree cannot be found.
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
-    { degreeId: degree as string },
-    {
-      enabled: typeof degree !== "undefined",
-      retry: (failureCount, error) => {
-        if (error.message === "NOT_FOUND") {
-          router.push("/404");
-          return false;
-        }
-
-        if (failureCount + 1 < 4) {
-          router.push("/500");
-          return false;
-        }
-        return true;
-      },
-    }
-  );
+  const degreeQuery = useDegreeQuery(degree);
 
   return (
     <ForumLayout
