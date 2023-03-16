@@ -10,7 +10,7 @@ import FavoritesDisplay from "../components/containers/FavoritesDisplay";
 const Home: NextPage = () => {
   return (
     <Layout title="Degree Door" description="The Degree Door home page">
-      <main className="text-white">
+      <main className="flex-1 text-white">
         <HeroBanner />
         <section>
           <Carousel />

@@ -24,7 +24,7 @@ const Write: NextPage = () => {
       {/* Toaster component will react-hot-toast messages */}
       <Toaster />
       {degreeQuery.isSuccess && (
-        <main>
+        <main className="flex-1">
           <h1 className="p-8 text-center text-4xl text-white">
             Write your Review
           </h1>

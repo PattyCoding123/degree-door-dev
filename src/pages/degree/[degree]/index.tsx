@@ -22,7 +22,7 @@ const DegreeHome: NextPage = () => {
       active="overview"
     >
       {degreeQuery.isSuccess && (
-        <main className="p-8">
+        <main className="flex-1 p-8">
           <div
             className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
                 border bg-primary shadow-2xl"

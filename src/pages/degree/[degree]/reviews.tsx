@@ -64,7 +64,7 @@ const ReviewsPage: NextPage = () => {
       {/* Toaster component for rendering react-hot-toast messages */}
       {degreeQuery.isSuccess && (
         // ! Only render the degrees if the degreeQuery is a success
-        <main className="flex flex-col p-8">
+        <main className="flex flex-1 flex-col p-8">
           <div
             className="relative mx-auto mt-8 flex h-80 w-2/3 
             flex-col items-center justify-center rounded-xl border bg-primary shadow-2xl"
@@ -74,7 +74,7 @@ const ReviewsPage: NextPage = () => {
             </h1>
             <p className="text-xl md:text-3xl">Reviews</p>
           </div>
-          <section className="mt-10 flex flex-col items-center justify-center gap-8 align-middle">
+          <section className="mt-16 flex flex-col items-center justify-center gap-8">
             {reviewsQuery.data?.map((review) => (
               // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
               <Review
