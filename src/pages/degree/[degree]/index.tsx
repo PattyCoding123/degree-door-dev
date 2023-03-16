@@ -36,7 +36,7 @@ const DegreeHome: NextPage = () => {
               </p>
             </section>
           </div>
-          <section className="mt-8">
+          <section className="my-8">
             <h1 className="text-center text-xl font-bold text-white">
               More Info...
             </h1>
