@@ -4,13 +4,14 @@ import { useSession } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 
-import { trpc } from "../../../utils/trpc";
 import Review from "../../../components/Review";
 import ForumLayout from "../../../components/layouts/ForumLayout";
 import ConfirmationDialog from "../../../components/modals/dialogs/ConfirmationDialog";
-import useDegreeQuery from "../../../utils/custom-hooks/useDegreeQuery";
-import useDeleteReview from "../../../utils/custom-hooks/useDeleteReview";
-import useReviewQuery from "../../../utils/custom-hooks/useReviewQuery";
+import {
+  useDegreeQuery,
+  useReviewQuery,
+  useDeleteReview,
+} from "../../../utils/custom-hooks";
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author

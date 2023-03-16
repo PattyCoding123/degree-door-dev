@@ -4,7 +4,7 @@ import { useState, type FC } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 
-import useClickOutside from "../../utils/custom-hooks/useOutsideClick";
+import { useOutsideClick } from "../../utils/custom-hooks";
 
 interface DropdownProps {
   color: "black" | "white";
@@ -15,7 +15,7 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
 
   // Allows the user to click outside the Dropdown menu to close it
   // rather than having to click the gear icon.
-  const ref = useClickOutside(() => setIsVisible(false));
+  const ref = useOutsideClick(() => setIsVisible(false));
 
   return (
     <div
