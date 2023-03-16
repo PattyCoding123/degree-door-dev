@@ -39,7 +39,7 @@ const FavoritesDisplay: React.FC = () => {
         <p className="text-2xl">
           There was a problem fetching your favorite degrees...
         </p>
-        <Button className="w-24" onClick={() => favorites.refetch()}>
+        <Button className="w-24 bg-red-500" onClick={() => favorites.refetch()}>
           Retry
         </Button>
       </div>
