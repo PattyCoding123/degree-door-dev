@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 
 import HeroBanner from "../components/HeroBanner";
-import Carousel from "../components/Carousel";
+import Carousel from "../components/containers/Carousel";
 import Layout from "../components/layouts/Layout";
-import FavoritesDisplay from "../components/FavoritesDisplay";
+import FavoritesDisplay from "../components/containers/FavoritesDisplay";
 
 // The Home page will render the HeroBanner, degree Carousel, and all favorite
 // degrees of a user IF they are logged in and have favorite degrees.

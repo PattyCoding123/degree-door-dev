@@ -4,9 +4,9 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useState, type FC } from "react";
 import useMeasure from "react-use-measure";
 
-import { trpc } from "../utils/trpc";
-import usePrevious from "../utils/usePrevious";
-import LoadingCarousel from "./loading-ui/LoadingCarouselIndicator";
+import { trpc } from "../../utils/trpc";
+import usePrevious from "../../utils/usePrevious";
+import LoadingCarousel from "../loading-ui/LoadingCarouselIndicator";
 
 const Carousel: FC = () => {
   // Used to help determine the sliding direction by comparing it with prev

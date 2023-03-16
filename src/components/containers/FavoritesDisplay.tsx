@@ -1,9 +1,9 @@
 import { useSession } from "next-auth/react";
 
-import { trpc } from "../utils/trpc";
-import { Button } from "./Buttons";
-import GeneralLoadingIndicator from "./loading-ui/GeneralLoadingIndicator";
-import FavoriteDegree from "./FavoriteDegree";
+import { trpc } from "../../utils/trpc";
+import { Button } from "../Buttons";
+import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
+import FavoriteDegree from "../FavoriteDegree";
 
 // A component that will render various UI depending
 // on the status of the session or favorites.
