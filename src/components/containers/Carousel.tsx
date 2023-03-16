@@ -5,7 +5,7 @@ import { useState, type FC } from "react";
 import useMeasure from "react-use-measure";
 
 import { trpc } from "../../utils/trpc";
-import usePrevious from "../../utils/usePrevious";
+import usePrevious from "../../utils/custom-hooks/usePrevious";
 import LoadingCarousel from "../loading-ui/LoadingCarouselIndicator";
 
 const Carousel: FC = () => {
