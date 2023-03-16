@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="sm:flex sm:items-center sm:justify-between">
-        <span className="flex text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+        <span className="mt-4 flex text-sm text-gray-500 dark:text-gray-400 sm:text-center md:mt-0">
           © 2023 Degree Door™ All Rights Reserved.
         </span>
         <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
