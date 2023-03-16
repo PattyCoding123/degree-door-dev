@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
         id="content-container"
         className="min-w-screen relative flex min-h-screen
         flex-col bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]
-      from-green-500 to-green-700 pb-footer-fit-small md:pb-footer-fit"
+      from-green-600 to-green-800 pb-footer-fit-small md:pb-footer-fit"
       >
         {children}
         <Footer />
