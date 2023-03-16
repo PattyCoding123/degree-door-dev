@@ -4,6 +4,8 @@ import { trpc } from "../trpc";
 
 // Custom hook to utilize logic for getDegreeInfo query
 const useDegreeQuery = (degree?: string | string[]) => {
+  // Dependent query, will not run unless degree is defined
+  // Push to 404 if degree cannot be found.
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
     {
