@@ -44,7 +44,7 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
   });
 
   return (
-    <form className="mb-8" onSubmit={onSubmit2}>
+    <form className="mb-16" onSubmit={onSubmit2}>
       <div className="mx-auto w-1/2 rounded-md bg-slate-200 p-8 shadow-2xl">
         <div className="relative mb-12">
           <label
