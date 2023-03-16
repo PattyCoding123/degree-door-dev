@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 
 import { trpc } from "../trpc";
 
+// Custom hook to utilize logic for getDegreeInfo query
 const useDegreeQuery = (degree?: string | string[]) => {
   const router = useRouter();
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
