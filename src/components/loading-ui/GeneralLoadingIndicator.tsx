@@ -10,7 +10,7 @@ const sizes = new Map<string, string>([
   ["small", "text-md"],
   ["medium", "text-xl"],
   ["large", "text-3xl"],
-  ["extra-large", "text-6xl"],
+  ["extra-large", "text-5xl"],
 ]);
 
 // A simple animated spinner component
