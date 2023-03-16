@@ -14,6 +14,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   // ! FavoriteIndicator functionalities will only work if the user is logged in.
   const { data: sessionData } = useSession();
 
+  // Use to invalidate query.
+  const utils = trpc.useContext();
   // Checks whether the user favorited the degree using database records.
   const favoriteQuery = trpc.forum.checkIfFavorite.useQuery(
     {
@@ -27,7 +29,9 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   // Mutation procedure to add a degree to a user's favorites
   const addFavorite = trpc.forum.favoriteDegree.useMutation({
     onSuccess: () => {
-      favoriteQuery.refetch(); // Refetch favoriteQuery
+      // Invalidate queries
+      utils.forum.checkIfFavorite.invalidate({ degreeId: degreeId });
+      utils.forum.getFavorites.invalidate();
     },
   });
 
@@ -35,6 +39,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   const removeFavorite = trpc.forum.removeFavoriteDegree.useMutation({
     onSuccess: () => {
       favoriteQuery.refetch(); // Refetch favoriteQuery
+      utils.forum.checkIfFavorite.invalidate({ degreeId: degreeId });
+      utils.forum.getFavorites.invalidate();
     },
   });
 
