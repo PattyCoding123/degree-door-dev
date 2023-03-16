@@ -1,20 +1,23 @@
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import { BsFillTrashFill } from "react-icons/bs";
-import { useSession } from "next-auth/react";
 
 import { type RouterOutputs } from "../utils/trpc";
 
 interface ReviewProps {
   reviewPost: RouterOutputs["forum"]["getAllReviews"][0]; // Single review from procedure
+  canDelete: boolean;
   handleClick: () => void; // Function that sets the selectedId of review page and shows dialog.
 }
 
 /*
   The Review component will render an individual review for a specific degree page.
 */
-const Review: React.FC<ReviewProps> = ({ reviewPost, handleClick }) => {
-  const { data: sessionData } = useSession();
-  const { course, pros, cons, id, userId } = reviewPost; // Destructure review post
+const Review: React.FC<ReviewProps> = ({
+  reviewPost,
+  handleClick,
+  canDelete,
+}) => {
+  const { course, pros, cons, id } = reviewPost; // Destructure review post
 
   return (
     <>
@@ -23,7 +26,7 @@ const Review: React.FC<ReviewProps> = ({ reviewPost, handleClick }) => {
           <h1 className="text-center text-lg font-bold">{course}</h1>
           {
             // ! Only render the delete button if the user wrote the review
-            sessionData?.user?.id === userId && (
+            canDelete && (
               <button type="button" onClick={handleClick}>
                 <BsFillTrashFill id={id} className="cursor-pointer text-lg" />
               </button>
