@@ -127,7 +127,11 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                 />
               </div>
               <div className="col-span-2 mt-2 flex justify-end gap-4 px-4">
-                <Button type="submit" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  className="bg-green-600"
+                  disabled={isSubmitting}
+                >
                   Submit
                 </Button>
               </div>
