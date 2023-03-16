@@ -59,7 +59,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
                   <Link href={href}>
                     <p
                       className={clsx("font-bold hover:opacity-50", {
-                        "text-indigo-600": active === id,
+                        "text-green-600": active === id,
                       })}
                     >
                       {label}
