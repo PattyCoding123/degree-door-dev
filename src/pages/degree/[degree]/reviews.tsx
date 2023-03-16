@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { Toaster, toast } from "react-hot-toast";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ import ConfirmationDialog from "../../../components/modals/dialogs/ConfirmationD
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
 const ReviewsPage: NextPage = () => {
+  const { data: sessionData } = useSession(); // Get session data
   const [showDialog, setShowDialog] = useState(false); // State to control dialog
   const [selectedReview, setSelectedReview] = useState<string>(); // To determine which
 
@@ -116,6 +118,7 @@ const ReviewsPage: NextPage = () => {
             {reviewsQuery.data?.map((review) => (
               // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
               <Review
+                canDelete={sessionData?.user?.id === review.userId}
                 key={review.id}
                 reviewPost={review}
                 handleClick={() => {
