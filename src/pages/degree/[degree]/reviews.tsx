@@ -10,6 +10,7 @@ import ForumLayout from "../../../components/layouts/ForumLayout";
 import ConfirmationDialog from "../../../components/modals/dialogs/ConfirmationDialog";
 import useDegreeQuery from "../../../utils/custom-hooks/useDegreeQuery";
 import useDeleteReview from "../../../utils/custom-hooks/useDeleteReview";
+import useReviewQuery from "../../../utils/custom-hooks/useReviewQuery";
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
@@ -26,14 +27,7 @@ const ReviewsPage: NextPage = () => {
   const degreeQuery = useDegreeQuery(degree);
 
   // Only query for reviews if the degreeQuery is successful
-  const reviewsQuery = trpc.forum.getAllReviews.useQuery(
-    {
-      degreeId: degree as string,
-    },
-    {
-      enabled: degreeQuery.isSuccess,
-    }
-  );
+  const reviewsQuery = useReviewQuery(degreeQuery.isSuccess, degree as string);
 
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degree);
