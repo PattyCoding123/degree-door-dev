@@ -7,6 +7,7 @@ import useMeasure from "react-use-measure";
 import { trpc } from "../../utils/trpc";
 import { usePrevious } from "../../utils/custom-hooks";
 import LoadingCarousel from "../loading-ui/LoadingCarouselIndicator";
+import { Button } from "../Buttons";
 
 const Carousel: FC = () => {
   // Used to help determine the sliding direction by comparing it with prev
@@ -15,21 +16,26 @@ const Carousel: FC = () => {
   const prev = usePrevious(count); // Used to compare with count
   const [ref, { width }] = useMeasure();
 
-  const { data, isSuccess } = trpc.forum.getAllDegreePaths.useQuery(undefined);
+  const allDegrees = trpc.forum.getAllDegreePaths.useQuery(undefined);
 
   // Determines the direction by comparing count with prev
   const direction: number = typeof prev === "number" && count > prev ? 1 : -1;
 
+  // Return LoadingCarousel if query is loading or fetching.
+  if (allDegrees.isLoading || allDegrees.isFetching) {
+    return <LoadingCarousel />;
+  }
+
   // Only render the carousel if the query is a success.
   // There will always be a degree.
-  if (isSuccess) {
+  if (allDegrees.isSuccess) {
     return (
       <div className="mt-8 flex justify-center">
         {/* Slide the carousel to the left */}
         <button
           onClick={() => {
             setCurrent((current) =>
-              current !== 0 ? current - 1 : data.length - 1
+              current !== 0 ? current - 1 : allDegrees.data.length - 1
             );
             setCount((count) => count - 1);
           }}
@@ -57,11 +63,11 @@ const Carousel: FC = () => {
             >
               {/* Null coalescing since Link href cannot be undefined */}
               <Link
-                href={`/degree/${data[current]?.id ?? ""}`}
+                href={`/degree/${allDegrees.data[current]?.id ?? ""}`}
                 className="h-full w-full"
               >
                 <p className="flex h-full w-full items-center justify-center p-8 text-lg text-black">
-                  {data[current]?.name}
+                  {allDegrees.data[current]?.name}
                 </p>
               </Link>
             </motion.div>
@@ -71,7 +77,7 @@ const Carousel: FC = () => {
         <button
           onClick={() => {
             setCurrent((current) =>
-              current !== data.length - 1 ? current + 1 : 0
+              current !== allDegrees.data.length - 1 ? current + 1 : 0
             );
             setCount((count) => count + 1);
           }}
@@ -82,7 +88,16 @@ const Carousel: FC = () => {
     );
   }
 
-  return <LoadingCarousel />;
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <p className="mb-4 text-2xl">
+        There was an error rendering the carousel...
+      </p>
+      <Button className="w-24 bg-red-500" onClick={() => allDegrees.refetch()}>
+        Retry
+      </Button>
+    </div>
+  );
 };
 export default Carousel;
 
