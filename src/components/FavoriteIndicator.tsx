@@ -38,7 +38,7 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
   // Mutation procedure to remove a degree from the user's favorites
   const removeFavorite = trpc.forum.removeFavoriteDegree.useMutation({
     onSuccess: () => {
-      favoriteQuery.refetch(); // Refetch favoriteQuery
+      // Invalidate queries
       utils.forum.checkIfFavorite.invalidate({ degreeId: degreeId });
       utils.forum.getFavorites.invalidate();
     },
