@@ -21,8 +21,13 @@ const FavoritesDisplay: React.FC = () => {
   }
 
   // Render general loading indicator if favorites is fetching
-  if (favorites.isFetching) {
-    return <GeneralLoadingIndicator size="extra-large" />;
+  if (favorites.isLoading || favorites.isFetching) {
+    return (
+      <div className="flex flex-col items-center">
+        <h2 className="mb-4 text-2xl font-semibold">Favorited Degrees</h2>
+        <GeneralLoadingIndicator size="extra-large" />
+      </div>
+    );
   }
 
   // Render an error message and button to refetch the queries IF
@@ -30,6 +35,7 @@ const FavoritesDisplay: React.FC = () => {
   if (favorites.isError) {
     return (
       <div className="flex flex-col items-center gap-4">
+        <h2 className="mb-4 text-2xl font-semibold">Favorited Degrees</h2>
         <p className="text-2xl">
           There was a problem fetching your favorite degrees...
         </p>
