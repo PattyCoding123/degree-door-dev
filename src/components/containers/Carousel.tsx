@@ -88,6 +88,7 @@ const Carousel: FC = () => {
     );
   }
 
+  // Return error message component and allow user's to refetch the data.
   return (
     <div className="flex flex-col items-center justify-center">
       <p className="mb-4 text-2xl">
