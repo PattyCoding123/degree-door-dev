@@ -1,22 +1,21 @@
-import { useRouter } from "next/router";
+import Router from "next/router";
 
 import { trpc } from "../trpc";
 
 // Custom hook to utilize logic for getDegreeInfo query
 const useDegreeQuery = (degree?: string | string[]) => {
-  const router = useRouter();
   const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
     { degreeId: degree as string },
     {
       enabled: typeof degree !== "undefined",
       retry: (failureCount, error) => {
         if (error.message === "NOT_FOUND") {
-          router.push("/404");
+          Router.push("/404");
           return false;
         }
 
         if (failureCount + 1 < 4) {
-          router.push("/500");
+          Router.push("/500");
           return false;
         }
         return true;
