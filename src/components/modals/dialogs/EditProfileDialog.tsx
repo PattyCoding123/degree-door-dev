@@ -3,7 +3,9 @@ import { MdOutlineCancel } from "react-icons/md";
 
 import { type UserProfile } from "../../../types/user-profile";
 import { Button } from "../../Buttons";
+import { trpc } from "../../../utils/trpc";
 import Modal from "../Modal";
+import toast from "react-hot-toast";
 
 interface EditProfileDialogProps {
   userProfile: UserProfile;
@@ -28,18 +30,37 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     handleSubmit,
     reset,
     formState: { isSubmitting },
-  } = useForm<UserProfile>({
+  } = useForm({
     // Default values to pass into the submit function.
     defaultValues: {
       displayName: displayName ?? "",
-      email: email ?? "",
       status: status ?? "Upcoming Student",
       about: about ?? "",
     },
   });
 
+  const editProfile = trpc.auth.editProfile.useMutation({
+    // * Reset the form, closeModal, and make a toast
+    onSuccess: () => {
+      reset();
+      closeEditForm();
+      toast.success("Changes were saved!", {
+        position: "bottom-center",
+        className: "text-xl",
+      });
+    },
+    // ! Don't close the form in case user needs to try again.
+    onError: () => {
+      toast.error("There was a problem changing your settings!", {
+        position: "bottom-center",
+        className: "text-xl",
+      });
+    },
+  });
+
   const onSubmit2 = handleSubmit(async (data) => {
-    //
+    // Call mutation procedure for editing profile
+    editProfile.mutateAsync(data);
   });
 
   return (
@@ -142,20 +163,5 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     </>
   );
 };
-
-// const ErrorMessage = (props: { message: string | undefined }) => {
-//   const { message } = props;
-//   return (
-//     <div
-//       className="absolute mt-2 flex items-center gap-2 text-sm text-red-700"
-//       role="alert"
-//     >
-//       <div className="text-lg">
-//         <BiError />
-//       </div>
-//       <p className="font-medium">{message}</p>
-//     </div>
-//   );
-// };
 
 export default EditProfileDialog;
