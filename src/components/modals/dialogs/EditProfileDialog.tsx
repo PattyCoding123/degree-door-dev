@@ -22,8 +22,9 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   show,
   closeEditForm,
 }) => {
-  // Get Router
-  const router = useRouter();
+  const router = useRouter(); // Get Router
+
+  const utils = trpc.useContext(); // Get trpc context
 
   // Destructure userProfile props
   const { displayName, email, status, about } = userProfile;
@@ -47,6 +48,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     // * Reset the form, closeModal, and make a toast
     onSuccess: () => {
       reset();
+      utils.auth.getSession.invalidate();
       closeEditForm();
       toast.success("Changes were saved!", {
         position: "bottom-center",
@@ -103,7 +105,11 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2
                       text-gray-900 outline-none duration-300 hover:shadow-2xl"
                     disabled={isSubmitting}
-                    {...register("displayName")}
+                    {...register("displayName", {
+                      validate: (value) => {
+                        return !!value.trim();
+                      },
+                    })}
                   />
                 </div>
                 <div className="col-span-1 px-4">
@@ -151,7 +157,11 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                   id="about"
                   className="mt-2 min-h-[10rem] w-full resize-none rounded-lg border border-gray-400 
                     bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
-                  {...register("about")}
+                  {...register("about", {
+                    validate: (value) => {
+                      return !!value.trim();
+                    },
+                  })}
                 />
               </div>
               <div className="col-span-2 mt-2 flex justify-end gap-4 px-4">
@@ -159,7 +169,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                   type="submit"
                   className="bg-green-600"
                   disabled={
-                    isSubmitting || typeof router.query.userId === "string"
+                    isSubmitting || typeof router.query.userId !== "string"
                   }
                 >
                   Submit
