@@ -1,11 +1,10 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import EditProfileDialog from "../../components/modals/dialogs/EditProfileDialog";
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 
@@ -13,7 +12,6 @@ import ProfileDisplay from "../../components/forms/ProfileDisplay";
 // to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
   const { data: sessionData } = useSession(); // To get profile information
-  const [showForm, setShowForm] = useState(false); // Control the form dialog
 
   // Format user displayable data into an object.
   const userProfile = {
@@ -28,6 +26,7 @@ const Profile: NextPage = () => {
       title="Degree Door Profile"
       description="The Degree Door Profile Page"
     >
+      <Toaster /> {/* Render toast notifications */}
       <main className="p-8">
         <section
           className="mx-auto flex w-1/2 flex-col items-center justify-center
@@ -51,16 +50,8 @@ const Profile: NextPage = () => {
               Profile Information
             </h1>
           </div>
-          <ProfileDisplay
-            userProfile={userProfile}
-            openEditForm={() => setShowForm(true)}
-          />
+          <ProfileDisplay userProfile={userProfile} />
         </section>
-        <EditProfileDialog
-          userProfile={userProfile}
-          show={showForm}
-          closeEditForm={() => setShowForm(false)}
-        />
         <AuthShowcase />
       </main>
     </Layout>
