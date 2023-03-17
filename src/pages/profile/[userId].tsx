@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useSession, signOut, signIn } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
@@ -11,6 +12,7 @@ import ProfileDisplay from "../../components/forms/ProfileDisplay";
 // Profile page will render the user's profile information and also will allow users
 // to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
+  const router = useRouter();
   const { data: sessionData } = useSession(); // To get profile information
 
   // Format user displayable data into an object.
@@ -50,7 +52,12 @@ const Profile: NextPage = () => {
               Profile Information
             </h1>
           </div>
-          <ProfileDisplay userProfile={userProfile} />
+          <ProfileDisplay
+            userProfile={userProfile}
+            isEditable={
+              sessionData?.user?.id === (router.query.userId as string)
+            }
+          />
         </section>
         <AuthShowcase />
       </main>
