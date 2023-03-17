@@ -54,6 +54,8 @@ model User {
   email         String?     @unique
   emailVerified DateTime?
   image         String?
+  about         String?
+  status        String      @default("Upcoming Student")
   accounts      Account[]
   sessions      Session[]
   reviews       Review[]
@@ -90,10 +92,10 @@ model Degree {
 }
 
 model Favorites {
-  userId     String
-  degreeId   String
-  user       User   @relation(fields: [userId], references: [id])
-  degree     Degree @relation(fields: [degreeId], references: [id])
+  userId   String
+  degreeId String
+  user     User   @relation(fields: [userId], references: [id])
+  degree   Degree @relation(fields: [degreeId], references: [id])
 
   @@id([userId, degreeId])
 }

@@ -3,7 +3,7 @@ import { BsGithub } from "react-icons/bs";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="absolute bottom-0 max-h-64 w-full bg-white p-4 dark:bg-gray-900 sm:p-6">
+    <footer className="absolute bottom-0 max-h-64 w-full bg-primary p-4 dark:bg-gray-900 sm:p-6">
       <div className="md:flex md:justify-between">
         <section className="mb-6 md:mb-0">
           <Link href="/" className="flex items-center">
@@ -21,22 +21,26 @@ const Footer: React.FC = () => {
               Resources
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
-              <li className="mb-2">
-                <Link href="/">
-                  <p className="cursor-pointer hover:underline">Contact Us</p>
-                </Link>
-              </li>
-              <li>
+              <li className="mb-4">
                 <Link href="/about">
                   <p className="cursor-pointer hover:underline">About Us</p>
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/PattyCoding123/degree-door-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="cursor-pointer hover:underline">GitHub</p>
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div className="sm:flex sm:items-center sm:justify-between">
-        <span className="flex text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+        <span className="mt-4 flex text-sm text-gray-500 dark:text-gray-400 sm:text-center md:mt-0">
           © 2023 Degree Door™ All Rights Reserved.
         </span>
         <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">

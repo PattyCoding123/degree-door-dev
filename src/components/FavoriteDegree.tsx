@@ -6,6 +6,8 @@ interface FavoriteDegreeProps {
   degreeName: string;
 }
 
+// Render's a Link component to a degree door page.
+// It needs the degreeId and the degreeName.
 const FavoriteDegree: React.FC<FavoriteDegreeProps> = ({
   degreeId,
   degreeName,

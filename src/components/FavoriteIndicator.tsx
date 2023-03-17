@@ -7,10 +7,16 @@ interface FavoriteProps {
   degreeId: string;
 }
 
-const FavoriteIndicator: React.FC<FavoriteProps> = ({
-  degreeId,
-}) => {
+// The FavoriteIndicator is a component that notifies authed-users
+// whether they favorited a degree. It also will allow them to favorite
+// or unfavorite degrees.
+const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
+  // ! FavoriteIndicator functionalities will only work if the user is logged in.
   const { data: sessionData } = useSession();
+
+  // Use to invalidate query.
+  const utils = trpc.useContext();
+  // Checks whether the user favorited the degree using database records.
   const favoriteQuery = trpc.forum.checkIfFavorite.useQuery(
     {
       degreeId: degreeId,
@@ -20,18 +26,25 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({
     }
   );
 
+  // Mutation procedure to add a degree to a user's favorites
   const addFavorite = trpc.forum.favoriteDegree.useMutation({
     onSuccess: () => {
-      favoriteQuery.refetch();
+      // Invalidate queries
+      utils.forum.checkIfFavorite.invalidate({ degreeId: degreeId });
+      utils.forum.getFavorites.invalidate();
     },
   });
 
+  // Mutation procedure to remove a degree from the user's favorites
   const removeFavorite = trpc.forum.removeFavoriteDegree.useMutation({
     onSuccess: () => {
-      favoriteQuery.refetch();
+      // Invalidate queries
+      utils.forum.checkIfFavorite.invalidate({ degreeId: degreeId });
+      utils.forum.getFavorites.invalidate();
     },
   });
 
+  // ! Only render functional FavoriteIndicator if the user is logged in
   if (sessionData?.user !== undefined) {
     return (
       <>
@@ -57,6 +70,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({
       </>
     );
   }
+
+  // Render disabled button of empty favorite indicator
   return (
     <button disabled={true}>
       <AiOutlineStar className="text-3xl hover:animate-pulse hover:cursor-pointer" />

@@ -1,33 +1,17 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../../utils/trpc";
 import ForumLayout from "../../../components/layouts/ForumLayout";
+import { useDegreeQuery } from "../../../utils/custom-hooks";
 
+// DegreeHome is a page that will render an overview of the degree information.
 const DegreeHome: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
   // Dependent query, will not run unless degree is defined
   // Push to 404 if degree cannot be found.
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
-    { degreeId: degree as string },
-    {
-      enabled: typeof degree !== "undefined",
-      retry: (failureCount, error) => {
-        if (error.message === "NOT_FOUND") {
-          router.push("/404");
-          return false;
-        }
-
-        if (failureCount + 1 < 4) {
-          router.push("/500");
-          return false;
-        }
-        return true;
-      },
-    }
-  );
+  const degreeQuery = useDegreeQuery(degree);
 
   return (
     <ForumLayout
@@ -38,10 +22,10 @@ const DegreeHome: NextPage = () => {
       active="overview"
     >
       {degreeQuery.isSuccess && (
-        <main className="p-8">
+        <main className="flex-1 p-8">
           <div
             className="relative mx-auto mt-8 h-80 w-2/3 rounded-xl 
-                border bg-gradient-to-b from-rose-100 to-teal-100 shadow-2xl"
+                border bg-primary shadow-2xl"
           >
             <section className="absolute inset-0 flex flex-col justify-center gap-2 text-center">
               <h1 className="text-4xl font-bold md:text-6xl">
@@ -52,12 +36,12 @@ const DegreeHome: NextPage = () => {
               </p>
             </section>
           </div>
-          <section className="mt-8">
+          <section className="my-8">
             <h1 className="text-center text-xl font-bold text-white">
               More Info...
             </h1>
             <div className="mt-8 flex flex-col items-center justify-center gap-16 align-middle md:flex-row">
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University
@@ -70,7 +54,7 @@ const DegreeHome: NextPage = () => {
                   </p>
                 </div>
               </article>
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University
@@ -83,7 +67,7 @@ const DegreeHome: NextPage = () => {
                   </p>
                 </div>
               </article>
-              <article className="h-80 w-80 rounded-xl border bg-gradient-to-b from-rose-100 to-teal-100 p-4 shadow-2xl">
+              <article className="h-80 w-80 rounded-xl border bg-primary p-4 shadow-2xl">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-center font-bold">
                     Information about the University

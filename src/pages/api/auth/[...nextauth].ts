@@ -11,6 +11,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
       if (session.user) {
+        // ! Include user.status and user.about on session
+        session.user.status = user.status;
+        session.user.about = user.about;
         session.user.id = user.id;
       }
       return session;
@@ -27,7 +30,7 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/auth/login",
-  }
+  },
 };
 
 export default NextAuth(authOptions);

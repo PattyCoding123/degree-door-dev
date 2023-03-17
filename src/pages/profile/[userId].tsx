@@ -1,23 +1,29 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import EditProfileDialog from "../../components/modals/dialogs/EditProfileDialog";
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 
+// Profile page will render the user's profile information and also will allow users
+// to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
-  const { data: sessionData } = useSession();
-  const [showForm, setShowForm] = useState(true);
+  const router = useRouter();
 
+  // ! Use trpc getSession procedure to refresh the session. It doesn't
+  // ! pull directly from DB since it uses NextAuth getServerSession.
+  const { data: session } = trpc.auth.getSession.useQuery();
+
+  // Format user displayable data into an object.
   const userProfile = {
-    displayName: sessionData?.user?.name,
-    email: sessionData?.user?.email,
-    status: "Upcoming Student",
-    about: "...",
+    displayName: session?.user?.name,
+    email: session?.user?.email,
+    status: session?.user?.status,
+    about: session?.user?.about,
   };
 
   return (
@@ -25,18 +31,18 @@ const Profile: NextPage = () => {
       title="Degree Door Profile"
       description="The Degree Door Profile Page"
     >
+      <Toaster /> {/* Render toast notifications */}
       <main className="p-8">
         <section
           className="mx-auto flex w-1/2 flex-col items-center justify-center
-          rounded-md bg-gradient-to-b from-rose-100 to-teal-100 p-8"
+          rounded-md bg-gray-200 p-8"
         >
           <div className="flex flex-col items-center justify-center">
+            {/* Render the user's avatar image */}
             <Image
               className="mb-3 rounded-full shadow-lg"
               src={
-                sessionData?.user?.image
-                  ? `${sessionData.user?.image}`
-                  : "/avatar.png"
+                session?.user?.image ? `${session.user?.image}` : "/avatar.png"
               }
               alt="profile avatar"
               width={96}
@@ -49,14 +55,12 @@ const Profile: NextPage = () => {
           </div>
           <ProfileDisplay
             userProfile={userProfile}
-            openEditForm={() => setShowForm(true)}
+            isEditable={
+              typeof router.query.userId === "string" &&
+              session?.user?.id === router.query.userId
+            }
           />
         </section>
-        <EditProfileDialog
-          userProfile={userProfile}
-          show={showForm}
-          closeEditForm={() => setShowForm(false)}
-        />
         <AuthShowcase />
       </main>
     </Layout>
@@ -89,6 +93,8 @@ const AuthShowcase: React.FC = () => {
 
 export default Profile;
 
+// The use of getServerSideProps in the profile page is to make sure
+// the user is actually logged in and accessing their profile page.
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerAuthSession(context); // Get Session
   const { userId } = context.query;

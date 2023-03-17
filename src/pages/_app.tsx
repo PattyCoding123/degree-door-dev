@@ -13,7 +13,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
-      <div id="modal-root" />
+      <div id="modal-root" /> {/* For portals */}
     </SessionProvider>
   );
 };

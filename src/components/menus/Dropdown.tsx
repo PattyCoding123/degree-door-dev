@@ -4,7 +4,7 @@ import { useState, type FC } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 
-import useClickOutside from "../../utils/useOutsideClick";
+import { useOutsideClick } from "../../utils/custom-hooks";
 
 interface DropdownProps {
   color: "black" | "white";
@@ -12,7 +12,10 @@ interface DropdownProps {
 const Dropdown: FC<DropdownProps> = ({ color }) => {
   const [isVisible, setIsVisible] = useState(false);
   const { data: sessionData } = useSession();
-  const ref = useClickOutside(() => setIsVisible(false));
+
+  // Allows the user to click outside the Dropdown menu to close it
+  // rather than having to click the gear icon.
+  const ref = useOutsideClick(() => setIsVisible(false));
 
   return (
     <div
@@ -22,9 +25,10 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
       <div className="relative">
         <BsFillGearFill
           onClick={() => setIsVisible((prev) => !prev)}
-          className={`align-middle text-xl text-${color} duration-200 hover:scale-90 hover:cursor-pointer`}
+          className={`align-middle text-xl text-${color} duration-200 hover:cursor-pointer active:scale-90`}
           aria-haspopup="true"
         />
+        {/* AnimatePresence to display exit animation. */}
         <AnimatePresence>
           {isVisible && (
             <motion.div
@@ -38,23 +42,27 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
               aria-labelledby="menu-button"
             >
               <div className="p-2" role="none">
-                {sessionData?.user ? (
-                  <Link
-                    href={`/profile/${sessionData.user.id}`}
-                    className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
-                    role="menuitem"
-                    id="menu-item-0"
-                  >
-                    Profile
-                  </Link>
-                ) : (
-                  <button
-                    className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
-                    onClick={() => signIn()}
-                  >
-                    Sign In
-                  </button>
-                )}
+                {
+                  // Render either a link the profile page OR a signIn button
+                  // depending on the session data.
+                  sessionData?.user ? (
+                    <Link
+                      href={`/profile/${sessionData.user.id}`}
+                      className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
+                      role="menuitem"
+                      id="menu-item-0"
+                    >
+                      Profile
+                    </Link>
+                  ) : (
+                    <button
+                      className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
+                      onClick={() => signIn()}
+                    >
+                      Sign In
+                    </button>
+                  )
+                }
               </div>
             </motion.div>
           )}
