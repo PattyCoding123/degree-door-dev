@@ -13,14 +13,17 @@ import ProfileDisplay from "../../components/forms/ProfileDisplay";
 // to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
   const router = useRouter();
-  const { data: sessionData } = useSession(); // To get profile information
+
+  // ! Use trpc getSession procedure to refresh the session. It doesn't
+  // ! pull directly from DB since it uses NextAuth getServerSession.
+  const { data: session } = trpc.auth.getSession.useQuery();
 
   // Format user displayable data into an object.
   const userProfile = {
-    displayName: sessionData?.user?.name,
-    email: sessionData?.user?.email,
-    status: sessionData?.user?.status,
-    about: sessionData?.user?.about,
+    displayName: session?.user?.name,
+    email: session?.user?.email,
+    status: session?.user?.status,
+    about: session?.user?.about,
   };
 
   return (
@@ -39,9 +42,7 @@ const Profile: NextPage = () => {
             <Image
               className="mb-3 rounded-full shadow-lg"
               src={
-                sessionData?.user?.image
-                  ? `${sessionData.user?.image}`
-                  : "/avatar.png"
+                session?.user?.image ? `${session.user?.image}` : "/avatar.png"
               }
               alt="profile avatar"
               width={96}
@@ -55,7 +56,8 @@ const Profile: NextPage = () => {
           <ProfileDisplay
             userProfile={userProfile}
             isEditable={
-              sessionData?.user?.id === (router.query.userId as string)
+              typeof router.query.userId === "string" &&
+              session?.user?.id === router.query.userId
             }
           />
         </section>
