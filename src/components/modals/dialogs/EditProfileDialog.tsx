@@ -46,7 +46,6 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   });
 
   // Set the default values in case userProfile changes
-
   const editProfile = trpc.auth.editProfile.useMutation({
     // * Reset the form, closeModal, and make a toast
     onSuccess: () => {
@@ -118,7 +117,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     disabled={isSubmitting}
                     {...register("displayName", {
                       validate: (value) => {
-                        value.trim();
+                        value.trim(); // Don't allow whitespace
                         return true;
                       },
                     })}
@@ -171,7 +170,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
                   {...register("about", {
                     validate: (value) => {
-                      value.trim();
+                      value.trim(); // Don't allow whitespace
                       return true;
                     },
                   })}
