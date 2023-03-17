@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
 import { useRouter } from "next/router";
+import { useMemo, useEffect } from "react";
 import toast from "react-hot-toast";
 
 import { type UserProfile } from "../../../types/user-profile";
@@ -26,9 +27,6 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
 
   const utils = trpc.useContext(); // Get trpc context
 
-  // Destructure userProfile props
-  const { displayName, email, status, about } = userProfile;
-
   // Destructure properties from useForm
   const {
     register,
@@ -37,17 +35,21 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     formState: { isSubmitting },
   } = useForm({
     // Default values to pass into the submit function.
-    defaultValues: {
-      displayName: displayName ?? "",
-      status: status ?? "Upcoming Student",
-      about: about ?? "",
-    },
+    defaultValues: useMemo(
+      () => ({
+        displayName: userProfile.displayName ?? "",
+        status: userProfile.status ?? "Upcoming Student",
+        about: userProfile.about ?? "",
+      }),
+      [userProfile]
+    ),
   });
+
+  // Set the default values in case userProfile changes
 
   const editProfile = trpc.auth.editProfile.useMutation({
     // * Reset the form, closeModal, and make a toast
     onSuccess: () => {
-      reset();
       utils.auth.getSession.invalidate();
       closeEditForm();
       toast.success("Changes were saved!", {
@@ -63,6 +65,15 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
       });
     },
   });
+
+  // ! Update form fields with update profile information
+  useEffect(() => {
+    reset({
+      displayName: userProfile.displayName ?? "",
+      status: userProfile.status ?? "Upcoming Student",
+      about: userProfile.about ?? "",
+    });
+  }, [userProfile, reset]);
 
   const onSubmit2 = handleSubmit(async (data) => {
     // Call mutation procedure for editing profile
@@ -107,7 +118,8 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     disabled={isSubmitting}
                     {...register("displayName", {
                       validate: (value) => {
-                        return !!value.trim();
+                        value.trim();
+                        return true;
                       },
                     })}
                   />
@@ -120,7 +132,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     readOnly={true}
                     type="text"
                     name="email"
-                    value={email ?? ""}
+                    value={userProfile.email ?? ""}
                     id="email"
                     className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-200 p-2 
                       text-gray-900 outline-none duration-300 hover:shadow-2xl"
@@ -137,7 +149,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                   className="mt-2 w-full rounded-lg border border-gray-400 bg-slate-50 p-2 
                     text-gray-900 outline-none duration-300 hover:shadow-2xl"
                   disabled={isSubmitting}
-                  {...register("status")}
+                  {...register("status", { required: true })}
                 >
                   <option value="Upcoming Student">Upcoming Student</option>
                   <option value="Freshman">Freshman</option>
@@ -159,7 +171,8 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                     bg-slate-50 p-2 text-gray-900 outline-none duration-300 hover:shadow-2xl"
                   {...register("about", {
                     validate: (value) => {
-                      return !!value.trim();
+                      value.trim();
+                      return true;
                     },
                   })}
                 />
