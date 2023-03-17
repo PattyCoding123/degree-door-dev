@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
+import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 import { type UserProfile } from "../../../types/user-profile";
 import { Button } from "../../Buttons";
 import { trpc } from "../../../utils/trpc";
 import Modal from "../Modal";
-import toast from "react-hot-toast";
 
 interface EditProfileDialogProps {
   userProfile: UserProfile;
@@ -21,6 +22,9 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
   show,
   closeEditForm,
 }) => {
+  // Get Router
+  const router = useRouter();
+
   // Destructure userProfile props
   const { displayName, email, status, about } = userProfile;
 
@@ -60,7 +64,10 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
 
   const onSubmit2 = handleSubmit(async (data) => {
     // Call mutation procedure for editing profile
-    editProfile.mutateAsync(data);
+    editProfile.mutateAsync({
+      formData: data,
+      urlUserId: router.query.userId as string,
+    });
   });
 
   return (
@@ -151,7 +158,9 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
                 <Button
                   type="submit"
                   className="bg-green-600"
-                  disabled={isSubmitting}
+                  disabled={
+                    isSubmitting || typeof router.query.userId === "string"
+                  }
                 >
                   Submit
                 </Button>
