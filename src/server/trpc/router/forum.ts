@@ -33,7 +33,7 @@ export const forumRouter = router({
         },
       });
     }),
-  createReview: protectedProcedure
+  createReview: publicProcedure
     .input(
       z.object({
         degreeId: z.string(),
@@ -49,7 +49,8 @@ export const forumRouter = router({
       const review = await ctx.prisma.review.create({
         data: {
           ...formData,
-          userId: ctx.session.user.id,
+          // ! userId is now optional
+          userId: ctx.session?.user?.id,
           degreeId: degreeId,
         },
       });
