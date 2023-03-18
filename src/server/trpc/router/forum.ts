@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { TRPCError } from "@trpc/server";
 import { router, publicProcedure, protectedProcedure } from "../trpc";
+import { assertIsReviewAuthor } from "../../../utils/assertIsReviewAuthor";
 
 export const forumRouter = router({
   hello: publicProcedure
@@ -59,6 +60,9 @@ export const forumRouter = router({
   deleteReview: protectedProcedure
     .input(z.object({ reviewId: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      // ! IMPORTANT NOTE: guard against user deleting other user's reviews.
+      await assertIsReviewAuthor(ctx, input.reviewId);
+
       const deletedReview = await ctx.prisma.review.delete({
         where: {
           id: input.reviewId,
