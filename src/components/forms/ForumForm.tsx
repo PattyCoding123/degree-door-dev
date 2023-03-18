@@ -40,8 +40,8 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
       }),
   });
 
-  const onSubmit2 = handleSubmit(async (data) => {
-    await createReview.mutateAsync({
+  const onSubmit2 = handleSubmit((data) => {
+    createReview.mutate({
       degreeId: degreeId,
       formData: data,
     });

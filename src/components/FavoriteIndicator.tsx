@@ -51,8 +51,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
         {favoriteQuery.data ? (
           <AiFillStar
             className="fill-yellow-500 text-3xl hover:animate-pulse hover:cursor-pointer"
-            onClick={async () =>
-              removeFavorite.mutateAsync({
+            onClick={() =>
+              removeFavorite.mutate({
                 degreeId: degreeId,
               })
             }
@@ -60,8 +60,8 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
         ) : (
           <AiOutlineStar
             className="text-3xl hover:animate-pulse hover:cursor-pointer"
-            onClick={async () =>
-              addFavorite.mutateAsync({
+            onClick={() =>
+              addFavorite.mutate({
                 degreeId: degreeId,
               })
             }

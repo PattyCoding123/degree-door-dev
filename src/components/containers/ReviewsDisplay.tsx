@@ -57,13 +57,13 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
       <ConfirmationDialog
         header="Delete your Review"
         content="Are you sure you want to delete this review? It cannot be recovered after."
-        handleOk={async () => {
+        handleOk={() => {
           if (
             typeof selectedReview?.reviewId === "string" &&
             typeof selectedReview?.reviewUserId === "string"
           ) {
             // Delete review if the selectedReview state is not null
-            await deleteReview.mutateAsync({
+            deleteReview.mutate({
               reviewId: selectedReview.reviewId,
               reviewUserId: selectedReview.reviewUserId,
             });
