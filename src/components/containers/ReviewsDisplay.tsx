@@ -63,7 +63,7 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
             typeof selectedReview?.reviewUserId === "string"
           ) {
             // Delete review if the selectedReview state is not null
-            deleteReview.mutateAsync({
+            await deleteReview.mutateAsync({
               reviewId: selectedReview.reviewId,
               reviewUserId: selectedReview.reviewUserId,
             });
