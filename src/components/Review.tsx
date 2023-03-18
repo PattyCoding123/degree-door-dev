@@ -56,7 +56,7 @@ const Review: React.FC<ReviewProps> = ({
             </div>
           </div>
         </section>
-        <time className="font-bold" dateTime={formattedDate}>
+        <time className="font-bold" dateTime={datetime}>
           {formattedDate}
         </time>
       </article>
