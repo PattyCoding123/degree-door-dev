@@ -17,7 +17,10 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
   degreeId,
 }) => {
   const { data: sessionData } = useSession();
-  const [selectedReview, setSelectedReview] = useState<string>(); // To determine which
+  const [selectedReview, setSelectedReview] = useState<{
+    reviewId: string;
+    reviewUserId: string | null;
+  }>(); // To determine which review to delete
   const [showDialog, setShowDialog] = useState(false); // State to control dialog
   const reviewsQuery = useReviewQuery(enableQuery, degreeId);
 
@@ -55,9 +58,15 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
         header="Delete your Review"
         content="Are you sure you want to delete this review? It cannot be recovered after."
         handleOk={async () => {
-          if (typeof selectedReview === "string") {
-            // Delete review if the selectedReview state is not undefined
-            deleteReview.mutateAsync({ reviewId: selectedReview });
+          if (
+            typeof selectedReview?.reviewId === "string" &&
+            typeof selectedReview?.reviewUserId === "string"
+          ) {
+            // Delete review if the selectedReview state is not null
+            deleteReview.mutateAsync({
+              reviewId: selectedReview.reviewId,
+              reviewUserId: selectedReview.reviewUserId,
+            });
           }
           setSelectedReview(undefined); // Reset selectedReview state
           setShowDialog(false); // Remove ConfirmationDialog
@@ -78,7 +87,10 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
             key={review.id}
             reviewPost={review}
             handleClick={() => {
-              setSelectedReview(review.id);
+              setSelectedReview({
+                reviewId: review.id,
+                reviewUserId: review.userId,
+              });
               setShowDialog(true);
             }}
           />
