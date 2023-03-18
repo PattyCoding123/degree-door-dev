@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import Image from "next/image";
