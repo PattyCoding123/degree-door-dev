@@ -748,6 +748,11 @@ damerau-levenshtein@^1.0.8:
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz#b43d286ccbd36bc5b2f7ed41caf2d0aba1f8a6e7"
   integrity sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==
 
+date-and-time@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-2.4.3.tgz#116963998a8cecd478955ae053f31a6747a988df"
+  integrity sha512-xkS/imTmsyEdpp9ie5oV5UWolg3XkYWNySbT2W4ESWr6v4V8YrsHbhpk9fIeQcr0NFTnYbQJLXlgU1zrLItysA==
+
 debounce@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.1.tgz#38881d8f4166a5c5848020c11827b834bcb3e0a5"
