@@ -82,8 +82,8 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
           />
         ))
       ) : (
-        <p className="mt-4 text-xl">
-          This forum has no degrees. Be the first to post a review!
+        <p className="mt-4 text-3xl text-white">
+          This forum has no reviews. Be the first to write a review!
         </p>
       )}
     </>
