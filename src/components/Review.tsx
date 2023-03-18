@@ -1,6 +1,6 @@
 import { IoMdThumbsUp, IoMdThumbsDown } from "react-icons/io";
 import { BsFillTrashFill } from "react-icons/bs";
-
+import date from "date-and-time";
 import { type RouterOutputs } from "../utils/trpc";
 
 interface ReviewProps {
@@ -17,8 +17,9 @@ const Review: React.FC<ReviewProps> = ({
   handleClick,
   canDelete,
 }) => {
-  const { course, pros, cons, id } = reviewPost; // Destructure review post
-
+  const { course, pros, cons, id, createdAt } = reviewPost; // Destructure review post
+  const datetime = date.format(createdAt, "YYYY-MM-DD");
+  const formattedDate = date.format(createdAt, "MMM DD, YYYY");
   return (
     <>
       <article className="flex w-2/3 flex-col gap-4 rounded-xl border bg-slate-200 p-4 shadow-2xl">
@@ -55,6 +56,9 @@ const Review: React.FC<ReviewProps> = ({
             </div>
           </div>
         </section>
+        <time className="font-bold" dateTime={formattedDate}>
+          {formattedDate}
+        </time>
       </article>
     </>
   );
