@@ -10,6 +10,8 @@ import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 import ProfileLoadingIndicator from "../../components/loading-ui/ProfileLoadingIndicator";
 import clsx from "clsx";
+import { useState } from "react";
+import ConfirmationDialog from "../../components/modals/dialogs/ConfirmationDialog";
 
 // Profile page will render the user's profile information and also will allow users
 // to open a form that will allow them to change their profile information.
@@ -111,26 +113,39 @@ const Profile: NextPage = () => {
 };
 
 const AuthShowcase: React.FC = () => {
+  const [showDialog, setShowDialog] = useState(false);
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+  const deleteUser = trpc.auth.deleteUser.useMutation();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
+    <>
+      <ConfirmationDialog
+        show={showDialog}
+        header={"Delete your Account"}
+        content={
+          "If you delete your account, you can no longer access and delete your old reviews."
+        }
+        okBtnText={"Delete"}
+        handleOk={() => {
+          deleteUser.mutate();
+          signOut();
+        }}
+        handleCancel={() => setShowDialog(false)}
+      />
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p className="text-center text-2xl text-white">
+          {sessionData && <span>Logged in as {sessionData.user?.name} -</span>}
+          <span className="font-bold"> DANGER ZONE </span>
+        </p>
+        <button
+          className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+          onClick={() => setShowDialog(true)}
+        >
+          Delete My Account
+        </button>
+      </div>
+    </>
   );
 };
 
