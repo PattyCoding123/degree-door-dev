@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useState, type FC } from "react";
 import { BsFillGearFill } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 import { useOutsideClick } from "../../utils/custom-hooks";
 
@@ -46,14 +46,23 @@ const Dropdown: FC<DropdownProps> = ({ color }) => {
                   // Render either a link the profile page OR a signIn button
                   // depending on the session data.
                   sessionData?.user ? (
-                    <Link
-                      href={`/profile/${sessionData.user.id}`}
-                      className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
-                      role="menuitem"
-                      id="menu-item-0"
-                    >
-                      Profile
-                    </Link>
+                    <>
+                      <Link
+                        href={`/profile/${sessionData.user.id}`}
+                        className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
+                        role="menuitem"
+                        id="menu-item-0"
+                      >
+                        Profile
+                      </Link>
+                      {/* Add a button to sign out of account*/}
+                      <button
+                        className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
+                        onClick={() => signOut()}
+                      >
+                        Sign Out
+                      </button>
+                    </>
                   ) : (
                     <button
                       className="block w-full rounded-lg px-4 py-2 text-left text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-700"
