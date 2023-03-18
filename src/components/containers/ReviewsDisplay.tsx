@@ -24,9 +24,9 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degreeId);
 
-  if (reviewsQuery.isFetching || reviewsQuery.isLoading) {
+  if (reviewsQuery.isLoading || reviewsQuery.isFetching) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center text-white">
         <GeneralLoadingIndicator size="extra-large" />
       </div>
     );
@@ -35,7 +35,9 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
   if (reviewsQuery.isError) {
     return (
       <div className="flex flex-col items-center gap-4">
-        <p className="text-2xl">There was a problem fetching the reviews...</p>
+        <p className="text-2xl text-white">
+          There was a problem fetching the reviews...
+        </p>
         <Button
           className="w-24 bg-red-500"
           onClick={() => reviewsQuery.refetch()}
