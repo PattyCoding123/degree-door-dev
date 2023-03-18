@@ -84,7 +84,7 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
           />
         ))
       ) : (
-        <p className="mt-4 text-3xl text-white">
+        <p className="text-3xl text-white">
           This forum has no reviews. Be the first to write a review!
         </p>
       )}
