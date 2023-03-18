@@ -1,7 +1,6 @@
 import { useSession } from "next-auth/react";
 
 import { trpc } from "../../utils/trpc";
-import { Button } from "../Buttons";
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
 import FavoriteDegree from "../FavoriteDegree";
 
@@ -39,9 +38,12 @@ const FavoritesDisplay: React.FC = () => {
         <p className="text-2xl">
           There was a problem fetching your favorite degrees...
         </p>
-        <Button className="w-24 bg-red-500" onClick={() => favorites.refetch()}>
+        <button
+          className="text-2xl underline active:text-lime-300"
+          onClick={() => favorites.refetch()}
+        >
           Retry
-        </Button>
+        </button>
       </div>
     );
   }

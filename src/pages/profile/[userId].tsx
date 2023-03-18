@@ -8,6 +8,8 @@ import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
+import ProfileLoadingIndicator from "../../components/loading-ui/ProfileLoadingIndicator";
+import clsx from "clsx";
 
 // Profile page will render the user's profile information and also will allow users
 // to open a form that will allow them to change their profile information.
@@ -16,7 +18,13 @@ const Profile: NextPage = () => {
 
   // ! Use trpc getSession procedure to refresh the session. It doesn't
   // ! pull directly from DB since it uses NextAuth getServerSession.
-  const { data: session } = trpc.auth.getSession.useQuery();
+  const {
+    data: session,
+    isLoading,
+    isFetching,
+    isError,
+    refetch,
+  } = trpc.auth.getSession.useQuery();
 
   // Format user displayable data into an object.
   const userProfile = {
@@ -26,6 +34,32 @@ const Profile: NextPage = () => {
     about: session?.user?.about,
   };
 
+  if (isError) {
+    return (
+      <Layout
+        title="Degree Door Profile"
+        description="The Degree Door Profile Page"
+      >
+        <main className="flex flex-1 items-center p-8">
+          <div
+            className="relative mx-auto flex h-96 w-1/2 flex-col items-center
+        justify-center rounded-md bg-gray-200 p-8"
+          >
+            <h1 className="absolute top-8 text-3xl font-bold text-gray-900 dark:text-white">
+              Error
+            </h1>
+            <p className="text-xl">
+              There was a problem accessing your profile information
+            </p>
+            <button className="text-lg underline" onClick={() => refetch()}>
+              Try again...
+            </button>
+          </div>
+        </main>
+      </Layout>
+    );
+  }
+
   return (
     <Layout
       title="Degree Door Profile"
@@ -33,11 +67,16 @@ const Profile: NextPage = () => {
     >
       <Toaster /> {/* Render toast notifications */}
       <main className="p-8">
-        <section
+        <div
           className="mx-auto flex w-1/2 flex-col items-center justify-center
           rounded-md bg-gray-200 p-8"
         >
-          <div className="flex flex-col items-center justify-center">
+          <div
+            className={clsx(
+              "flex flex-col items-center justify-center",
+              (isLoading || isFetching) && "animate-pulse"
+            )}
+          >
             {/* Render the user's avatar image */}
             <Image
               className="mb-3 rounded-full shadow-lg"
@@ -53,14 +92,18 @@ const Profile: NextPage = () => {
               Profile Information
             </h1>
           </div>
-          <ProfileDisplay
-            userProfile={userProfile}
-            isEditable={
-              typeof router.query.userId === "string" &&
-              session?.user?.id === router.query.userId
-            }
-          />
-        </section>
+          {isLoading || isFetching ? (
+            <ProfileLoadingIndicator />
+          ) : (
+            <ProfileDisplay
+              userProfile={userProfile}
+              isEditable={
+                typeof router.query.userId === "string" &&
+                session?.user?.id === router.query.userId
+              }
+            />
+          )}
+        </div>
         <AuthShowcase />
       </main>
     </Layout>

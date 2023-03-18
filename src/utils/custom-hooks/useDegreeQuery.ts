@@ -17,7 +17,6 @@ const useDegreeQuery = (degree?: string | string[]) => {
         }
 
         if (failureCount + 1 < 4) {
-          Router.push("/500");
           return false;
         }
         return true;

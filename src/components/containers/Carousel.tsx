@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useState, type FC } from "react";
+import Link from "next/link";
 import useMeasure from "react-use-measure";
 
 import { trpc } from "../../utils/trpc";
 import { usePrevious } from "../../utils/custom-hooks";
 import LoadingCarousel from "../loading-ui/LoadingCarouselIndicator";
-import { Button } from "../Buttons";
 
 const Carousel: FC = () => {
   // Used to help determine the sliding direction by comparing it with prev
@@ -94,9 +93,12 @@ const Carousel: FC = () => {
       <p className="mb-4 text-2xl">
         There was an error rendering the carousel...
       </p>
-      <Button className="w-24 bg-red-500" onClick={() => allDegrees.refetch()}>
+      <button
+        className="text-2xl underline active:text-lime-300"
+        onClick={() => allDegrees.refetch()}
+      >
         Retry
-      </Button>
+      </button>
     </div>
   );
 };

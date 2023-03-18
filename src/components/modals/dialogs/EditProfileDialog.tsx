@@ -74,9 +74,9 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({
     });
   }, [userProfile, reset]);
 
-  const onSubmit2 = handleSubmit(async (data) => {
+  const onSubmit2 = handleSubmit((data) => {
     // Call mutation procedure for editing profile
-    editProfile.mutateAsync({
+    editProfile.mutate({
       formData: data,
       urlUserId: router.query.userId as string,
     });

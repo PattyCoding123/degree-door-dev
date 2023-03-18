@@ -27,7 +27,11 @@ const About: NextPage = () => {
             will be able to register an account to access the main
             functionalities of the website. From there they are able to access
             everything Degree Door has to offer! We thank you for using our
-            product and hope you find it as useful as we intended it to be!
+            product and hope you find it as useful as we intended it to be! IF
+            you have any suggestions, click the GitHub link or icon in the
+            footer and go to the <b>Issues</b> tab and click on the
+            <span className="font-bold text-green-700"> New issue</span> button
+            to open a new issue for any suggestions you may.
             <br />
             <span className="font-semibold">
               Sincerely, <br />
