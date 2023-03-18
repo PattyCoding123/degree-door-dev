@@ -80,10 +80,10 @@ model Review {
   course    String
   pros      String
   cons      String
-  userId    String
+  userId    String?
   degreeId  String
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
   degree    Degree   @relation(fields: [degreeId], references: [id])
 
   @@index([degreeId, createdAt("desc")]) // Fetching reviews is mainly done through degreeId
