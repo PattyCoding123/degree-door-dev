@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { useDeleteReview, useReviewQuery } from "../../utils/custom-hooks";
-import { Button } from "../Buttons";
 import Review from "../Review";
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
 import ConfirmationDialog from "../modals/dialogs/ConfirmationDialog";
@@ -41,12 +40,12 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
         <p className="text-2xl text-white">
           There was a problem fetching the reviews...
         </p>
-        <Button
-          className="w-24 bg-red-500"
+        <button
+          className="text-2xl underline active:text-lime-300"
           onClick={() => reviewsQuery.refetch()}
         >
           Retry
-        </Button>
+        </button>
       </div>
     );
   }
