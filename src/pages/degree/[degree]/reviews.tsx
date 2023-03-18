@@ -74,9 +74,10 @@ const ReviewsPage: NextPage = () => {
             </h1>
             <p className="text-xl md:text-3xl">Reviews</p>
           </div>
-          <section className="mt-16 flex flex-col items-center justify-center gap-8">
+          <section className="mt-16 mb-8 flex flex-col items-center justify-center gap-8">
             {reviewsQuery.data?.map((review) => (
               // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
+              // ! Reviews are only deletable by authenticated authors and if the userIds match.
               <Review
                 canDelete={sessionData?.user?.id === review.userId}
                 key={review.id}
