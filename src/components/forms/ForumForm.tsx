@@ -63,9 +63,10 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
             {...register("course", {
               required: "Course is required",
               pattern: {
-                value: /^[A-Z]{2,3}\s[0-9]{4}$/i,
+                value: /\s*[A-Z]{2,10}\s[0-9]{4}\s*$/i, // Allow trailing and leading spaces
                 message: "Please enter a valid course",
               },
+              validate: (value) => !!value.trim(), // Trim off trailing and leading spaces
             })}
           />
           {errors.course && <ErrorMessage message={errors.course?.message} />}
@@ -83,9 +84,17 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
             border-gray-700 p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you enjoy about this particular course? (If nothing, you can put N/A)"
             disabled={isSubmitting}
-            {...register("pros", { required: "This field is required" })}
+            {...register("pros", {
+              required: "This field is required",
+              validate: (value) => !!value.trim(), // Returns boolean value of trimmed value
+            })}
           />
-          {errors.pros && <ErrorMessage message={errors.pros?.message} />}
+          {errors.pros && (
+            <ErrorMessage
+              // ! In case user enters trailing space, indicate it is invalid
+              message={errors.pros?.message || "This field is required"}
+            />
+          )}
         </div>
         <div className="relative mb-12">
           <label
@@ -99,10 +108,18 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
             className="text-md mt-2 block h-32 max-h-fit w-full flex-1 resize-none rounded-md
             border-gray-700 p-4 outline-none duration-200 hover:shadow-xl"
             placeholder="What did you dislike about this particular course? (If nothing, you can put N/A)"
-            {...register("cons", { required: "This field is required" })}
+            {...register("cons", {
+              required: "This field is required",
+              validate: (value) => !!value.trim(), // Returns boolean value of trimmed value
+            })}
             disabled={isSubmitting}
           />
-          {errors.cons && <ErrorMessage message={errors.cons?.message} />}
+          {errors.cons && (
+            <ErrorMessage
+              // ! In case user enters trailing space, indicate it is invalid
+              message={errors.cons?.message || "This field is required"}
+            />
+          )}
         </div>
         <div className="flex justify-end">
           {sessionData?.user ? (
