@@ -2,6 +2,8 @@ import type { GetServerSideProps, NextPage } from "next";
 import { useSession, signOut } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import clsx from "clsx";
 import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
@@ -9,8 +11,6 @@ import { getServerAuthSession } from "../../server/common/get-server-auth-sessio
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 import ProfileLoadingIndicator from "../../components/loading-ui/ProfileLoadingIndicator";
-import clsx from "clsx";
-import { useState } from "react";
 import ConfirmationDialog from "../../components/modals/dialogs/ConfirmationDialog";
 
 // Profile page will render the user's profile information and also will allow users
