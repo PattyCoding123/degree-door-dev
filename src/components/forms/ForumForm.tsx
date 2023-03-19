@@ -59,7 +59,16 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
         show={showModal}
         okBtnText="Submit"
       />
-      <form className="mb-16" onSubmit={onSubmit2}>
+      <form
+        className="mb-16"
+        onSubmit={(e) => {
+          // ! Prevent guests from bypassing confirmation.
+          if (sessionData) {
+            return onSubmit2; // Return only if user is logged in
+          }
+          e.preventDefault(); // Prevent refresh in case enter
+        }}
+      >
         <div className="mx-auto w-1/2 rounded-md bg-slate-200 p-8 shadow-2xl">
           <div className="relative mb-12">
             <label
@@ -142,8 +151,9 @@ const ForumForm: React.FC<{ degreeId: string }> = ({ degreeId }) => {
               // * when the form is incomplete or if the user enters invalid input
               <Button
                 className="bg-green-600"
-                type="submit"
+                type="button"
                 disabled={isSubmitting}
+                onClick={onSubmit2}
               >
                 Submit
               </Button>
