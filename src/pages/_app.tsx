@@ -5,16 +5,19 @@ import { SessionProvider } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 
 import "../styles/globals.css";
+import ErrorBoundary from "../components/layouts/ErrorBoundary";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <div id="modal-root" /> {/* For portals */}
-    </SessionProvider>
+    <ErrorBoundary>
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+        <div id="modal-root" /> {/* For portals */}
+      </SessionProvider>
+    </ErrorBoundary>
   );
 };
 
