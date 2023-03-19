@@ -16,8 +16,6 @@ import ConfirmationDialog from "../../components/modals/dialogs/ConfirmationDial
 // Profile page will render the user's profile information and also will allow users
 // to open a form that will allow them to change their profile information.
 const Profile: NextPage = () => {
-  const router = useRouter();
-
   // ! Use trpc getSession procedure to refresh the session. It doesn't
   // ! pull directly from DB since it uses NextAuth getServerSession.
   const {
@@ -97,13 +95,7 @@ const Profile: NextPage = () => {
           {isLoading || isFetching ? (
             <ProfileLoadingIndicator />
           ) : (
-            <ProfileDisplay
-              userProfile={userProfile}
-              isEditable={
-                typeof router.query.userId === "string" &&
-                session?.user?.id === router.query.userId
-              }
-            />
+            <ProfileDisplay userProfile={userProfile} />
           )}
         </div>
         <AuthShowcase />
