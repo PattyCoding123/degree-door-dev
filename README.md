@@ -15,7 +15,7 @@
 <h1 align="center">Degree Door Enhanced</h1>
 
   <p align="center">
-    A website that helps student gather more information about the various degrees at Wayne State University. This is a continuation of our original project <a href="https://github.com/WSU-4110/Degree-Door">Degree Door</a> from our Software Engineering course, and all the links will take you to our documentation on our repo which is hosted on the university's organization.
+    A website that helps students gather more information about the various degrees at Wayne State University. This is a continuation of our original project <a href="https://github.com/WSU-4110/Degree-Door">Degree Door</a> from our Software Engineering course, and all the links will take you to our documentation on our repo which is hosted on the university's organization.
     <br />
     <a href="https://github.com/WSU-4110/Degree-Door/wiki"><strong>Check out the docs »</strong></a>
     <br />
