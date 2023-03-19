@@ -6,43 +6,35 @@ import EditProfileDialog from "../modals/dialogs/EditProfileDialog";
 
 export interface ProfileDisplayProps {
   userProfile: UserProfile;
-  isEditable: boolean;
 }
 
 // Display the user's name, email, status, and about section
 // within the div. The form will not submit anything.
-const ProfileDisplay: React.FC<ProfileDisplayProps> = ({
-  userProfile,
-  isEditable,
-}) => {
+const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ userProfile }) => {
   const [showForm, setShowForm] = useState(false); // Control
 
   // Destructure userProfile properties.
   const { displayName, email, status, about } = userProfile;
   return (
     <>
-      {isEditable && (
-        <EditProfileDialog
-          userProfile={userProfile}
-          show={showForm}
-          closeEditForm={() => setShowForm(false)}
-        />
-      )}
+      <EditProfileDialog
+        userProfile={userProfile}
+        show={showForm}
+        closeEditForm={() => setShowForm(false)}
+      />
       <div className="h-full w-full p-4">
         <form
           className="relative mx-auto grid grid-cols-2 rounded-lg 
           border border-gray-300 bg-white p-8 shadow-2xl"
         >
           {/* Icon to open a form that allows a user to edit their profile */}
-          {isEditable && (
-            <button
-              id="cancel-profile-edit"
-              type="button"
-              onClick={() => setShowForm(true)}
-            >
-              <BsFillPencilFill className="absolute top-3 right-3 text-2xl text-gray-500 active:text-gray-800" />
-            </button>
-          )}
+          <button
+            id="cancel-profile-edit"
+            type="button"
+            onClick={() => setShowForm(true)}
+          >
+            <BsFillPencilFill className="absolute top-3 right-3 text-2xl text-gray-500 active:text-gray-800" />
+          </button>
           <div className="col-span-2 mb-4 grid h-full w-full grid-cols-2">
             <div className="col-span-1 px-4">
               <label className="font-bold text-gray-900" htmlFor="name">
