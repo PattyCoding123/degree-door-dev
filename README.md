@@ -6,7 +6,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://degree-door.vercel.app/login">
+  <a href="https://degreedoor.vercel.app/">
     <img src="https://i.imgur.com/PUIKaAn.png" alt="logo" width="300"/>
   </a>
 </p>
@@ -17,9 +17,11 @@
   <p align="center">
     A website that helps student gather more information about the various degrees at Wayne State University. This is a continuation of our original project <a href="https://github.com/WSU-4110/Degree-Door">Degree Door</a> from our Software Engineering course, and all the links will take you to our documentation on our repo which is hosted on the university's organization.
     <br />
-    <a href="https://github.com/WSU-4110/Degree-Door"><strong>Check out the docs »</strong></a>
+    <a href="https://github.com/WSU-4110/Degree-Door/wiki"><strong>Check out the docs »</strong></a>
     <br />
     <br />
+    <a href="https://degreedoor.vercel.app/">Live Demo</a>
+    ·
     <a href="https://github.com/WSU-4110/Degree-Door/issues">Review Requirements</a>
     ·
     <a href="https://github.com/WSU-4110/Degree-Door/wiki">See wiki page</a>

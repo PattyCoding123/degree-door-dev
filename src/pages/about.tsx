@@ -31,7 +31,7 @@ const About: NextPage = () => {
             you have any suggestions, click the GitHub link or icon in the
             footer and go to the <b>Issues</b> tab and click on the
             <span className="font-bold text-green-700"> New issue</span> button
-            to open a new issue for any suggestions you may.
+            to open a new issue for any suggestions.
             <br />
             <span className="font-semibold">
               Sincerely, <br />
