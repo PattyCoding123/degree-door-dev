@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 import { trpc } from "../../utils/trpc";
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
@@ -15,7 +15,12 @@ const FavoritesDisplay: React.FC = () => {
   // Render Log in message if the user's isn't logged in
   if (!sessionData || !sessionData.user) {
     return (
-      <p className="mt-16 text-2xl">Log in to start favoriting degrees!</p>
+      <p className="mt-16 text-2xl">
+        <button className="underline" onClick={() => signIn()}>
+          Login
+        </button>{" "}
+        to start favoriting degrees!
+      </p>
     );
   }
 
