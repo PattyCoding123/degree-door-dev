@@ -99,12 +99,12 @@ model Degree {
 }
 
 model Favorites {
-  id       String @id @default(cuid())
   userId   String
   degreeId String
   user     User   @relation(fields: [userId], references: [id])
   degree   Degree @relation(fields: [degreeId], references: [id])
 
+  @@id([userId, degreeId])
   @@index([userId]) // Searching for favorites is done through the userId
   @@index([degreeId])
 }
