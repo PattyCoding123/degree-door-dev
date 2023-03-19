@@ -44,7 +44,7 @@ const FavoritesDisplay: React.FC = () => {
           There was a problem fetching your favorite degrees...
         </p>
         <button
-          className="text-2xl underline active:text-lime-300"
+          className="text-2xl underline hover:text-amber-400 active:text-amber-600"
           onClick={() => favorites.refetch()}
         >
           Retry

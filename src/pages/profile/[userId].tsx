@@ -55,7 +55,10 @@ const Profile: NextPage = () => {
             <p className="text-xl">
               There was a problem accessing your profile information
             </p>
-            <button className="text-lg underline" onClick={() => refetch()}>
+            <button
+              className="text-lg underline hover:text-amber-400 active:text-amber-600"
+              onClick={() => refetch()}
+            >
               Try again...
             </button>
           </div>
