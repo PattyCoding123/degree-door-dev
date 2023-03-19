@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import Image from "next/image";
 
 import { trpc } from "../../utils/trpc";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
+import { useDeleteUser } from "../../utils/custom-hooks";
 import Layout from "../../components/layouts/Layout";
 import ProfileDisplay from "../../components/forms/ProfileDisplay";
 import ProfileLoadingIndicator from "../../components/loading-ui/ProfileLoadingIndicator";
@@ -42,6 +43,7 @@ const Profile: NextPage = () => {
         title="Degree Door Profile"
         description="The Degree Door Profile Page"
       >
+        <Toaster />
         <main className="flex flex-1 items-center p-8">
           <div
             className="relative mx-auto flex h-96 w-1/2 flex-col items-center
@@ -116,7 +118,7 @@ const AuthShowcase: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const { data: sessionData } = useSession();
 
-  const deleteUser = trpc.auth.deleteUser.useMutation();
+  const deleteUser = useDeleteUser();
 
   return (
     <>
@@ -129,7 +131,6 @@ const AuthShowcase: React.FC = () => {
         okBtnText={"Delete"}
         handleOk={() => {
           deleteUser.mutate();
-          signOut();
         }}
         handleCancel={() => setShowDialog(false)}
       />
