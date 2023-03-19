@@ -41,6 +41,12 @@ export const authRouter = router({
       return userInfo;
     }),
   deleteUser: protectedProcedure.mutation(async ({ ctx }) => {
+    // ! Must be done to prevent mysql errors
+    await ctx.prisma.favorites.deleteMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+    });
     const user = await ctx.prisma.user.delete({
       where: {
         id: ctx.session.user.id,
