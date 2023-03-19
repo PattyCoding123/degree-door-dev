@@ -2,6 +2,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 
 import { trpc } from "../utils/trpc";
+import Tooltip from "./Tooltip";
 
 interface FavoriteProps {
   degreeId: string;
@@ -71,11 +72,13 @@ const FavoriteIndicator: React.FC<FavoriteProps> = ({ degreeId }) => {
     );
   }
 
-  // Render disabled button of empty favorite indicator
+  // Render disabled button of empty favorite indicator with a tooltip
   return (
-    <button disabled={true}>
-      <AiOutlineStar className="text-3xl hover:animate-pulse hover:cursor-pointer" />
-    </button>
+    <Tooltip message="You must be logged in to favorite a degree.">
+      <button disabled={true}>
+        <AiOutlineStar className="text-3xl hover:animate-pulse hover:cursor-pointer" />
+      </button>
+    </Tooltip>
   );
 };
 
