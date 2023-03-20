@@ -1,4 +1,4 @@
-import type { ErrorInfo, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Component } from "react";
 import Image from "next/image";
 
@@ -20,10 +20,6 @@ class ErrorBoundary extends Component<Props, State> {
   public static getDerivedStateFromError(_: Error): State {
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
   }
 
   public render() {
