@@ -7,21 +7,14 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import loadable from "@loadable/component";
 
 import { useDeleteReview, useReviewQuery } from "../../utils/custom-hooks";
-const Review = dynamic(
-  async () => {
-    return new Promise((resolve) => setTimeout(resolve, 1000)).then(
-      () => import("../Review")
-    );
-  },
-  {
-    ssr: false,
-    loading: () => (
-      <div className="text-white">
-        <GeneralLoadingIndicator size="extra-large" />
-      </div>
-    ),
-  }
-);
+const Review = dynamic(() => import("../Review"), {
+  ssr: false,
+  loading: () => (
+    <div className="text-white">
+      <GeneralLoadingIndicator size="extra-large" />
+    </div>
+  ),
+});
 // const Review = lazy(async () => {
 //   return new Promise((resolve) => setTimeout(resolve, 1000)).then(
 //     () => import("../Review")
@@ -47,7 +40,7 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
     {
       degreeId: degreeId,
     },
-    { useErrorBoundary: true, retry: false, suspense: true }
+    { useErrorBoundary: true, suspense: true }
   );
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degreeId);
