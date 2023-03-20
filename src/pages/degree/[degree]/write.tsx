@@ -2,34 +2,16 @@ import { type NextPage } from "next";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../../utils/trpc";
 import ForumForm from "../../../components/forms/ForumForm";
 import ForumLayout from "../../../components/layouts/ForumLayout";
+import { useDegreeQuery } from "../../../utils/custom-hooks";
 
+// The Write page will render the forum for creating a review.
 const Write: NextPage = () => {
   const router = useRouter();
   const { degree } = router.query;
 
-  // Dependent query, will not run unless degree is defined
-  // Push to /404 if page cannot be found.
-  const degreeQuery = trpc.forum.getDegreeInfo.useQuery(
-    { degreeId: degree as string },
-    {
-      enabled: typeof degree !== "undefined",
-      retry: (failureCount, error) => {
-        if (error.message === "NOT_FOUND") {
-          router.push("/404");
-          return false;
-        }
-
-        if (failureCount + 1 < 4) {
-          router.push("/500");
-          return false;
-        }
-        return true;
-      },
-    }
-  );
+  const degreeQuery = useDegreeQuery(degree);
 
   return (
     <ForumLayout
@@ -39,9 +21,10 @@ const Write: NextPage = () => {
       degreeName={degreeQuery.data?.name}
       active="write"
     >
+      {/* Toaster component will react-hot-toast messages */}
       <Toaster />
       {degreeQuery.isSuccess && (
-        <main>
+        <main className="flex-1">
           <h1 className="p-8 text-center text-4xl text-white">
             Write your Review
           </h1>

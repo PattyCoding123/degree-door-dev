@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 
 import Layout from "../components/layouts/Layout";
 
+// About page will render the mission statement of the Degree Door team.
 const About: NextPage = () => {
   return (
     <Layout
@@ -11,7 +12,7 @@ const About: NextPage = () => {
       <main className="relative flex h-full w-full flex-1 flex-col">
         <div
           className="my-auto flex h-fit w-3/5 flex-col gap-4 self-center rounded-lg 
-            bg-gradient-to-b from-rose-100 to-teal-100 p-8"
+            bg-primary p-8"
         >
           <h1 className="text-center text-5xl font-bold">Degree Door</h1>
           <p className="text-lg">
@@ -26,7 +27,11 @@ const About: NextPage = () => {
             will be able to register an account to access the main
             functionalities of the website. From there they are able to access
             everything Degree Door has to offer! We thank you for using our
-            product and hope you find it as useful as we intended it to be!
+            product and hope you find it as useful as we intended it to be! IF
+            you have any suggestions, click the GitHub link or icon in the
+            footer and go to the <b>Issues</b> tab and click on the
+            <span className="font-bold text-green-700"> New issue</span> button
+            to open a new issue for any suggestions.
             <br />
             <span className="font-semibold">
               Sincerely, <br />

@@ -17,12 +17,12 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
 }) => {
   return (
     <nav className="m-auto flex w-full flex-col shadow-lg">
-      {degreeName && (
-        <header className="bg-gray-900 py-1">
-          <h1 className="text-center font-bold text-white">{degreeName}</h1>
-        </header>
-      )}
-      <div className="flex flex-col items-center justify-between gap-8 bg-gradient-to-b from-rose-100 to-teal-100 px-6 py-4 md:grid md:grid-cols-3">
+      <header className="bg-gray-900 py-1">
+        <h1 className="text-center font-bold text-white">
+          {degreeName ?? "Loading..."}
+        </h1>
+      </header>
+      <div className="flex flex-col items-center justify-between gap-8 bg-primary px-6 py-4 md:grid md:grid-cols-3">
         <Link href="/">
           <div className="navbar-brand col-span-1 flex cursor-pointer">
             <Image
@@ -59,7 +59,7 @@ const DegreeNavbar: React.FC<DegreeNavbarProps> = ({
                   <Link href={href}>
                     <p
                       className={clsx("font-bold hover:opacity-50", {
-                        "text-indigo-600": active === id,
+                        "text-green-600": active === id,
                       })}
                     >
                       {label}

@@ -33,7 +33,7 @@ export const forumRouter = router({
         },
       });
     }),
-  createReview: protectedProcedure
+  createReview: publicProcedure
     .input(
       z.object({
         degreeId: z.string(),
@@ -49,15 +49,21 @@ export const forumRouter = router({
       const review = await ctx.prisma.review.create({
         data: {
           ...formData,
-          userId: ctx.session.user.id,
+          // ! userId is now optional
+          userId: ctx.session?.user?.id,
           degreeId: degreeId,
         },
       });
       return review;
     }),
   deleteReview: protectedProcedure
-    .input(z.object({ reviewId: z.string() }))
+    .input(z.object({ reviewId: z.string(), reviewUserId: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      // ! IMPORTANT NOTE: guard against user deleting other user's reviews.
+      if (ctx.session.user.id !== input.reviewUserId) {
+        throw new TRPCError({ code: "UNAUTHORIZED" });
+      }
+
       const deletedReview = await ctx.prisma.review.delete({
         where: {
           id: input.reviewId,

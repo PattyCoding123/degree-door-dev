@@ -1,11 +1,12 @@
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
+[![MIT License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://degree-door.vercel.app/login">
+  <a href="https://degreedoor.vercel.app/">
     <img src="https://i.imgur.com/PUIKaAn.png" alt="logo" width="300"/>
   </a>
 </p>
@@ -14,11 +15,13 @@
 <h1 align="center">Degree Door Enhanced</h1>
 
   <p align="center">
-    A website that helps student gather more information about the various degrees at Wayne State University. This is a continuation of our original project <a href="https://github.com/WSU-4110/Degree-Door">Degree Door</a> from our Software Engineering course, and all the links will take you to our documentation on our repo which is hosted on the university's organization.
+    A website that helps students gather more information about the various degrees at Wayne State University. This is a continuation of our original project <a href="https://github.com/WSU-4110/Degree-Door">Degree Door</a> from our Software Engineering course, and all the links will take you to our documentation on our repo which is hosted on the university's organization.
     <br />
-    <a href="https://github.com/WSU-4110/Degree-Door"><strong>Check out the docs »</strong></a>
+    <a href="https://github.com/WSU-4110/Degree-Door/wiki"><strong>Check out the docs »</strong></a>
     <br />
     <br />
+    <a href="https://degreedoor.vercel.app/">Live Demo</a>
+    ·
     <a href="https://github.com/WSU-4110/Degree-Door/issues">Review Requirements</a>
     ·
     <a href="https://github.com/WSU-4110/Degree-Door/wiki">See wiki page</a>
@@ -37,6 +40,7 @@
     </li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#license">License</a></li>
     <li><a href="#authors">Authors</a></li>
   </ol>
 </details>
@@ -91,6 +95,13 @@ $ yarn
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- Authors -->
 
 ## Authors
@@ -105,3 +116,5 @@ $ yarn
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
+[license-shield]: https://img.shields.io/github/license/PattyCoding123/degree-door-dev?color=%23808080&style=for-the-badge
+[license-url]: https://github.com/PattyCoding123/degree-door-dev/blob/main/LICENSE.md

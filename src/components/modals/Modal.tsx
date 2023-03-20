@@ -6,6 +6,7 @@ type ModalProps = {
 };
 
 const Modal = ({ children }: ModalProps) => {
+  // Select the id "modal-root" for the portal
   const modalRoot = document.querySelector("#modal-root");
 
   // create div element only once using ref
@@ -18,11 +19,13 @@ const Modal = ({ children }: ModalProps) => {
     const el = elRef.current;
     modalRoot.appendChild(el);
     return () => {
+      // Remove modal element once modal stops showing.
       modalRoot.removeChild(el);
     };
   }, [elRef, modalRoot]);
 
   return createPortal(
+    // The portal will be for modals/dialogs
     <div
       className="relative z-10"
       aria-labelledby="modal-title"
