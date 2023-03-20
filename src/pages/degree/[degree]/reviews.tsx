@@ -1,13 +1,14 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
-import { lazy } from "react";
 
 import ForumLayout from "../../../components/layouts/ForumLayout";
 import { useDegreeQuery } from "../../../utils/custom-hooks";
-const ReviewsDisplay = lazy(
-  () => import("../../../components/containers/ReviewsDisplay")
-);
+import ReviewsDisplay from "../../../components/containers/ReviewsDisplay";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
+import GeneralLoadingIndicator from "../../../components/loading-ui/GeneralLoadingIndicator";
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
@@ -29,23 +30,45 @@ const ReviewsPage: NextPage = () => {
     >
       <Toaster />
       {/* Toaster component for rendering react-hot-toast messages */}
-      {degreeQuery.isSuccess && (
-        // ! Only render the degrees if the degreeQuery is a success
-        <main className="flex flex-1 flex-col p-8">
-          <div
-            className="relative mx-auto mt-8 flex h-80 w-2/3 
+
+      {/* ! Only render the degrees if the degreeQuery is a success */}
+      <main className="flex flex-1 flex-col p-8">
+        <div
+          className="relative mx-auto mt-8 flex h-80 w-2/3 
             flex-col items-center justify-center rounded-xl border bg-primary shadow-2xl"
-          >
-            <h1 className="text-4xl font-bold md:text-6xl">
-              {degreeQuery.data.name}
-            </h1>
-            <p className="text-xl md:text-3xl">Reviews</p>
-          </div>
-          <section className="mt-16 mb-8 flex flex-col items-center justify-center gap-8">
-            <ReviewsDisplay degreeId={degreeQuery.data.id} />
-          </section>
-        </main>
-      )}
+        >
+          <h1 className="text-4xl font-bold md:text-6xl">
+            {degreeQuery.data?.name}
+          </h1>
+          <p className="text-xl md:text-3xl">Reviews</p>
+        </div>
+        <section className="mt-16 mb-8 flex flex-col items-center justify-center gap-8">
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary
+                onReset={reset}
+                fallbackRender={({ resetErrorBoundary }) => (
+                  <div className="text-3xl text-black">
+                    <p className="text-black">There was an error!</p>
+                    <button
+                      className="bg-slate-400 text-black"
+                      onClick={() => resetErrorBoundary()}
+                    >
+                      Try Again
+                    </button>
+                  </div>
+                )}
+              >
+                <Suspense fallback={<p className="text-6xl">LOADING...</p>}>
+                  {degreeQuery.data?.id && (
+                    <ReviewsDisplay degreeId={degreeQuery.data.id} />
+                  )}
+                </Suspense>
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
+        </section>
+      </main>
     </ForumLayout>
   );
 };

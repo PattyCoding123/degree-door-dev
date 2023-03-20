@@ -27,6 +27,7 @@ export const forumRouter = router({
   getAllReviews: publicProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(async ({ input, ctx }) => {
+      // throw new TRPCError({ code: "FORBIDDEN" }); // ! Test ErrorBoundary
       return await ctx.prisma.review.findMany({
         where: {
           degreeId: input.degreeId,

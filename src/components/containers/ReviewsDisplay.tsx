@@ -1,14 +1,32 @@
 import { useSession } from "next-auth/react";
 import { Suspense, useState, lazy } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import dynamic from "next/dynamic";
+// import { ErrorBoundary } from "react-error-boundary";
+import ErrorBoundary from "../layouts/ErrorBoundary";
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
+import loadable from "@loadable/component";
 
 import { useDeleteReview, useReviewQuery } from "../../utils/custom-hooks";
-const Review = lazy(async () => {
-  return new Promise((resolve) => setTimeout(resolve, 1000)).then(
-    () => import("../Review")
-  );
-});
+const Review = dynamic(
+  async () => {
+    return new Promise((resolve) => setTimeout(resolve, 1000)).then(
+      () => import("../Review")
+    );
+  },
+  {
+    ssr: false,
+    loading: () => (
+      <div className="text-white">
+        <GeneralLoadingIndicator size="extra-large" />
+      </div>
+    ),
+  }
+);
+// const Review = lazy(async () => {
+//   return new Promise((resolve) => setTimeout(resolve, 1000)).then(
+//     () => import("../Review")
+//   );
+// });
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
 import ConfirmationDialog from "../modals/dialogs/ConfirmationDialog";
 import { trpc } from "../../utils/trpc";
@@ -24,9 +42,12 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
     reviewUserId: string | null;
   }>(); // To determine which review to delete
   const [showDialog, setShowDialog] = useState(false); // State to control dialog
-  const reviews = trpc.forum.getAllReviews.useQuery(
-    { degreeId: "cs" },
-    { suspense: true, useErrorBoundary: true }
+  // const [reviews, reviewsQuery] = useReviewQuery(degreeId);
+  const { data: reviews } = trpc.forum.getAllReviews.useQuery(
+    {
+      degreeId: degreeId,
+    },
+    { useErrorBoundary: true, retry: false, suspense: true }
   );
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degreeId);
@@ -58,49 +79,23 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
         show={showDialog}
         okBtnText="Delete"
       />
-      <QueryErrorResetBoundary>
-        {({ reset }) => (
-          <ErrorBoundary
-            onReset={reset}
-            fallbackRender={({ resetErrorBoundary }) => (
-              <>
-                <div className="text-black">There was an error!</div>
-                <button
-                  className="text-black"
-                  onClick={() => resetErrorBoundary()}
-                >
-                  Try Again
-                </button>
-              </>
-            )}
-          >
-            <Suspense
-              fallback={
-                <div className="text-white">
-                  <GeneralLoadingIndicator size="extra-large" />
-                </div>
-              }
-            >
-              {reviews.data?.map((review) => (
-                // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
-                // ! Reviews are only deletable by authenticated authors and if the userIds match.
-                <Review
-                  canDelete={sessionData?.user?.id === review.userId}
-                  key={review.id}
-                  reviewPost={review}
-                  handleClick={() => {
-                    setSelectedReview({
-                      reviewId: review.id,
-                      reviewUserId: review.userId,
-                    });
-                    setShowDialog(true);
-                  }}
-                />
-              ))}
-            </Suspense>
-          </ErrorBoundary>
-        )}
-      </QueryErrorResetBoundary>
+
+      {reviews?.map((review) => (
+        // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
+        // ! Reviews are only deletable by authenticated authors and if the userIds match.
+        <Review
+          canDelete={sessionData?.user?.id === review.userId}
+          key={review.id}
+          reviewPost={review}
+          handleClick={() => {
+            setSelectedReview({
+              reviewId: review.id,
+              reviewUserId: review.userId,
+            });
+            setShowDialog(true);
+          }}
+        />
+      ))}
     </>
   );
 };
