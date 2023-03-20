@@ -19,7 +19,7 @@ const GeneralLoadingIndicator: React.FC<GeneralLoadingIndicatorProps> = ({
 }) => {
   return (
     <AiOutlineLoading3Quarters
-      className={`animate-spin font-bold ${sizes.get(size)}`}
+      className={`text animate-spin font-bold ${sizes.get(size)}`}
     />
   );
 };

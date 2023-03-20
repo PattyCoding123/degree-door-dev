@@ -1,10 +1,13 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
+import { lazy } from "react";
 
 import ForumLayout from "../../../components/layouts/ForumLayout";
 import { useDegreeQuery } from "../../../utils/custom-hooks";
-import ReviewsDisplay from "../../../components/containers/ReviewsDisplay";
+const ReviewsDisplay = lazy(
+  () => import("../../../components/containers/ReviewsDisplay")
+);
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
@@ -39,7 +42,7 @@ const ReviewsPage: NextPage = () => {
             <p className="text-xl md:text-3xl">Reviews</p>
           </div>
           <section className="mt-16 mb-8 flex flex-col items-center justify-center gap-8">
-            <ReviewsDisplay enableQuery={true} degreeId={degreeQuery.data.id} />
+            <ReviewsDisplay degreeId={degreeQuery.data.id} />
           </section>
         </main>
       )}

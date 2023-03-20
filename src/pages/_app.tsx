@@ -12,12 +12,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ErrorBoundary>
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-        <div id="modal-root" /> {/* For portals */}
-      </SessionProvider>
-    </ErrorBoundary>
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+      <div id="modal-root" /> {/* For portals */}
+    </SessionProvider>
   );
 };
 

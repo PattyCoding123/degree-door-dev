@@ -1,18 +1,13 @@
 import { trpc } from "../trpc";
 
 // Custom hook for the getAllReviews procedure
-const useReviewQuery = (degreeQueryStatus: boolean, degree?: string) => {
+const useReviewQuery = (degree: string) => {
   // Only query for reviews if enabled
-  const reviewsQuery = trpc.forum.getAllReviews.useQuery(
-    {
-      degreeId: degree as string,
-    },
-    {
-      enabled: degreeQueryStatus,
-    }
-  );
+  const reviewsSuspenseQuery = trpc.forum.getAllReviews.useSuspenseQuery({
+    degreeId: degree,
+  });
 
-  return reviewsQuery;
+  return reviewsSuspenseQuery;
 };
 
 export default useReviewQuery;

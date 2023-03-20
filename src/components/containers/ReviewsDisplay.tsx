@@ -1,54 +1,35 @@
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { Suspense, useState, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
 
 import { useDeleteReview, useReviewQuery } from "../../utils/custom-hooks";
-import Review from "../Review";
+const Review = lazy(async () => {
+  return new Promise((resolve) => setTimeout(resolve, 1000)).then(
+    () => import("../Review")
+  );
+});
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
 import ConfirmationDialog from "../modals/dialogs/ConfirmationDialog";
+import { trpc } from "../../utils/trpc";
 
 interface ReviewsDisplayProps {
-  enableQuery: boolean;
   degreeId: string;
 }
 
-const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
-  enableQuery,
-  degreeId,
-}) => {
+const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
   const { data: sessionData } = useSession();
   const [selectedReview, setSelectedReview] = useState<{
     reviewId: string;
     reviewUserId: string | null;
   }>(); // To determine which review to delete
   const [showDialog, setShowDialog] = useState(false); // State to control dialog
-  const reviewsQuery = useReviewQuery(enableQuery, degreeId);
-
+  const reviews = trpc.forum.getAllReviews.useQuery(
+    { degreeId: "cs" },
+    { suspense: true, useErrorBoundary: true }
+  );
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degreeId);
-
-  if (reviewsQuery.isLoading || reviewsQuery.isFetching) {
-    return (
-      <div className="flex flex-col items-center text-white">
-        <GeneralLoadingIndicator size="extra-large" />
-      </div>
-    );
-  }
-
-  if (reviewsQuery.isError) {
-    return (
-      <div className="flex flex-col items-center gap-4">
-        <p className="text-2xl text-white">
-          There was a problem fetching the reviews...
-        </p>
-        <button
-          className="text-2xl underline active:text-lime-300"
-          onClick={() => reviewsQuery.refetch()}
-        >
-          Retry
-        </button>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -77,28 +58,49 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({
         show={showDialog}
         okBtnText="Delete"
       />
-      {reviewsQuery.data.length > 0 ? (
-        reviewsQuery.data.map((review) => (
-          // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
-          // ! Reviews are only deletable by authenticated authors and if the userIds match.
-          <Review
-            canDelete={sessionData?.user?.id === review.userId}
-            key={review.id}
-            reviewPost={review}
-            handleClick={() => {
-              setSelectedReview({
-                reviewId: review.id,
-                reviewUserId: review.userId,
-              });
-              setShowDialog(true);
-            }}
-          />
-        ))
-      ) : (
-        <p className="text-3xl text-white">
-          This forum has no reviews. Be the first to write a review!
-        </p>
-      )}
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary
+            onReset={reset}
+            fallbackRender={({ resetErrorBoundary }) => (
+              <>
+                <div className="text-black">There was an error!</div>
+                <button
+                  className="text-black"
+                  onClick={() => resetErrorBoundary()}
+                >
+                  Try Again
+                </button>
+              </>
+            )}
+          >
+            <Suspense
+              fallback={
+                <div className="text-white">
+                  <GeneralLoadingIndicator size="extra-large" />
+                </div>
+              }
+            >
+              {reviews.data?.map((review) => (
+                // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
+                // ! Reviews are only deletable by authenticated authors and if the userIds match.
+                <Review
+                  canDelete={sessionData?.user?.id === review.userId}
+                  key={review.id}
+                  reviewPost={review}
+                  handleClick={() => {
+                    setSelectedReview({
+                      reviewId: review.id,
+                      reviewUserId: review.userId,
+                    });
+                    setShowDialog(true);
+                  }}
+                />
+              ))}
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </>
   );
 };
