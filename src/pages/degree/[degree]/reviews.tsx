@@ -50,6 +50,10 @@ const ReviewsPage: NextPage = () => {
         </div>
         <section className="mt-16 mb-8 flex flex-col items-center justify-center gap-8">
           {degreeQuery.data?.id && (
+            // ! In order to successfully use the Suspense options of React-Query,
+            // ! you must wrap the component that contains the query in both a suspense
+            // ! component and ErrorBoundary component, and you must lazily import the
+            // ! component that contains the query
             <QueryErrorResetBoundary>
               {({ reset }) => (
                 <ErrorBoundary
