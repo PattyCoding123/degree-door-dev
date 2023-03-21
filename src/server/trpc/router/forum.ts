@@ -24,7 +24,7 @@ export const forumRouter = router({
         throw new TRPCError({ code: "NOT_FOUND" });
       }
     }),
-  getAllReviews: publicProcedure
+  getAllReviews: protectedProcedure
     .input(z.object({ degreeId: z.string() }))
     .query(async ({ input, ctx }) => {
       // throw new TRPCError({ code: "FORBIDDEN" }); // ! Test ErrorBoundary

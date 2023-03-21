@@ -33,6 +33,8 @@ const ReviewsDisplay = lazy(async () => {
 // const ReviewsDisplay = "../../../components/containers/ReviewsDisplay";
 import GeneralLoadingIndicator from "../../../components/loading-ui/GeneralLoadingIndicator";
 import { IoMdThumbsDown, IoMdThumbsUp } from "react-icons/io";
+import { TRPCError } from "@trpc/server";
+import { TRPCClientError } from "@trpc/client";
 
 // The Reviews page will render all the reviews for a specific degree forum.
 // It will also allow user's to delete reviews if they are the author
@@ -76,17 +78,26 @@ const ReviewsPage: NextPage = () => {
               {({ reset }) => (
                 <ErrorBoundary
                   onReset={reset}
-                  fallbackRender={({ resetErrorBoundary }) => (
-                    <div className="text-3xl text-black">
-                      <p className="text-black">There was an error!</p>
-                      <button
-                        className="bg-slate-400 text-black"
-                        onClick={() => resetErrorBoundary()}
-                      >
-                        Try Again
-                      </button>
-                    </div>
-                  )}
+                  fallbackRender={({ error, resetErrorBoundary }) => {
+                    console.log(error.message);
+                    if (
+                      error instanceof TRPCClientError &&
+                      error.message === "UNAUTHORIZED"
+                    ) {
+                      return <p>You must be logged in to see reviews...</p>;
+                    }
+                    return (
+                      <div className="text-3xl text-black">
+                        <p className="text-black">There was an error!</p>
+                        <button
+                          className="bg-slate-400 text-black"
+                          onClick={() => resetErrorBoundary()}
+                        >
+                          Try Again
+                        </button>
+                      </div>
+                    );
+                  }}
                 >
                   <Suspense
                     fallback={[...Array(5).keys()].map((i) => (

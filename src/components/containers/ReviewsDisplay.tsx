@@ -38,12 +38,11 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
   }>(); // To determine which review to delete
   const [showDialog, setShowDialog] = useState(false); // State to control dialog
   // const [reviews, reviewsQuery] = useReviewQuery(degreeId);
-  const { data: reviews } = trpc.forum.getAllReviews.useQuery(
-    {
-      degreeId: degreeId,
-    },
-    { useErrorBoundary: true, suspense: true }
+  const [data, query] = trpc.forum.getAllReviews.useSuspenseQuery(
+    { degreeId },
+    { retry: false }
   );
+
   // Procedure to delete a review for that degree forum.
   const deleteReview = useDeleteReview(degreeId);
 
@@ -75,7 +74,7 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
         okBtnText="Delete"
       />
 
-      {reviews?.map((review) => (
+      {data.map((review) => (
         // ! Review handleClick will set the selectedReviewState and render the ConfirmationDialog
         // ! Reviews are only deletable by authenticated authors and if the userIds match.
         <Review
