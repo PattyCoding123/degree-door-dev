@@ -7,22 +7,24 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import loadable from "@loadable/component";
 
 import { useDeleteReview, useReviewQuery } from "../../utils/custom-hooks";
-const Review = dynamic(() => import("../Review"), {
-  ssr: false,
-  loading: () => (
-    <div className="text-white">
-      <GeneralLoadingIndicator size="extra-large" />
-    </div>
-  ),
-});
-// const Review = lazy(async () => {
-//   return new Promise((resolve) => setTimeout(resolve, 1000)).then(
-//     () => import("../Review")
-//   );
-// });
+// ! See effect of dynamic import
+// const Review = dynamic(
+//   async () => {
+//     return new Promise((resolve) => setTimeout(resolve, 4000)).then(
+//       () => import("../Review")
+//     );
+//   },
+//   {
+//     ssr: false,
+//     loading: () => <ReviewSkeleton />,
+//   }
+// );
+
+const Review = dynamic(() => import("../Review"));
 import GeneralLoadingIndicator from "../loading-ui/GeneralLoadingIndicator";
 import ConfirmationDialog from "../modals/dialogs/ConfirmationDialog";
 import { trpc } from "../../utils/trpc";
+import { IoMdThumbsDown, IoMdThumbsUp } from "react-icons/io";
 
 interface ReviewsDisplayProps {
   degreeId: string;
@@ -94,3 +96,37 @@ const ReviewsDisplay: React.FC<ReviewsDisplayProps> = ({ degreeId }) => {
 };
 
 export default ReviewsDisplay;
+
+const ReviewSkeleton: React.FC = () => {
+  return (
+    <>
+      <div className="flex w-2/3 animate-pulse flex-col gap-4 rounded-xl border bg-slate-200 p-4 shadow-2xl">
+        <div className="flex items-center justify-between">
+          <h1 className="text-center text-lg font-bold" />
+        </div>
+        <section className="flex">
+          <div className="flex w-16 items-center justify-center rounded border-2 border-green-700 bg-primary p-2">
+            <IoMdThumbsUp className="text-lg text-green-700" />
+          </div>
+          <div className="w-full rounded border-r-4 border-green-700 bg-primary p-4">
+            <div className="flex flex-col">
+              <h2 className="text-lg font-bold">PROS</h2>
+              <p className="text-md text-gray-600" />
+            </div>
+          </div>
+        </section>
+        <section className="flex">
+          <div className="flex w-16 items-center justify-center rounded border-2 border-red-700 bg-primary p-2">
+            <IoMdThumbsDown className="text-lg text-red-700" />
+          </div>
+          <div className="w-full rounded border-r-4 border-red-700 bg-primary p-4">
+            <div className="flex flex-col">
+              <h2 className="text-lg font-bold">CONS</h2>
+              <p className="text-md text-gray-600" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+};
